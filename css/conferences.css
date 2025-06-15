@@ -744,9 +744,24 @@
     color: white;
 }
 
-.conf-type-badge.presentation {
-    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+.conf-type-badge.keynote-presentation {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
     color: white;
+    border: 1px solid #7c3aed;
+}
+
+.conf-type-badge.invited-presentation,
+.conf-type-badge.invited-talk {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    color: white;
+    border: 1px solid #0891b2;
+    position: relative;
+}
+
+.conf-type-badge.invited-presentation::before,
+.conf-type-badge.invited-talk::before {
+    content: "⭐";
+    margin-right: 0.25rem;
 }
 
 .conf-title {

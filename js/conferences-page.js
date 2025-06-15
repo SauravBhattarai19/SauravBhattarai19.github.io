@@ -107,13 +107,40 @@ class ConferencesPage {
         const conferencesList = document.getElementById('conferences-list');
         if (!conferencesList) return;
 
-        let filteredConferences = this.conferencesData || [];
-
-        // Apply filters
+        let filteredConferences = this.conferencesData || [];        // Apply filters
         if (this.currentFilter !== 'all') {
+            const originalCount = filteredConferences.length;
             filteredConferences = filteredConferences.filter(conf => {
-                return conf.presentationType === this.currentFilter;
+                if (!conf.type) return false;
+                
+                const typeNormalized = conf.type.toLowerCase();
+                let matches = false;
+                
+                switch (this.currentFilter) {
+                    case 'keynote':
+                        matches = typeNormalized.includes('keynote');
+                        break;
+                    case 'invited':
+                        matches = typeNormalized.includes('invited');
+                        break;
+                    case 'oral':
+                        matches = typeNormalized.includes('oral') && !typeNormalized.includes('poster');
+                        break;
+                    case 'poster':
+                        matches = typeNormalized.includes('poster');
+                        break;
+                    case 'online':
+                        matches = typeNormalized.includes('online');
+                        break;
+                    default:
+                        matches = true;
+                }
+                
+                return matches;
             });
+            
+            console.log(`Filter "${this.currentFilter}": ${originalCount} → ${filteredConferences.length} conferences`);
+            console.log('Available types:', this.conferencesData.map(c => c.type));
         }
 
         // Apply sorting
@@ -139,9 +166,8 @@ class ConferencesPage {
                         <div class="conf-date-badge">
                             <i class="fas fa-calendar"></i>
                             ${new Date(conf.date).toLocaleDateString()}
-                        </div>
-                        <div class="conf-badges">
-                            <span class="conf-type-badge ${conf.presentationType}">${conf.presentationType}</span>
+                        </div>                        <div class="conf-badges">
+                            <span class="conf-type-badge ${this.getTypeCssClass(conf.type)}">${conf.type || 'Presentation'}</span>
                             ${conf.award ? `<span class="award-badge"><i class="fas fa-trophy"></i> ${conf.award}</span>` : ''}
                         </div>
                     </div>
@@ -187,9 +213,7 @@ class ConferencesPage {
                 </div>
             </div>
         `).join('');
-    }
-
-    setupEventListeners() {
+    }    setupEventListeners() {
         // Filter buttons
         const filterButtons = document.querySelectorAll('.filter-btn');
         filterButtons.forEach(button => {
@@ -197,6 +221,7 @@ class ConferencesPage {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 e.target.classList.add('active');
                 this.currentFilter = e.target.dataset.filter;
+                console.log('Filter changed to:', this.currentFilter);
                 this.renderAllConferences();
             });
         });
@@ -206,10 +231,11 @@ class ConferencesPage {
         if (sortSelect) {
             sortSelect.addEventListener('change', (e) => {
                 this.currentSort = e.target.value;
+                console.log('Sort changed to:', this.currentSort);
                 this.renderAllConferences();
             });
         }
-    }    updateStats() {
+    }updateStats() {
         if (!this.conferencesData || this.conferencesData.length === 0) {
             document.getElementById('total-presentations').textContent = '0';
             document.getElementById('countries-visited').textContent = '0';
@@ -282,6 +308,19 @@ class ConferencesPage {
             default:
                 return 'fa-microphone';
         }
+    }    getTypeCssClass(type) {
+        if (!type) return 'presentation';
+        
+        const typeNormalized = type.toLowerCase().replace(/\s+/g, '-');
+        
+        if (typeNormalized.includes('keynote')) return 'keynote-presentation';
+        if (typeNormalized.includes('invited')) return 'invited-presentation';
+        if (typeNormalized.includes('online') && typeNormalized.includes('poster')) return 'online-poster-presentation';
+        if (typeNormalized.includes('online')) return 'online-presentation';
+        if (typeNormalized.includes('oral')) return 'oral-presentation';
+        if (typeNormalized.includes('poster')) return 'poster-presentation';
+        
+        return typeNormalized;
     }
 
     formatLocation(conf) {
