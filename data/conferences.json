@@ -7,7 +7,7 @@
     "city": "Kathmandu",
     "country": "Nepal",
     "location": "Kathmandu, Nepal",
-    "date": "November 28–29, 2024",
+    "date": "November 29, 2024",
     "type": "Invited Talk",
     "status": "presented"
   },
@@ -43,7 +43,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
-    "date": "Dec 9-13, 2024",
+    "date": "Dec 11, 2024",
     "type": "Poster Presentation",
     "status": "presented"
   },
@@ -55,7 +55,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
-    "date": "Dec 9-13, 2024",
+    "date": "Dec 12, 2024",
     "type": "Poster Presentation",
     "status": "presented"
   },
@@ -79,7 +79,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
-    "date": "Dec 3-31, 2024",
+    "date": "Dec 28, 2024",
     "type": "Online Poster Presentation",
     "status": "presented"
   },
@@ -91,7 +91,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
-    "date": "Dec 9-13, 2024",
+    "date": "Dec 13, 2024",
     "type": "Poster Presentation",
     "status": "presented"
   },
@@ -103,7 +103,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
-    "date": "Dec 9-13, 2024",
+    "date": "Dec 13, 2024",
     "type": "Oral Presentation",
     "status": "presented"
   },
@@ -115,7 +115,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
-    "date": "Dec 9-13, 2024",
+    "date": "Dec 13, 2024",
     "type": "Oral Presentation",
     "status": "presented"
   },
@@ -127,7 +127,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
-    "date": "Dec 9-13, 2024",
+    "date": "Dec 13, 2024",
     "type": "Poster Presentation",
     "status": "presented"
   },
@@ -136,9 +136,9 @@
     "title": "Interconnected Hazards Data",
     "authors": "Talchabhadel, R., S. Bhattarai",
     "conference": "Natural Hazards Research Summit 2024: Interconnected Hazards: Retrospective Data Analysis for Climate Resilience in the United States",
-    "city": "",
-    "country": "",
-    "location": "",
+    "city": "Jackson",
+    "country": "USA",
+    "location": "Jackson, MS",
     "date": "2024",
     "type": "Conference Paper",
     "status": "published",
@@ -152,7 +152,7 @@
     "city": "Amsterdam",
     "country": "Netherlands",
     "location": "Amsterdam, Netherlands",
-    "date": "12-14 June, 2024",
+    "date": "June 13, 2024",
     "type": "Oral Presentation",
     "status": "presented"
   },
@@ -164,7 +164,7 @@
     "city": "Milwaukee",
     "country": "USA",
     "location": "Milwaukee, WI",
-    "date": "May 19 -- 22, 2024",
+    "date": "May 21, 2024",
     "type": "Oral Presentation",
     "status": "presented"
   },
@@ -176,7 +176,7 @@
     "city": "Milwaukee",
     "country": "USA",
     "location": "Milwaukee, WI",
-    "date": "May 19 -- 22, 2024",
+    "date": "May 22, 2024",
     "type": "Oral Presentation",
     "status": "presented"
   },
@@ -188,7 +188,7 @@
     "city": "Vienna",
     "country": "Austria",
     "location": "Vienna, Austria",
-    "date": "14--19 Apr 2024",
+    "date": "Apt 19, 2024",
     "type": "Oral Presentation",
     "status": "presented",
     "doi": "https://doi.org/10.5194/egusphere-egu24-20600"
@@ -201,7 +201,7 @@
     "city": "Honolulu",
     "country": "USA",
     "location": "Honolulu, HI",
-    "date": "Feb 13-16, 2024",
+    "date": "Feb 16, 2024",
     "type": "Poster Presentation",
     "status": "presented"
   },
@@ -213,7 +213,7 @@
     "city": "Honolulu",
     "country": "USA",
     "location": "Honolulu, HI",
-    "date": "Feb 13-16, 2024",
+    "date": "Feb 16, 2024",
     "type": "Poster Presentation",
     "status": "presented"
   },
@@ -225,7 +225,7 @@
     "city": "Baltimore",
     "country": "USA",
     "location": "Baltimore, MD",
-    "date": "Jan 28 - Feb 1, 2024",
+    "date": "Feb 1, 2024",
     "type": "Oral Presentation",
     "status": "presented"
   },
@@ -237,7 +237,7 @@
     "city": "San Francisco",
     "country": "USA",
     "location": "San Francisco",
-    "date": "Dec 11-15, 2023",
+    "date": "Dec 12, 2023",
     "type": "Oral Presentation",
     "status": "presented"
   },
