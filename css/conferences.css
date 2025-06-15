@@ -883,6 +883,172 @@
     font-weight: 500;
 }
 
+/* ===========================================
+   COMPACT RECENT PRESENTATIONS DESIGN
+   =========================================== */
+
+.recent-presentation-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.recent-presentation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.recent-presentation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.15);
+    border-color: #e2e8f0;
+}
+
+.presentation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.presentation-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.date-month {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4f46e5;
+}
+
+.date-year {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.presentation-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.type-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Different badge styles for different presentation types */
+.type-badge.oral-presentation {
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+    color: white;
+}
+
+.type-badge.poster-presentation {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+}
+
+.type-badge.invited-talk,
+.type-badge.invited-oral-presentation,
+.type-badge.keynote-presentation {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: white;
+}
+
+.type-badge.invited-talk i,
+.type-badge.invited-oral-presentation i,
+.type-badge.keynote-presentation i {
+    color: #fbbf24;
+}
+
+.award-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.presentation-content {
+    margin-top: 1rem;
+}
+
+.presentation-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.presentation-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.detail-item i {
+    width: 16px;
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+
+.detail-item span {
+    line-height: 1.4;
+}
+
+/* Recent Presentations Grid Container */
+.recent-presentations-grid {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .recent-presentations-grid {
+        gap: 1.25rem;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .conferences-header h2,
@@ -945,5 +1111,32 @@
     
     .conf-date {
         align-self: flex-end;
+    }
+    
+    .recent-presentation-card {
+        padding: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .presentation-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+    
+    .presentation-date {
+        align-self: flex-start;
+    }
+    
+    .presentation-badges {
+        justify-content: flex-start;
+    }
+    
+    .presentation-title {
+        font-size: 1rem;
+    }
+    
+    .detail-item {
+        font-size: 0.85rem;
     }
 }

@@ -67,37 +67,40 @@ class ConferencesPage {
         const timeline = document.getElementById('recent-presentations-timeline');
         if (!timeline) return;
 
-        const currentDate = new Date();
-        const recent = (this.conferencesData || [])
+        const currentDate = new Date();        const recent = (this.conferencesData || [])
             .filter(conf => conf.status === 'presented' || new Date(conf.date) <= currentDate)
             .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .slice(0, 5);
-
-        timeline.innerHTML = recent.map((conf, index) => `
-            <div class="timeline-item" data-aos="fade-up" data-aos-delay="${index * 100}">
-                <div class="timeline-marker">
-                    <div class="marker-icon ${conf.type?.toLowerCase().replace(/\s+/g, '-') || 'presentation'}">
-                        <i class="fas ${this.getTypeIcon(conf.type)}"></i>
+            .slice(0, 3);        timeline.innerHTML = recent.map((conf, index) => `
+            <div class="recent-presentation-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+                <div class="presentation-header">
+                    <div class="presentation-date">
+                        <span class="date-month">${new Date(conf.date).toLocaleDateString('en-US', { month: 'short' })}</span>
+                        <span class="date-year">${new Date(conf.date).getFullYear()}</span>
+                    </div>
+                    <div class="presentation-badges">
+                        <span class="type-badge ${conf.type?.toLowerCase().replace(/\s+/g, '-') || 'presentation'}">
+                            ${conf.type?.includes('Invited') ? '<i class="fas fa-star"></i> ' : ''}${conf.type || 'Presentation'}
+                        </span>
+                        ${conf.award ? `<span class="award-badge"><i class="fas fa-trophy"></i> ${conf.award}</span>` : ''}
                     </div>
                 </div>
-                <div class="timeline-content">
-                    <div class="timeline-header">
-                        <h4 class="timeline-title">${conf.title}</h4>
-                        <span class="timeline-date">${new Date(conf.date).toLocaleDateString()}</span>
+                <div class="presentation-content">
+                    <h4 class="presentation-title">${conf.title}</h4>
+                    <div class="presentation-details">
+                        <div class="detail-item">
+                            <i class="fas fa-university"></i>
+                            <span>${conf.conference}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${conf.location}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-users"></i>
+                            <span>${conf.authors}</span>
+                        </div>
                     </div>
-                    <p class="timeline-event">${conf.conference}</p>
-                    <div class="timeline-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        ${conf.location}
-                    </div>
-                    <div class="timeline-authors">
-                        <i class="fas fa-users"></i>
-                        ${conf.authors}
-                    </div>
-                    <div class="timeline-type">
-                        <span class="type-badge ${conf.type?.toLowerCase().replace(/\s+/g, '-') || 'presentation'}">${conf.type || 'Presentation'}</span>
-                        ${conf.award ? `<span class="award-badge"><i class="fas fa-trophy"></i> ${conf.award}</span>` : ''}
-                    </div>                </div>
+                </div>
             </div>
         `).join('');
     }

@@ -1,6 +1,11 @@
 // Data Manager - Handles loading and caching of JSON data
-class DataManager {
-    constructor() {
+class DataManager {    constructor() {
+        this.cache = {};
+        this.loading = {};
+    }
+
+    // Clear cache to force fresh data load
+    clearCache() {
         this.cache = {};
         this.loading = {};
     }
@@ -12,9 +17,9 @@ class DataManager {
 
         if (this.loading[filename]) {
             return this.loading[filename];
-        }
-
-        this.loading[filename] = fetch(`./data/${filename}`)
+        }        // Add cache-busting parameter to force fresh data load
+        const cacheBuster = new Date().getTime();
+        this.loading[filename] = fetch(`./data/${filename}?v=${cacheBuster}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Failed to load ${filename}: ${response.statusText}`);
