@@ -97,52 +97,65 @@ class ResearchPage {
                 default:
                     return 0;
             }
-        });
-
-        researchGrid.innerHTML = filteredResearch.map((research, index) => `
-            <div class="research-card" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}">
-                <div class="card-header">
-                    <div class="card-image">
-                        <img src="assets/research/${research.image || 'default.jpg'}" alt="${research.title}">
-                        <div class="card-overlay">
-                            <span class="status-badge ${research.status}">${research.status}</span>
-                            ${research.featured ? '<span class="featured-badge">Featured</span>' : ''}
-                        </div>
+        });        researchGrid.innerHTML = filteredResearch.map((research, index) => `
+            <div class="research-card ${research.featured ? 'featured' : ''}" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}">
+                <div class="research-image">
+                    ${research.image ? 
+                        `<img src="assets/research/${research.image}" alt="${research.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                         <div class="placeholder-image" style="display:none;"><i class="fas fa-flask"></i></div>` :
+                        `<div class="placeholder-image"><i class="fas fa-flask"></i></div>`
+                    }
+                    <div class="research-overlay">
+                        <span class="research-status status-${research.status}">${research.status}</span>
+                        ${research.featured ? '<span class="featured-tag"><i class="fas fa-star"></i> Featured</span>' : ''}
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="research-content">
                     <h3 class="research-title">${research.title}</h3>
                     <p class="research-description">${research.description}</p>
                     
                     <div class="research-technologies">
-                        ${research.technologies.map(tech => 
+                        ${research.technologies?.slice(0, 4).map(tech => 
                             `<span class="tech-tag">${tech}</span>`
-                        ).join('')}
+                        ).join('') || ''}
+                        ${research.technologies?.length > 4 ? `<span class="tech-more">+${research.technologies.length - 4}</span>` : ''}
                     </div>
                     
-                    ${research.funding ? `
-                        <div class="research-funding">
-                            <i class="fas fa-dollar-sign"></i>
-                            <span>${research.funding}</span>
-                        </div>
-                    ` : ''}
-                    
-                    ${research.collaborators ? `
-                        <div class="research-collaborators">
-                            <i class="fas fa-users"></i>
-                            <span>${research.collaborators.join(', ')}</span>
-                        </div>
-                    ` : ''}
+                    <div class="research-details">
+                        ${research.funding ? `
+                            <div class="detail-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span class="detail-text">${research.funding}</span>
+                            </div>
+                        ` : ''}
+                        
+                        ${research.collaborators?.length > 0 ? `
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <span class="detail-text">${research.collaborators.length} Collaborator${research.collaborators.length > 1 ? 's' : ''}</span>
+                            </div>
+                        ` : ''}
+                        
+                        ${research.publications?.length > 0 ? `
+                            <div class="detail-item">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="detail-text">${research.publications.length} Publication${research.publications.length > 1 ? 's' : ''}</span>
+                            </div>
+                        ` : ''}
+                    </div>
                     
                     ${research.publications && research.publications.length > 0 ? `
                         <div class="research-publications">
-                            <h4>Related Publications:</h4>
-                            <ul>
+                            <div class="publications-header">
+                                <i class="fas fa-scroll"></i>
+                                <span>Key Publications</span>
+                            </div>
+                            <div class="publications-list">
                                 ${research.publications.slice(0, 2).map(pub => 
-                                    `<li>${pub}</li>`
+                                    `<div class="publication-item">${pub}</div>`
                                 ).join('')}
-                                ${research.publications.length > 2 ? `<li>... and ${research.publications.length - 2} more</li>` : ''}
-                            </ul>
+                                ${research.publications.length > 2 ? `<div class="publication-more">+${research.publications.length - 2} more publications</div>` : ''}
+                            </div>
                         </div>
                     ` : ''}
                 </div>
@@ -170,14 +183,38 @@ class ResearchPage {
                 this.renderAllResearch();
             });
         }
-    }
-
-    updateStats() {
-        // Update statistics        const activeProjects = (this.researchData || []).filter(r => r.status === 'ongoing').length;
-        const collaborations = new Set((this.researchData || []).flatMap(r => r.collaborators || [])).size;
+    }    updateStats() {
+        // Update statistics based on actual data
+        if (!this.researchData) return;
         
-        document.getElementById('active-projects').textContent = activeProjects;
-        document.getElementById('collaborations').textContent = collaborations;
+        const activeProjects = this.researchData.filter(r => r.status === 'ongoing').length;
+        const completedProjects = this.researchData.filter(r => r.status === 'completed').length;
+        const totalProjects = this.researchData.length;
+        
+        // Get unique collaborators
+        const allCollaborators = this.researchData.flatMap(r => r.collaborators || []);
+        const uniqueCollaborators = new Set(allCollaborators).size;
+        
+        // Count total publications from research
+        const totalPublications = this.researchData.reduce((sum, r) => sum + (r.publications?.length || 0), 0);
+        
+        // Update DOM elements
+        const activeProjectsEl = document.getElementById('active-projects');
+        const collaborationsEl = document.getElementById('collaborations');
+        const fundingAmountEl = document.getElementById('funding-amount');
+        const impactAreasEl = document.getElementById('impact-areas');
+        
+        if (activeProjectsEl) activeProjectsEl.textContent = activeProjects;
+        if (collaborationsEl) collaborationsEl.textContent = uniqueCollaborators;
+        if (fundingAmountEl) fundingAmountEl.textContent = `${totalProjects}+`;
+        if (impactAreasEl) impactAreasEl.textContent = `${totalPublications}`;
+        
+        // Update stat labels to be more accurate
+        const impactAreasLabel = document.querySelector('#impact-areas + .stat-label');
+        if (impactAreasLabel) impactAreasLabel.textContent = 'Publications';
+        
+        const fundingLabel = document.querySelector('#funding-amount + .stat-label');
+        if (fundingLabel) fundingLabel.textContent = 'Research Projects';
     }
 }
 

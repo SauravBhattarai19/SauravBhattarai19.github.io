@@ -21,25 +21,24 @@ class ConferencesPage {
         } catch (error) {
             console.error('Error initializing conferences page:', error);
         }
-    }
-
-    renderUpcomingConferences() {
+    }    renderUpcomingConferences() {
         const upcomingGrid = document.getElementById('upcoming-conferences-grid');
         if (!upcomingGrid) return;
 
         const currentDate = new Date();
         const upcoming = (this.conferencesData || []).filter(conf => 
-            new Date(conf.date) > currentDate
+            conf.status === 'upcoming' || new Date(conf.date) > currentDate
         ).slice(0, 3);
 
-        upcomingGrid.innerHTML = upcoming.length > 0 ? upcoming.map(conf => `
-            <div class="upcoming-conference-card" data-aos="fade-up" data-aos-delay="100">
+        upcomingGrid.innerHTML = upcoming.length > 0 ? upcoming.map((conf, index) => `
+            <div class="upcoming-conference-card" data-aos="fade-up" data-aos-delay="${index * 100}">
                 <div class="conf-header">
                     <div class="conf-date">
                         <div class="date-month">${new Date(conf.date).toLocaleDateString('en-US', { month: 'short' })}</div>
                         <div class="date-day">${new Date(conf.date).getDate()}</div>
+                        <div class="date-year">${new Date(conf.date).getFullYear()}</div>
                     </div>
-                    <div class="conf-type-badge ${conf.presentationType}">${conf.presentationType}</div>
+                    <div class="conf-type-badge ${conf.type?.toLowerCase().replace(/\s+/g, '-') || 'presentation'}">${conf.type || 'Presentation'}</div>
                 </div>
                 <div class="conf-content">
                     <h3 class="conf-title">${conf.title}</h3>
@@ -48,9 +47,10 @@ class ConferencesPage {
                         <i class="fas fa-map-marker-alt"></i>
                         ${conf.location}
                     </div>
-                    ${conf.abstract ? `
-                        <p class="conf-abstract">${conf.abstract.substring(0, 150)}...</p>
-                    ` : ''}
+                    <div class="conf-authors">
+                        <i class="fas fa-users"></i>
+                        ${conf.authors}
+                    </div>
                 </div>
                 <div class="conf-countdown">
                     <span class="countdown-label">In</span>
@@ -63,23 +63,21 @@ class ConferencesPage {
                 <p>No upcoming conferences scheduled</p>
             </div>
         `;
-    }
-
-    renderRecentPresentations() {
+    }    renderRecentPresentations() {
         const timeline = document.getElementById('recent-presentations-timeline');
         if (!timeline) return;
 
         const currentDate = new Date();
         const recent = (this.conferencesData || [])
-            .filter(conf => new Date(conf.date) <= currentDate)
+            .filter(conf => conf.status === 'presented' || new Date(conf.date) <= currentDate)
             .sort((a, b) => new Date(b.date) - new Date(a.date))
             .slice(0, 5);
 
         timeline.innerHTML = recent.map((conf, index) => `
             <div class="timeline-item" data-aos="fade-up" data-aos-delay="${index * 100}">
                 <div class="timeline-marker">
-                    <div class="marker-icon ${conf.presentationType}">
-                        <i class="fas ${this.getTypeIcon(conf.presentationType)}"></i>
+                    <div class="marker-icon ${conf.type?.toLowerCase().replace(/\s+/g, '-') || 'presentation'}">
+                        <i class="fas ${this.getTypeIcon(conf.type)}"></i>
                     </div>
                 </div>
                 <div class="timeline-content">
@@ -92,11 +90,14 @@ class ConferencesPage {
                         <i class="fas fa-map-marker-alt"></i>
                         ${conf.location}
                     </div>
-                    <div class="timeline-type">
-                        <span class="type-badge ${conf.presentationType}">${conf.presentationType}</span>
-                        ${conf.award ? `<span class="award-badge"><i class="fas fa-trophy"></i> ${conf.award}</span>` : ''}
+                    <div class="timeline-authors">
+                        <i class="fas fa-users"></i>
+                        ${conf.authors}
                     </div>
-                </div>
+                    <div class="timeline-type">
+                        <span class="type-badge ${conf.type?.toLowerCase().replace(/\s+/g, '-') || 'presentation'}">${conf.type || 'Presentation'}</span>
+                        ${conf.award ? `<span class="award-badge"><i class="fas fa-trophy"></i> ${conf.award}</span>` : ''}
+                    </div>                </div>
             </div>
         `).join('');
     }
@@ -225,17 +226,22 @@ class ConferencesPage {
         const diffTime = target - now;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         return diffDays;
-    }
-
-    getTypeIcon(type) {
-        switch (type) {
+    }    getTypeIcon(type) {
+        if (!type) return 'fa-microphone';
+        
+        const normalizedType = type.toLowerCase().replace(/\s+/g, '-');
+        switch (normalizedType) {
             case 'keynote':
+            case 'keynote-presentation':
                 return 'fa-microphone-alt';
             case 'invited':
+            case 'invited-talk':
                 return 'fa-user-friends';
             case 'oral':
-                return 'fa-presentation';
+            case 'oral-presentation':
+                return 'fa-comments';
             case 'poster':
+            case 'poster-presentation':
                 return 'fa-image';
             default:
                 return 'fa-microphone';
