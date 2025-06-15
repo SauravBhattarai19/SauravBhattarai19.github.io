@@ -223,8 +223,8 @@ class PublicationsPage {
         const yearsActive = years.length > 0 ? Math.max(...years) - Math.min(...years) + 1 : 1;
         
         // For citations and h-index, we'll use modest estimates since we don't have actual citation data
-        const estimatedCitations = publishedCount * 15; // Conservative estimate of ~15 citations per published paper
-        const estimatedHIndex = Math.min(Math.floor(Math.sqrt(publishedCount * 10)), publishedCount); // Conservative h-index estimate
+        const estimatedCitations = 20; // Conservative estimate of ~15 citations per published paper
+        const estimatedHIndex = 2; // Conservative h-index estimate
         
         // Update DOM elements
         this.updateStatElement('total-publications', totalPubs);
