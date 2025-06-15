@@ -450,39 +450,125 @@ document.addEventListener('DOMContentLoaded', function() {
 // Homepage preview functionality
 async function initializeHomepage(dataManager) {
     try {
-        await dataManager.loadData();
-        renderResearchPreview(dataManager);
-        renderPublicationsPreview(dataManager);
-        renderConferencesPreview(dataManager);
-        renderAchievementsPreview(dataManager);
+        // Load all data concurrently
+        const [publications, research, conferences, achievements] = await Promise.all([
+            dataManager.getPublications(),
+            dataManager.getResearch(),
+            dataManager.getConferences(),
+            dataManager.getAchievements()
+        ]);
+
+        // Update homepage statistics
+        updateHomepageStats(publications, research, conferences, achievements);
+        
+        // Render preview sections
+        renderResearchPreview(research);
+        renderPublicationsPreview(publications);
+        renderConferencesPreview(conferences);
+        renderAchievementsPreview(achievements);
     } catch (error) {
         console.error('Error loading homepage data:', error);
     }
 }
 
-function renderResearchPreview(dataManager) {
-    const researchPreview = document.getElementById('research-preview');
-    if (!researchPreview) return;
+function updateHomepageStats(publications, research, conferences, achievements) {
+    // Update profile stats
+    const totalPubsElement = document.getElementById('total-pubs-count');
+    const totalConfElement = document.getElementById('total-conf-count');
+    
+    if (totalPubsElement && publications) {
+        const totalPubs = (publications.published?.length || 0) + (publications.underReview?.length || 0);
+        totalPubsElement.textContent = totalPubs;
+    }
+    
+    if (totalConfElement && conferences) {
+        totalConfElement.textContent = conferences.length;
+    }
 
-    const featuredResearch = dataManager.research
+    // Update research stats
+    const researchProjectsElement = document.getElementById('research-projects-count');
+    const featuredResearchElement = document.getElementById('featured-research-count');
+    
+    if (researchProjectsElement && research) {
+        researchProjectsElement.textContent = research.length;
+    }
+    
+    if (featuredResearchElement && research) {
+        const featuredCount = research.filter(r => r.featured).length;
+        featuredResearchElement.textContent = featuredCount;
+    }
+
+    // Update publications stats
+    const totalPublicationsElement = document.getElementById('total-publications-count');
+    const recentPublicationsElement = document.getElementById('recent-publications-count');
+    
+    if (totalPublicationsElement && publications) {
+        const totalPubs = (publications.published?.length || 0) + (publications.underReview?.length || 0);
+        totalPublicationsElement.textContent = totalPubs;
+    }
+    
+    if (recentPublicationsElement && publications) {
+        const currentYear = new Date().getFullYear();
+        const recentPubs = publications.published?.filter(p => p.year == currentYear).length || 0;
+        recentPublicationsElement.textContent = recentPubs;
+    }
+
+    // Update conferences stats
+    const totalConferencesElement = document.getElementById('total-conferences-count');
+    const upcomingConferencesElement = document.getElementById('upcoming-conferences-count');
+    
+    if (totalConferencesElement && conferences) {
+        totalConferencesElement.textContent = conferences.length;
+    }
+    
+    if (upcomingConferencesElement && conferences) {
+        const upcomingCount = conferences.filter(c => c.status === 'upcoming').length;
+        upcomingConferencesElement.textContent = upcomingCount;
+    }
+
+    // Update achievements stats
+    const totalAchievementsElement = document.getElementById('total-achievements-count');
+    const recentAchievementsElement = document.getElementById('recent-achievements-count');
+    
+    if (totalAchievementsElement && achievements) {
+        totalAchievementsElement.textContent = achievements.length;
+    }
+    
+    if (recentAchievementsElement && achievements) {
+        const currentYear = new Date().getFullYear();
+        const recentAchievements = achievements.filter(a => {
+            const achievementYear = new Date(a.date).getFullYear();
+            return achievementYear === currentYear;
+        }).length;
+        recentAchievementsElement.textContent = recentAchievements;
+    }
+}
+
+function renderResearchPreview(research) {
+    const researchPreview = document.getElementById('research-preview');
+    if (!researchPreview || !research) return;
+
+    const featuredResearch = research
         .filter(item => item.featured || item.status === 'ongoing')
-        .slice(0, 3);
+        .slice(0, 2); // Show only 2 for minimal view
+
+    if (featuredResearch.length === 0) {
+        researchPreview.innerHTML = '<p class="no-data">No featured research available.</p>';
+        return;
+    }
 
     researchPreview.innerHTML = `
         <div class="preview-grid">
-            ${featuredResearch.map(research => `
+            ${featuredResearch.map(researchItem => `
                 <div class="preview-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-image">
-                        <img src="assets/research/${research.image || 'default.jpg'}" alt="${research.title}">
-                        <div class="card-overlay">
-                            <span class="status-badge ${research.status}">${research.status}</span>
-                        </div>
-                    </div>
                     <div class="card-content">
-                        <h3>${research.title}</h3>
-                        <p>${research.description.substring(0, 120)}...</p>
+                        <div class="card-header">
+                            <h3>${researchItem.title}</h3>
+                            <span class="status-badge ${researchItem.status}">${researchItem.status}</span>
+                        </div>
+                        <p>${researchItem.description.substring(0, 120)}...</p>
                         <div class="card-technologies">
-                            ${research.technologies.slice(0, 3).map(tech => 
+                            ${researchItem.technologies.slice(0, 3).map(tech => 
                                 `<span class="tech-tag">${tech}</span>`
                             ).join('')}
                         </div>
@@ -493,26 +579,31 @@ function renderResearchPreview(dataManager) {
     `;
 }
 
-function renderPublicationsPreview(dataManager) {
+function renderPublicationsPreview(publications) {
     const publicationsPreview = document.getElementById('publications-preview');
-    if (!publicationsPreview) return;
+    if (!publicationsPreview || !publications) return;
 
     const recentPublications = [
-        ...dataManager.publications.published.slice(0, 2),
-        ...dataManager.publications.underReview.slice(0, 1)
-    ].slice(0, 3);
+        ...(publications.published?.slice(0, 2) || []),
+        ...(publications.underReview?.slice(0, 1) || [])
+    ].slice(0, 2); // Show only 2 for minimal view
+
+    if (recentPublications.length === 0) {
+        publicationsPreview.innerHTML = '<p class="no-data">No recent publications available.</p>';
+        return;
+    }
 
     publicationsPreview.innerHTML = `
         <div class="preview-list">
             ${recentPublications.map(pub => `
                 <div class="preview-item" data-aos="fade-up" data-aos-delay="100">
                     <div class="item-header">
-                        <span class="type-badge ${pub.type}">${pub.type}</span>
+                        <span class="type-badge ${pub.type || 'journal'}">${pub.type || 'journal'}</span>
                         <span class="year-badge">${pub.year || 'Under Review'}</span>
                     </div>
                     <h4>${pub.title}</h4>
                     <p class="authors">${pub.authors}</p>
-                    <p class="venue">${pub.journal || pub.conference || pub.venue}</p>
+                    <p class="venue">${pub.journal || pub.conference || pub.venue || ''}</p>
                     ${pub.doi ? `
                         <div class="item-link">
                             <a href="${pub.doi}" target="_blank">
@@ -527,13 +618,18 @@ function renderPublicationsPreview(dataManager) {
     `;
 }
 
-function renderConferencesPreview(dataManager) {
+function renderConferencesPreview(conferences) {
     const conferencesPreview = document.getElementById('conferences-preview');
-    if (!conferencesPreview) return;
+    if (!conferencesPreview || !conferences) return;
 
-    const recentConferences = dataManager.conferences
+    const recentConferences = conferences
         .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 3);
+        .slice(0, 2); // Show only 2 for minimal view
+
+    if (recentConferences.length === 0) {
+        conferencesPreview.innerHTML = '<p class="no-data">No recent conferences available.</p>';
+        return;
+    }
 
     conferencesPreview.innerHTML = `
         <div class="preview-timeline">
@@ -553,7 +649,7 @@ function renderConferencesPreview(dataManager) {
                                 <i class="fas fa-map-marker-alt"></i>
                                 ${conf.location}
                             </span>
-                            <span class="conf-type ${conf.presentationType}">${conf.presentationType}</span>
+                            <span class="conf-type ${conf.type || conf.presentationType}">${conf.type || conf.presentationType || 'Presentation'}</span>
                         </div>
                     </div>
                 </div>
@@ -562,13 +658,18 @@ function renderConferencesPreview(dataManager) {
     `;
 }
 
-function renderAchievementsPreview(dataManager) {
+function renderAchievementsPreview(achievements) {
     const achievementsPreview = document.getElementById('achievements-preview');
-    if (!achievementsPreview) return;
+    if (!achievementsPreview || !achievements) return;
 
-    const recentAchievements = dataManager.achievements
+    const recentAchievements = achievements
         .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 3);
+        .slice(0, 2); // Show only 2 for minimal view
+
+    if (recentAchievements.length === 0) {
+        achievementsPreview.innerHTML = '<p class="no-data">No recent achievements available.</p>';
+        return;
+    }
 
     achievementsPreview.innerHTML = `
         <div class="preview-grid">
@@ -580,7 +681,7 @@ function renderAchievementsPreview(dataManager) {
                     <div class="achievement-content">
                         <h4>${achievement.title}</h4>
                         <p class="achievement-org">${achievement.organization}</p>
-                        <p class="achievement-desc">${achievement.description.substring(0, 100)}...</p>
+                        <p class="achievement-desc">${achievement.description.substring(0, 80)}...</p>
                         <div class="achievement-date">
                             <i class="fas fa-calendar"></i>
                             ${new Date(achievement.date).toLocaleDateString()}

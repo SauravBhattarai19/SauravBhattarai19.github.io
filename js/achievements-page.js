@@ -4,17 +4,20 @@ class AchievementsPage {
         this.dataManager = new DataManager();
         this.currentFilter = 'all';
         this.currentSort = 'date-desc';
+        this.achievementsData = null;
         this.init();
     }
 
     async init() {
         try {
-            await this.dataManager.loadData();
-            this.renderRecentAchievements();
-            this.renderAchievementTimeline();
-            this.renderAllAchievements();
-            this.setupEventListeners();
-            this.updateStats();
+            this.achievementsData = await this.dataManager.getAchievements();
+            if (this.achievementsData) {
+                this.renderRecentAchievements();
+                this.renderAchievementTimeline();
+                this.renderAllAchievements();
+                this.setupEventListeners();
+                this.updateStats();
+            }
         } catch (error) {
             console.error('Error initializing achievements page:', error);
         }
@@ -24,7 +27,7 @@ class AchievementsPage {
         const recentGrid = document.getElementById('recent-achievements-grid');
         if (!recentGrid) return;
 
-        const recentAchievements = this.dataManager.achievements
+        const recentAchievements = (this.achievementsData || [])
             .sort((a, b) => new Date(b.date) - new Date(a.date))
             .slice(0, 3);
 
@@ -53,7 +56,7 @@ class AchievementsPage {
         const timeline = document.getElementById('achievement-timeline');
         if (!timeline) return;
 
-        const sortedAchievements = this.dataManager.achievements
+        const sortedAchievements = (this.achievementsData || [])
             .sort((a, b) => new Date(b.date) - new Date(a.date));
 
         timeline.innerHTML = sortedAchievements.map((achievement, index) => `
@@ -83,7 +86,7 @@ class AchievementsPage {
         const achievementsGrid = document.getElementById('achievements-grid');
         if (!achievementsGrid) return;
 
-        let filteredAchievements = this.dataManager.achievements;
+        let filteredAchievements = this.achievementsData || [];
 
         // Apply filters
         if (this.currentFilter !== 'all') {
@@ -195,14 +198,12 @@ class AchievementsPage {
                 this.renderAllAchievements();
             });
         }
-    }
-
-    updateStats() {
-        const totalAwards = this.dataManager.achievements.length;
-        const totalFunding = this.dataManager.achievements
+    }    updateStats() {
+        const totalAwards = (this.achievementsData || []).length;
+        const totalFunding = (this.achievementsData || [])
             .filter(a => a.amount)
             .reduce((sum, a) => sum + a.amount, 0);
-        const certifications = this.dataManager.achievements.filter(a => a.certificate).length;
+        const certifications = (this.achievementsData || []).filter(a => a.certificate).length;
 
         document.getElementById('total-awards').textContent = totalAwards;
         document.getElementById('total-funding').textContent = `$${(totalFunding / 1000).toFixed(0)}K`;

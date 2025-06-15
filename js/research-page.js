@@ -4,26 +4,32 @@ class ResearchPage {
         this.dataManager = new DataManager();
         this.currentFilter = 'all';
         this.currentSort = 'date-desc';
+        this.researchData = null;
         this.init();
     }
 
     async init() {
         try {
-            await this.dataManager.loadData();
-            this.renderFeaturedResearch();
-            this.renderAllResearch();
-            this.setupEventListeners();
-            this.updateStats();
+            this.researchData = await this.dataManager.getResearch();
+            if (this.researchData) {
+                this.renderFeaturedResearch();
+                this.renderAllResearch();
+                this.setupEventListeners();
+                this.updateStats();
+            }
         } catch (error) {
             console.error('Error initializing research page:', error);
         }
-    }
-
-    renderFeaturedResearch() {
+    }    renderFeaturedResearch() {
         const featuredGrid = document.getElementById('featured-research-grid');
-        if (!featuredGrid) return;
+        if (!featuredGrid || !this.researchData) return;
 
-        const featuredResearch = this.dataManager.research.filter(item => item.featured);
+        const featuredResearch = this.researchData.filter(item => item.featured);
+        
+        if (featuredResearch.length === 0) {
+            featuredGrid.innerHTML = '<p class="no-data">No featured research available.</p>';
+            return;
+        }
         
         featuredGrid.innerHTML = featuredResearch.map(research => `
             <div class="featured-card" data-aos="fade-up" data-aos-delay="100">
@@ -61,7 +67,7 @@ class ResearchPage {
         const researchGrid = document.getElementById('research-grid');
         if (!researchGrid) return;
 
-        let filteredResearch = this.dataManager.research;
+        let filteredResearch = this.researchData || [];
 
         // Apply filters
         if (this.currentFilter !== 'all') {
@@ -167,9 +173,8 @@ class ResearchPage {
     }
 
     updateStats() {
-        // Update statistics
-        const activeProjects = this.dataManager.research.filter(r => r.status === 'ongoing').length;
-        const collaborations = new Set(this.dataManager.research.flatMap(r => r.collaborators || [])).size;
+        // Update statistics        const activeProjects = (this.researchData || []).filter(r => r.status === 'ongoing').length;
+        const collaborations = new Set((this.researchData || []).flatMap(r => r.collaborators || [])).size;
         
         document.getElementById('active-projects').textContent = activeProjects;
         document.getElementById('collaborations').textContent = collaborations;

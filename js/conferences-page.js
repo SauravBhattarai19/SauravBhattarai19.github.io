@@ -4,17 +4,20 @@ class ConferencesPage {
         this.dataManager = new DataManager();
         this.currentFilter = 'all';
         this.currentSort = 'date-desc';
+        this.conferencesData = null;
         this.init();
     }
 
     async init() {
         try {
-            await this.dataManager.loadData();
-            this.renderUpcomingConferences();
-            this.renderRecentPresentations();
-            this.renderAllConferences();
-            this.setupEventListeners();
-            this.updateStats();
+            this.conferencesData = await this.dataManager.getConferences();
+            if (this.conferencesData) {
+                this.renderUpcomingConferences();
+                this.renderRecentPresentations();
+                this.renderAllConferences();
+                this.setupEventListeners();
+                this.updateStats();
+            }
         } catch (error) {
             console.error('Error initializing conferences page:', error);
         }
@@ -25,7 +28,7 @@ class ConferencesPage {
         if (!upcomingGrid) return;
 
         const currentDate = new Date();
-        const upcoming = this.dataManager.conferences.filter(conf => 
+        const upcoming = (this.conferencesData || []).filter(conf => 
             new Date(conf.date) > currentDate
         ).slice(0, 3);
 
@@ -67,7 +70,7 @@ class ConferencesPage {
         if (!timeline) return;
 
         const currentDate = new Date();
-        const recent = this.dataManager.conferences
+        const recent = (this.conferencesData || [])
             .filter(conf => new Date(conf.date) <= currentDate)
             .sort((a, b) => new Date(b.date) - new Date(a.date))
             .slice(0, 5);
@@ -102,7 +105,7 @@ class ConferencesPage {
         const conferencesList = document.getElementById('conferences-list');
         if (!conferencesList) return;
 
-        let filteredConferences = this.dataManager.conferences;
+        let filteredConferences = this.conferencesData || [];
 
         // Apply filters
         if (this.currentFilter !== 'all') {
@@ -204,14 +207,12 @@ class ConferencesPage {
                 this.renderAllConferences();
             });
         }
-    }
-
-    updateStats() {
-        const totalPresentations = this.dataManager.conferences.length;
-        const countries = new Set(this.dataManager.conferences.map(conf => 
-            conf.location.split(',').pop().trim()
-        )).size;
-        const awards = this.dataManager.conferences.filter(conf => conf.award).length;
+    }    updateStats() {
+        const totalPresentations = (this.conferencesData || []).length;
+        const countries = new Set((this.conferencesData || []).map(conf => 
+            conf.location?.split(',').pop()?.trim()
+        ).filter(Boolean)).size;
+        const awards = (this.conferencesData || []).filter(conf => conf.award).length;
 
         document.getElementById('total-presentations').textContent = totalPresentations;
         document.getElementById('countries-visited').textContent = countries;
