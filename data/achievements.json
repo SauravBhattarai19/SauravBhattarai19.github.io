@@ -1,0 +1,68 @@
+[
+  {
+    "year": "2025",
+    "title": "Selected Participant, NCAR Graduate Visitor Program (GVP)",
+    "organization": "National Center for Atmospheric Research",
+    "location": "Boulder, CO",
+    "description": "Chosen to collaborate with scientists at the National Center for Atmospheric Research on climate-hydrology research as part of a competitive summer research residency.",
+    "category": "Fellowship",
+    "featured": true
+  },
+  {
+    "year": "2024-2025",
+    "title": "ORISE Fellow, U.S. Department of Defense Research Participation Program",
+    "organization": "ERDC CHL",
+    "description": "Selected for a prestigious fellowship focusing on hydrological modeling and analysis.",
+    "category": "Fellowship",
+    "featured": true
+  },
+  {
+    "year": "2024",
+    "title": "Winner, AGU Catchment Hydrology Subcommittee Early Career Competition",
+    "organization": "American Geophysical Union",
+    "award_amount": "$300",
+    "description": "Awarded for submission on rainfall-runoff modeling using LSTM sequence-to-sequence learning models.",
+    "category": "Competition",
+    "featured": true
+  },
+  {
+    "year": "2024",
+    "title": "CyberTraining Workshop Travel Support",
+    "organization": "Natural Hazards Center",
+    "description": "Awarded a travel grant to attend the CyberTraining workshop.",
+    "category": "Travel Grant",
+    "featured": false
+  },
+  {
+    "year": "2024",
+    "title": "AGU-Chapman Travel Grant",
+    "organization": "American Geophysical Union",
+    "description": "Travel support for Chapman Conference on Remote Sensing of the Water Cycle, Honolulu, HI, Feb 13-16, 2024.",
+    "category": "Travel Grant",
+    "featured": false
+  },
+  {
+    "year": "2023-Present",
+    "title": "Full Scholarship with Graduate Research Assistant Position",
+    "organization": "Jackson State University",
+    "description": "Full scholarship under Prof. Dr. Rocky Talchabhadel from the 'Hydrological Impacts Computing, Outreach, and Resiliency Partnership (HICORPS) Project' in collaboration with ERDC and WOOLPERT.",
+    "category": "Scholarship",
+    "featured": true
+  },
+  {
+    "year": "2017-2021",
+    "title": "Golden Jubilee Scholarship Scheme (GJSS)",
+    "organization": "H.E. Ambassador of India, Nepal",
+    "description": "Four-year scholarship for undergraduate studies.",
+    "category": "Scholarship",
+    "featured": false
+  },
+  {
+    "year": "2017-2021",
+    "title": "Merit-Based Full Four-Year Scholarship",
+    "organization": "Institute of Engineering (IOE), Pulchowk Campus",
+    "description": "Awarded for securing 19th rank out of approximately 15,000 engineering aspirants for undergraduate study in Civil Engineering.",
+    "category": "Scholarship",
+    "featured": true
+  }
+]

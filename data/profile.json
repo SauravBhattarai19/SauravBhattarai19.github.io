@@ -1,0 +1,52 @@
+{
+  "personal": {
+    "name": "Saurav Bhattarai",
+    "title": "Water Resource Engineer & Hydro-climatology Researcher",
+    "bio": "To become a skilled water resource engineer with expertise in hydro-climatology, leveraging advanced programming and modeling tools to contribute to the global challenge of water-resource management, focusing on the impacts of climate change and water-related hazards on society.",
+    "photo": "Headshot.png",
+    "current_position": "Graduate Research Assistant at Jackson State University",
+    "location": "Jackson, Mississippi, USA"
+  },
+  "contact": {
+    "phone": "+1-601-918-0712",
+    "email_primary": "Saurav.bhattarai@students.jsums.edu",
+    "email_secondary": "saurav.bhattarai.1999@gmail.com",
+    "linkedin": "saurav-bhattarai-7133a3176",
+    "github": "Saurav-JSU",
+    "website": "bit.ly/jsu_water"
+  },
+  "education": [
+    {
+      "degree": "Graduate Studies",
+      "institution": "Jackson State University",
+      "location": "USA",
+      "period": "2023-Present",
+      "gpa": "4.0/4.0",
+      "status": "current"
+    },
+    {
+      "degree": "Bachelor of Civil Engineering",
+      "institution": "Tribhuvan University, Institute of Engineering (IOE)",
+      "location": "Pulchowk Campus, Nepal",
+      "period": "2017-2022",
+      "score": "80.14%",
+      "status": "completed"
+    }
+  ],
+  "current_positions": [
+    {
+      "title": "Graduate Research Assistant",
+      "institution": "Jackson State University",
+      "department": "Department of Civil and Environmental Engineering",
+      "period": "2023-Present",
+      "address": "1400 John R. Lynch St, Jackson, MS 39217"
+    },
+    {
+      "title": "ORISE Graduate Fellow",
+      "institution": "U.S. Army Corps of Engineers - Engineer Research and Development Center",
+      "department": "Coastal and Hydraulics Laboratory (ERDC-CHL)",
+      "period": "2024-2025",
+      "address": "3909 Halls Ferry Road, Vicksburg, MS 39180"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "title": "Climate Change Impact Assessment and Modeling",
+    "description": "Advanced research on climate change impacts using satellite data, machine learning, and hydrological modeling. Focus on extreme weather events, precipitation patterns, and flood risk assessment.",
+    "technologies": ["Python", "Machine Learning", "Remote Sensing", "GIS", "Climate Modeling"],
+    "status": "ongoing",
+    "featured": true,
+    "image": "climate_modeling.jpg",
+    "publications": [
+      "Understanding spatiotemporal variation of heatwave projections across US cities",
+      "Projected Changes in Precipitation Extremes Across the Mississippi River Basin"
+    ],
+    "funding": "HICORPS Project - ERDC and WOOLPERT Collaboration",
+    "collaborators": ["Jackson State University", "U.S. Army Corps of Engineers", "WOOLPERT"]
+  },
+  {
+    "title": "Heatwave Analysis and Urban Climate Studies",
+    "description": "Comprehensive analysis of heatwave patterns, urban heat islands, and their impacts on vulnerable communities using satellite-based observations and machine learning techniques.",
+    "technologies": ["Satellite Remote Sensing", "Google Earth Engine", "Deep Learning", "Geospatial Analysis"],
+    "status": "ongoing",
+    "featured": true,
+    "image": "heatwave_analysis.jpg",
+    "publications": [
+      "Spatiotemporal Characterization of Heatwave Exposure across Historically Vulnerable Communities",
+      "Spatiotemporal characterization of heatwaves on an urban center using satellite-based estimates"
+    ],
+    "funding": "NSF Graduate Research Fellowship",
+    "collaborators": ["Jackson State University", "University Partners"]
+  },
+  {
+    "title": "Compound Hazard Assessment",
+    "description": "Research on compound climate hazards including the interaction between precipitation, storm surge, and coastal flooding. Development of multi-hazard risk assessment frameworks.",
+    "technologies": ["Coastal Modeling", "Statistical Analysis", "Risk Assessment", "GIS"],
+    "status": "ongoing",
+    "featured": true,
+    "image": "compound_hazards.jpg",
+    "publications": [
+      "Evaluating the Compound Effects of Precipitation and Storm Surge on Coastal Flooding Risk"
+    ],
+    "funding": "ORISE Fellowship - U.S. Department of Defense",
+    "collaborators": ["ERDC-CHL", "U.S. Army Corps of Engineers"]
+  },
+  {
+    "title": "Satellite-Based Precipitation Analysis",
+    "description": "Comparative analysis of satellite precipitation products across different geographic regions, validation studies, and development of optimal satellite performance metrics.",
+    "technologies": ["Satellite Data Processing", "Validation Techniques", "Statistical Modeling"],
+    "status": "completed",
+    "featured": false,
+    "image": "precipitation_satellite.jpg",
+    "publications": [
+      "Comparative Analysis of Satellite-Based Precipitation Data across the CONUS and Hawaii"
+    ],
+    "funding": "Graduate Research Assistantship",
+    "collaborators": ["Jackson State University"]
+  }
+]

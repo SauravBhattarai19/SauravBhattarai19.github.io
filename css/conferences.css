@@ -1,0 +1,504 @@
+/* Conferences Styles */
+.conferences-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.conferences-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.conferences-timeline {
+    position: relative;
+}
+
+.timeline-year {
+    margin-bottom: 3rem;
+}
+
+.year-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    position: sticky;
+    top: 80px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 0;
+    z-index: 10;
+}
+
+.timeline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline-items::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+.conference-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+
+.conference-card::before {
+    content: '';
+    position: absolute;
+    left: -1.75rem;
+    top: 1.5rem;
+    width: 12px;
+    height: 12px;
+    background: #4f46e5;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 1px #4f46e5;
+}
+
+.conference-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #4f46e5;
+}
+
+.status-upcoming {
+    border-left: 4px solid #f59e0b;
+}
+
+.status-upcoming::before {
+    background: #f59e0b !important;
+    box-shadow: 0 0 0 1px #f59e0b !important;
+}
+
+.status-presented {
+    border-left: 4px solid #10b981;
+}
+
+.status-presented::before {
+    background: #10b981 !important;
+    box-shadow: 0 0 0 1px #10b981 !important;
+}
+
+.conference-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.conference-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.conference-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.conference-type {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.type-oral {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.type-poster {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.conference-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-upcoming {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.status-presented {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.conference-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.conference-authors {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.conference-details {
+    margin-bottom: 1.5rem;
+}
+
+.conference-venue, .conference-location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.conference-venue i, .conference-location i {
+    color: #6b7280;
+    width: 16px;
+}
+
+.conference-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Achievements Styles */
+.achievements-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.achievements-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.achievements-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Timeline View */
+.achievements-timeline .timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.achievements-timeline .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+.achievements-timeline .timeline-year {
+    margin-bottom: 3rem;
+}
+
+.achievements-timeline .year-marker {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    position: sticky;
+    top: 80px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 0;
+    z-index: 10;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.timeline-marker {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+    position: absolute;
+    left: -2.25rem;
+    top: 0;
+    z-index: 1;
+}
+
+.timeline-marker.fellowship {
+    background: #8b5cf6;
+}
+
+.timeline-marker.scholarship {
+    background: #06b6d4;
+}
+
+.timeline-marker.competition {
+    background: #f59e0b;
+}
+
+.timeline-marker.travel-grant {
+    background: #10b981;
+}
+
+.timeline-content {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    flex: 1;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateX(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-item.featured .timeline-content {
+    border-left: 4px solid #4f46e5;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.achievement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.achievement-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0;
+}
+
+.achievement-category {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.achievement-category.fellowship {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+.achievement-category.scholarship {
+    background: #cffafe;
+    color: #0891b2;
+}
+
+.achievement-category.competition {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.achievement-category.travel-grant {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.achievement-organization {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6b7280;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.achievement-organization .location {
+    color: #9ca3af;
+    font-weight: normal;
+}
+
+.achievement-description {
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.achievement-amount {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #059669;
+    font-weight: 600;
+}
+
+/* Grid View */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.achievement-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-card.featured {
+    border-left: 5px solid #4f46e5;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.achievement-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.achievement-year {
+    background: #4f46e5;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.achievement-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .conferences-header, .achievements-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .conferences-controls, .achievements-controls {
+        flex-direction: column;
+    }
+    
+    .timeline-items {
+        padding-left: 1rem;
+    }
+    
+    .conference-card, .timeline-content {
+        margin-left: 0.5rem;
+    }
+    
+    .conference-card::before, .timeline-marker {
+        left: -1rem;
+    }
+    
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .achievement-header, .conference-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .achievement-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}

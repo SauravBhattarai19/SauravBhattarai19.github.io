@@ -8,6 +8,7 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
 # IDE and Editor Files
 .vscode/
@@ -15,17 +16,28 @@ Thumbs.db
 *.swp
 *.swo
 *~
+.sublime-project
+.sublime-workspace
 
 # Temporary Files
 *.tmp
 *.temp
 *.log
+*.orig
 
 # Node.js (if you add any build tools later)
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Build outputs (if you add build tools)
+dist/
+build/
+.cache/
+*.cache
 
 # Environment Variables
 .env
@@ -37,12 +49,36 @@ yarn-error.log*
 # Backup Files
 *.bak
 *.backup
+*~
 
-# Cache
-.cache/
-*.cache
+# Personal/Draft Files
+CV_DRAFT.tex
+*.personal
+drafts/
+private/
+*_draft.*
+*_old.*
 
-# Optional: LaTeX auxiliary files (if you're keeping CV.tex)
+# Microsoft Office temporary files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Large media files (uncomment if you have very large files)
+# *.mp4
+# *.mov
+# *.avi
+# *.mkv
+# *.webm
+# *.flv
+
+# Archive files (unless specifically needed)
+# *.zip
+# *.rar
+# *.7z
+# *.tar.gz
+
+# LaTeX auxiliary files (for CV.tex)
 *.aux
 *.bbl
 *.blg
@@ -56,3 +92,25 @@ yarn-error.log*
 *.nav
 *.snm
 *.vrb
+*.idx
+*.ind
+*.ilg
+*.glo
+*.gls
+*.glg
+*.xdy
+
+# Python cache (if you add Python tools)
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# System and hidden files
+.sass-cache/
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
