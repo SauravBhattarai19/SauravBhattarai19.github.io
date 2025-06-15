@@ -41,11 +41,10 @@ class ConferencesPage {
                     <div class="conf-type-badge ${conf.type?.toLowerCase().replace(/\s+/g, '-') || 'presentation'}">${conf.type || 'Presentation'}</div>
                 </div>
                 <div class="conf-content">
-                    <h3 class="conf-title">${conf.title}</h3>
-                    <p class="conf-event">${conf.conference}</p>
+                    <h3 class="conf-title">${conf.title}</h3>                    <p class="conf-event">${conf.conference}</p>
                     <div class="conf-location">
                         <i class="fas fa-map-marker-alt"></i>
-                        ${conf.location}
+                        ${this.formatLocation(conf)}
                     </div>
                     <div class="conf-authors">
                         <i class="fas fa-users"></i>
@@ -90,10 +89,9 @@ class ConferencesPage {
                         <div class="detail-item">
                             <i class="fas fa-university"></i>
                             <span>${conf.conference}</span>
-                        </div>
-                        <div class="detail-item">
+                        </div>                        <div class="detail-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>${conf.location}</span>
+                            <span>${this.formatLocation(conf)}</span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-users"></i>
@@ -212,15 +210,50 @@ class ConferencesPage {
             });
         }
     }    updateStats() {
-        const totalPresentations = (this.conferencesData || []).length;
-        const countries = new Set((this.conferencesData || []).map(conf => 
-            conf.location?.split(',').pop()?.trim()
-        ).filter(Boolean)).size;
-        const awards = (this.conferencesData || []).filter(conf => conf.award).length;
+        if (!this.conferencesData || this.conferencesData.length === 0) {
+            document.getElementById('total-presentations').textContent = '0';
+            document.getElementById('countries-visited').textContent = '0';
+            document.getElementById('awards-received').textContent = '0';
+            return;
+        }
 
+        // Calculate total presentations
+        const totalPresentations = this.conferencesData.length;
+
+        // Calculate unique countries visited
+        const countries = new Set();
+        this.conferencesData.forEach(conf => {
+            // Try to get country from the new 'country' field first
+            if (conf.country) {
+                countries.add(conf.country.trim());
+            } 
+            // Fallback to parsing from location field for backward compatibility
+            else if (conf.location) {
+                const locationParts = conf.location.split(',');
+                if (locationParts.length >= 2) {
+                    // Get the last part which should be state/country
+                    const lastPart = locationParts[locationParts.length - 1].trim();
+                    // If it looks like a US state, count as USA
+                    const usStates = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming', 'DC', 'Washington DC'];
+                    if (usStates.some(state => lastPart.includes(state))) {
+                        countries.add('USA');
+                    } else {
+                        countries.add(lastPart);
+                    }
+                }
+            }
+        });
+
+        // Calculate awards received
+        const awards = this.conferencesData.filter(conf => conf.award && conf.award.trim() !== '').length;
+
+        // Update the display
         document.getElementById('total-presentations').textContent = totalPresentations;
-        document.getElementById('countries-visited').textContent = countries;
+        document.getElementById('countries-visited').textContent = countries.size;
         document.getElementById('awards-received').textContent = awards;
+
+        // Optional: Log the countries for debugging
+        console.log('Countries visited:', Array.from(countries).sort());
     }
 
     getDaysUntil(date) {
@@ -249,6 +282,15 @@ class ConferencesPage {
             default:
                 return 'fa-microphone';
         }
+    }
+
+    formatLocation(conf) {
+        // Use new city/country structure if available
+        if (conf.city && conf.country) {
+            return `${conf.city}, ${conf.country}`;
+        }
+        // Fallback to original location field
+        return conf.location || 'Location TBD';
     }
 }
 
