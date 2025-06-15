@@ -54,6 +54,8 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     margin-bottom: 3rem;
     position: relative;
+    color: #1f2937;
+    font-weight: 700;
 }
 
 .section-title::after {
@@ -69,10 +71,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gradient-text {
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 50%, #dbeafe 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Buttons */
@@ -223,6 +226,16 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
+.hero-title .gradient-text {
+    /* Ensure the gradient text has good contrast */
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 50%, #dbeafe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* Fallback for browsers that don't support background-clip */
+    color: white;
+}
+
 .hero-subtitle {
     font-size: 1.5rem;
     color: rgba(255, 255, 255, 0.9);
@@ -328,22 +341,32 @@ h1, h2, h3, h4, h5, h6 {
     height: 100px;
     background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'><path d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23ffffff'></path></svg>") repeat-x;
     background-size: 1200px 120px;
-    animation: wave 10s linear infinite;
+    /* Removed the moving animation - static wave now */
 }
 
-@keyframes wave {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-1200px);
-    }
-}
+/* Animation removed for better UX */
 
 /* About Section */
 .about {
     padding: 100px 0;
-    background: var(--background-light);
+    background: #ffffff;
+    position: relative;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(246, 250, 255, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+    z-index: 1;
+}
+
+.about .container {
+    position: relative;
+    z-index: 2;
 }
 
 .about-content {
@@ -355,9 +378,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-description {
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: #374151;
     margin-bottom: 2rem;
     line-height: 1.7;
+    font-weight: 400;
 }
 
 .about-highlights {
