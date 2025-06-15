@@ -44,9 +44,7 @@ class ConferencesPage {
         } catch (error) {
             console.error('❌ Error initializing conferences page:', error);
         }
-    }
-
-    renderUpcomingConferences() {
+    }renderUpcomingConferences() {
         const upcomingGrid = document.getElementById('upcoming-conferences-grid');
         if (!upcomingGrid) return;
 
@@ -66,8 +64,7 @@ class ConferencesPage {
                     <div class="conf-type-badge ${conf.type?.toLowerCase().replace(/\s+/g, '-') || 'presentation'}">${conf.type || 'Presentation'}</div>
                 </div>
                 <div class="conf-content">
-                    <h3 class="conf-title">${conf.title}</h3>
-                    <p class="conf-event">${conf.conference}</p>
+                    <h3 class="conf-title">${conf.title}</h3>                    <p class="conf-event">${conf.conference}</p>
                     <div class="conf-location">
                         <i class="fas fa-map-marker-alt"></i>
                         ${this.formatLocation(conf)}
@@ -88,19 +85,14 @@ class ConferencesPage {
                 <p>No upcoming conferences scheduled</p>
             </div>
         `;
-    }
-
-    renderRecentPresentations() {
+    }    renderRecentPresentations() {
         const timeline = document.getElementById('recent-presentations-timeline');
         if (!timeline) return;
 
-        const currentDate = new Date();
-        const recent = (this.conferencesData || [])
+        const currentDate = new Date();        const recent = (this.conferencesData || [])
             .filter(conf => conf.status === 'presented' || new Date(conf.date) <= currentDate)
             .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .slice(0, 3);
-
-        timeline.innerHTML = recent.map((conf, index) => `
+            .slice(0, 3);        timeline.innerHTML = recent.map((conf, index) => `
             <div class="recent-presentation-card" data-aos="fade-up" data-aos-delay="${index * 100}">
                 <div class="presentation-header">
                     <div class="presentation-date">
@@ -120,8 +112,7 @@ class ConferencesPage {
                         <div class="detail-item">
                             <i class="fas fa-university"></i>
                             <span>${conf.conference}</span>
-                        </div>
-                        <div class="detail-item">
+                        </div>                        <div class="detail-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>${this.formatLocation(conf)}</span>
                         </div>
@@ -139,9 +130,7 @@ class ConferencesPage {
         const conferencesList = document.getElementById('conferences-list');
         if (!conferencesList) return;
 
-        let filteredConferences = this.conferencesData || [];
-
-        // Apply filters
+        let filteredConferences = this.conferencesData || [];        // Apply filters
         if (this.currentFilter !== 'all') {
             const originalCount = filteredConferences.length;
             filteredConferences = filteredConferences.filter(conf => {
@@ -172,6 +161,9 @@ class ConferencesPage {
                 
                 return matches;
             });
+            
+            console.log(`Filter "${this.currentFilter}": ${originalCount} → ${filteredConferences.length} conferences`);
+            console.log('Available types:', this.conferencesData.map(c => c.type));
         }
 
         // Apply sorting
@@ -197,8 +189,7 @@ class ConferencesPage {
                         <div class="conf-date-badge">
                             <i class="fas fa-calendar"></i>
                             ${new Date(conf.date).toLocaleDateString()}
-                        </div>
-                        <div class="conf-badges">
+                        </div>                        <div class="conf-badges">
                             <span class="conf-type-badge ${this.getTypeCssClass(conf.type)}">${conf.type || 'Presentation'}</span>
                             ${conf.award ? `<span class="award-badge"><i class="fas fa-trophy"></i> ${conf.award}</span>` : ''}
                         </div>
@@ -245,9 +236,7 @@ class ConferencesPage {
                 </div>
             </div>
         `).join('');
-    }
-
-    setupEventListeners() {
+    }    setupEventListeners() {
         // Filter buttons
         const filterButtons = document.querySelectorAll('.filter-btn');
         filterButtons.forEach(button => {
@@ -255,6 +244,7 @@ class ConferencesPage {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 e.target.classList.add('active');
                 this.currentFilter = e.target.dataset.filter;
+                console.log('Filter changed to:', this.currentFilter);
                 this.renderAllConferences();
             });
         });
@@ -264,6 +254,7 @@ class ConferencesPage {
         if (sortSelect) {
             sortSelect.addEventListener('change', (e) => {
                 this.currentSort = e.target.value;
+                console.log('Sort changed to:', this.currentSort);
                 this.renderAllConferences();
             });
         }
@@ -273,6 +264,7 @@ class ConferencesPage {
             if (this.map) {
                 setTimeout(() => {
                     this.map.invalidateSize();
+                    console.log('🔄 Map resized due to window resize');
                 }, 100);
             }
         });
@@ -282,12 +274,11 @@ class ConferencesPage {
             if (!document.hidden && this.map) {
                 setTimeout(() => {
                     this.map.invalidateSize();
+                    console.log('🔄 Map resized due to visibility change');
                 }, 100);
             }
         });
-    }
-
-    updateStats() {
+    }updateStats() {
         if (!this.conferencesData || this.conferencesData.length === 0) {
             document.getElementById('total-presentations').textContent = '0';
             document.getElementById('countries-visited').textContent = '0';
@@ -301,8 +292,24 @@ class ConferencesPage {
         // Calculate unique countries visited
         const countries = new Set();
         this.conferencesData.forEach(conf => {
+            // Try to get country from the new 'country' field first
             if (conf.country) {
                 countries.add(conf.country.trim());
+            } 
+            // Fallback to parsing from location field for backward compatibility
+            else if (conf.location) {
+                const locationParts = conf.location.split(',');
+                if (locationParts.length >= 2) {
+                    // Get the last part which should be state/country
+                    const lastPart = locationParts[locationParts.length - 1].trim();
+                    // If it looks like a US state, count as USA
+                    const usStates = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming', 'DC', 'Washington DC'];
+                    if (usStates.some(state => lastPart.includes(state))) {
+                        countries.add('USA');
+                    } else {
+                        countries.add(lastPart);
+                    }
+                }
             }
         });
 
@@ -313,9 +320,60 @@ class ConferencesPage {
         document.getElementById('total-presentations').textContent = totalPresentations;
         document.getElementById('countries-visited').textContent = countries.size;
         document.getElementById('awards-received').textContent = awards;
+
+        // Optional: Log the countries for debugging
+        console.log('Countries visited:', Array.from(countries).sort());
     }
 
-    initializeMap() {
+    getDaysUntil(date) {
+        const now = new Date();
+        const target = new Date(date);
+        const diffTime = target - now;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
+    }    getTypeIcon(type) {
+        if (!type) return 'fa-microphone';
+        
+        const normalizedType = type.toLowerCase().replace(/\s+/g, '-');
+        switch (normalizedType) {
+            case 'keynote':
+            case 'keynote-presentation':
+                return 'fa-microphone-alt';
+            case 'invited':
+            case 'invited-talk':
+                return 'fa-user-friends';
+            case 'oral':
+            case 'oral-presentation':
+                return 'fa-comments';
+            case 'poster':
+            case 'poster-presentation':
+                return 'fa-image';
+            default:
+                return 'fa-microphone';
+        }
+    }    getTypeCssClass(type) {
+        if (!type) return 'presentation';
+        
+        const typeNormalized = type.toLowerCase().replace(/\s+/g, '-');
+        
+        if (typeNormalized.includes('keynote')) return 'keynote-presentation';
+        if (typeNormalized.includes('invited')) return 'invited-presentation';
+        if (typeNormalized.includes('online') && typeNormalized.includes('poster')) return 'online-poster-presentation';
+        if (typeNormalized.includes('online')) return 'online-presentation';
+        if (typeNormalized.includes('oral')) return 'oral-presentation';
+        if (typeNormalized.includes('poster')) return 'poster-presentation';
+        
+        return typeNormalized;
+    }
+
+    formatLocation(conf) {
+        // Use new city/country structure if available
+        if (conf.city && conf.country) {
+            return `${conf.city}, ${conf.country}`;
+        }
+        // Fallback to original location field
+        return conf.location || 'Location TBD';
+    }    initializeMap() {
         console.log('🗺️ Starting map initialization...');
         
         const mapContainer = document.getElementById('world-map');
@@ -380,266 +438,238 @@ class ConferencesPage {
         } catch (error) {
             console.error('❌ Error initializing map:', error);
         }
-    }
+    }groupConferencesByLocation() {
+        const groups = new Map();
 
-    createAllMarkers() {
-        console.log(`🎯 Creating markers for ${this.conferencesData.length} conferences...`);
-        
-        // Group conferences by location
-        const locationGroups = new Map();
-        
         this.conferencesData.forEach((conf, index) => {
             const coords = this.getCoordinates(conf);
-            if (coords && coords.length === 2) {
-                // Round coordinates to avoid tiny differences
-                const lat = Math.round(coords[0] * 1000) / 1000;
-                const lng = Math.round(coords[1] * 1000) / 1000;
+            if (coords && coords.length === 2 && !isNaN(coords[0]) && !isNaN(coords[1])) {
+                // Use more precise key to avoid floating point issues, but round to avoid tiny differences
+                const lat = Math.round(coords[0] * 10000) / 10000;
+                const lng = Math.round(coords[1] * 10000) / 10000;
                 const key = `${lat},${lng}`;
                 
-                if (!locationGroups.has(key)) {
-                    locationGroups.set(key, {
+                if (!groups.has(key)) {
+                    groups.set(key, {
                         coordinates: [lat, lng],
                         conferences: [],
                         locationName: this.formatLocation(conf)
                     });
                 }
-                locationGroups.get(key).conferences.push(conf);
+                groups.get(key).conferences.push(conf);
+                console.log(`📌 Conference ${index + 1}: "${conf.title}" grouped at ${key} (${this.formatLocation(conf)})`);
+            } else {
+                console.warn(`⚠️ Skipping conference ${index + 1}: "${conf.title}" - invalid coordinates:`, coords);
             }
         });
 
-        console.log(`📍 Found ${locationGroups.size} unique locations`);
-
-        // Create markers for each location
-        locationGroups.forEach((group, key) => {
-            try {
-                const marker = this.createMarkerForLocation(group);
-                if (marker) {
-                    marker.addTo(this.map);
-                    this.markers.push(marker);
-                    console.log(`✅ Created marker for ${group.locationName} (${group.conferences.length} conferences)`);
-                }
-            } catch (error) {
-                console.error(`❌ Error creating marker for ${group.locationName}:`, error);
-            }
+        const groupArray = Array.from(groups.values());
+        console.log(`🗂️ Location grouping complete. ${groupArray.length} unique locations found.`);
+        
+        // Debug: Show details of each group
+        groupArray.forEach((group, i) => {
+            console.log(`Group ${i + 1}: ${group.locationName} - ${group.conferences.length} conferences at [${group.coordinates[0]}, ${group.coordinates[1]}]`, 
+                       group.conferences.map(c => `"${c.title}" (${c.type})`));
         });
 
-        console.log(`🎯 Created ${this.markers.length} markers total`);
-
-        // Fit map to show all markers
-        if (this.markers.length > 0) {
-            setTimeout(() => {
-                try {
-                    const group = new L.featureGroup(this.markers);
-                    this.map.fitBounds(group.getBounds().pad(0.1));
-                    console.log('🔍 Map fitted to show all markers');
-                } catch (error) {
-                    console.error('Error fitting bounds:', error);
-                }
-            }, 1000);
-        }
+        return groupArray;
     }
 
-    createMarkerForLocation(locationGroup) {
-        const { coordinates, conferences, locationName } = locationGroup;
-        const conferenceCount = conferences.length;
+    createLocationGroupMarker(group) {
+        const { coordinates, conferences, locationName } = group;
         
-        // Choose marker style based on number of conferences
-        let markerHtml, iconSize;
-        
-        if (conferenceCount === 1) {
-            // Single conference marker
-            const conf = conferences[0];
-            const color = this.getMarkerColor(conf.type);
-            markerHtml = `
-                <div style="
-                    width: 24px; 
-                    height: 24px; 
-                    background: ${color}; 
-                    border: 3px solid white; 
-                    border-radius: 50%; 
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                ">
-                    <i class="fas fa-microphone" style="color: white; font-size: 10px;"></i>
-                </div>
-            `;
-            iconSize = [24, 24];
+        if (conferences.length === 1) {
+            // Single conference - use simple marker
+            return this.createSingleConferenceMarker(conferences[0], coordinates);
         } else {
-            // Multiple conferences marker
-            markerHtml = `
-                <div style="
-                    width: 36px; 
-                    height: 36px; 
-                    background: linear-gradient(135deg, #4f46e5, #7c3aed); 
-                    border: 3px solid white; 
-                    border-radius: 50%; 
-                    box-shadow: 0 3px 12px rgba(0,0,0,0.4);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    font-weight: bold;
-                    color: white;
-                    font-size: 14px;
-                ">
-                    ${conferenceCount}
-                </div>
-            `;
-            iconSize = [36, 36];
+            // Multiple conferences - use clustered marker
+            return this.createClusteredMarker(group);
         }
-
+    }    createSingleConferenceMarker(conf, coords) {
+        const color = this.getMarkerColor(conf.type);
+        
         const icon = L.divIcon({
-            className: 'custom-conference-marker',
-            html: markerHtml,
-            iconSize: iconSize,
-            iconAnchor: [iconSize[0]/2, iconSize[1]/2]
+            className: 'custom-marker single-marker',
+            html: `<div style="background-color: ${color}; width: 28px; height: 28px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-microphone" style="color: white; font-size: 12px;"></i>
+            </div>`,
+            iconSize: [28, 28],
+            iconAnchor: [14, 14]
         });
 
-        const marker = L.marker(coordinates, { icon: icon });
-        
-        // Create popup content
-        const popupContent = this.createPopupContent(locationGroup);
+        const popupContent = this.createSingleConferencePopup(conf);
+        const marker = L.marker(coords, { icon: icon });
         
         marker.bindPopup(popupContent, {
-            maxWidth: conferenceCount > 1 ? 500 : 400,
+            maxWidth: 400,
             minWidth: 300,
-            maxHeight: 500,
-            className: 'custom-conference-popup'
+            autoPan: true,
+            keepInView: true,
+            closeButton: true,
+            autoClose: false,
+            className: 'custom-popup-single'
+        });
+
+        return marker;
+    }createClusteredMarker(group) {
+        const { coordinates, conferences, locationName } = group;
+        
+        // Get all unique presentation types at this location
+        const types = [...new Set(conferences.map(c => c.type))];
+        const colors = types.map(type => this.getMarkerColor(type));
+        
+        // Create multi-colored marker for mixed types
+        const markerHtml = this.createMultiColorMarker(colors, conferences.length);
+        
+        const icon = L.divIcon({
+            className: 'custom-marker clustered-marker',
+            html: markerHtml,
+            iconSize: [36, 36],
+            iconAnchor: [18, 18]
+        });
+
+        const popupContent = this.createClusteredPopup(group);
+        const marker = L.marker(coordinates, { icon: icon });
+        
+        // Configure popup with better options for scrolling
+        marker.bindPopup(popupContent, {
+            maxWidth: 500,
+            minWidth: 380,
+            maxHeight: 600,
+            autoPan: true,
+            keepInView: true,
+            closeButton: true,
+            autoClose: false,
+            className: 'custom-popup-clustered'
+        });
+
+        // Add event listener to ensure popup opens properly
+        marker.on('click', function() {
+            // Small delay to ensure popup is rendered before adjusting scrolling
+            setTimeout(() => {
+                const popup = marker.getPopup();
+                if (popup && popup.isOpen()) {
+                    const popupElement = popup.getElement();
+                    if (popupElement) {
+                        const scrollContainer = popupElement.querySelector('.scrollable-conferences');
+                        if (scrollContainer) {
+                            // Reset scroll position to top
+                            scrollContainer.scrollTop = 0;
+                            console.log('📋 Popup opened with scrollable content initialized');
+                        }
+                    }
+                }
+            }, 100);
         });
 
         return marker;
     }
 
-    createPopupContent(locationGroup) {
-        const { conferences, locationName } = locationGroup;
-        
-        if (conferences.length === 1) {
-            return this.createSingleConferencePopup(conferences[0]);
+    createMultiColorMarker(colors, count) {
+        if (colors.length === 1) {
+            // Single color with count
+            return `
+                <div style="position: relative; width: 36px; height: 36px;">
+                    <div style="background-color: ${colors[0]}; width: 36px; height: 36px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-weight: bold; font-size: 14px;">${count}</span>
+                    </div>
+                </div>
+            `;
         } else {
-            return this.createMultipleConferencesPopup(locationGroup);
+            // Multi-colored pie chart style
+            const anglePerColor = 360 / colors.length;
+            let gradientStops = [];
+            
+            colors.forEach((color, index) => {
+                const startAngle = index * anglePerColor;
+                const endAngle = (index + 1) * anglePerColor;
+                gradientStops.push(`${color} ${startAngle}deg ${endAngle}deg`);
+            });
+            
+            return `
+                <div style="position: relative; width: 36px; height: 36px;">
+                    <div style="background: conic-gradient(${gradientStops.join(', ')}); width: 36px; height: 36px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
+                        <div style="background: rgba(255,255,255,0.9); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: #1f2937; font-weight: bold; font-size: 12px;">${count}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
     }
 
     createSingleConferencePopup(conf) {
-        const typeColor = this.getMarkerColor(conf.type);
-        
         return `
-            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; min-width: 280px;">
-                <div style="background: linear-gradient(135deg, ${typeColor}, ${typeColor}dd); color: white; padding: 16px; margin: -12px -12px 16px -12px; border-radius: 12px 12px 0 0;">
-                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700;">${conf.title}</h4>
-                    <p style="margin: 0; font-size: 13px; opacity: 0.9;">${conf.type}</p>
-                </div>
-                
-                <div style="padding: 0 4px;">
-                    <div style="margin-bottom: 12px;">
-                        <strong style="color: #374151; font-size: 12px;">🏛️ Conference:</strong><br>
-                        <span style="color: #1f2937; font-size: 13px;">${conf.conference}</span>
-                    </div>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
-                        <div>
-                            <strong style="color: #374151; font-size: 12px;">📅 Date:</strong><br>
-                            <span style="color: #1f2937; font-size: 13px;">${new Date(conf.date).toLocaleDateString()}</span>
-                        </div>
-                        <div>
-                            <strong style="color: #374151; font-size: 12px;">📍 Location:</strong><br>
-                            <span style="color: #1f2937; font-size: 13px;">${this.formatLocation(conf)}</span>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 12px;">
-                        <strong style="color: #374151; font-size: 12px;">👥 Authors:</strong><br>
-                        <span style="color: #1f2937; font-size: 12px;">${conf.authors}</span>
-                    </div>
-                    
-                    ${conf.award ? `
-                        <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; text-align: center;">
-                            🏆 ${conf.award}
-                        </div>
-                    ` : ''}
+            <div style="min-width: 280px; max-width: 350px;">
+                <h4 style="margin: 0 0 12px 0; color: #1f2937; font-size: 16px; font-weight: 600; line-height: 1.4;">${conf.title}</h4>
+                <div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <p style="margin: 4px 0; color: #374151; font-size: 13px;"><strong>📍 Conference:</strong> ${conf.conference}</p>
+                    <p style="margin: 4px 0; color: #374151; font-size: 13px;"><strong>🗺️ Location:</strong> ${this.formatLocation(conf)}</p>
+                    <p style="margin: 4px 0; color: #374151; font-size: 13px;"><strong>📅 Date:</strong> ${new Date(conf.date).toLocaleDateString()}</p>
+                    <p style="margin: 4px 0; color: #374151; font-size: 13px;"><strong>🎤 Type:</strong> <span style="background: ${this.getMarkerColor(conf.type)}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px;">${conf.type}</span></p>
+                    ${conf.award ? `<p style="margin: 8px 0 4px 0; color: #f59e0b; font-size: 13px; font-weight: 600;"><strong>🏆 Award:</strong> ${conf.award}</p>` : ''}
                 </div>
             </div>
         `;
-    }
-
-    createMultipleConferencesPopup(locationGroup) {
-        const { conferences, locationName } = locationGroup;
+    }    createClusteredPopup(group) {
+        const { conferences, locationName } = group;
+        
+        // Sort conferences by date (newest first)
         const sortedConfs = conferences.sort((a, b) => new Date(b.date) - new Date(a.date));
         
         let html = `
-            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; min-width: 420px; max-width: 480px;">
-                <div style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; padding: 16px; margin: -12px -12px 16px -12px; border-radius: 12px 12px 0 0;">
-                    <h4 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700;">📍 ${locationName}</h4>
-                    <p style="margin: 0; font-size: 14px; opacity: 0.9;">${conferences.length} presentations at this location</p>
+            <div style="min-width: 380px; max-width: 480px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                <div style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 20px; border-radius: 16px 16px 0 0; margin: -12px -12px 20px -12px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 20px; font-weight: 700; line-height: 1.3;">📍 ${locationName}</h4>
+                    <p style="margin: 0; font-size: 15px; opacity: 0.95; font-weight: 500;">${conferences.length} presentation${conferences.length > 1 ? 's' : ''} at this location</p>
                 </div>
-                
-                <div style="max-height: 350px; overflow-y: auto; padding: 0 4px;" class="scrollable-conferences">
+                <div style="max-height: 400px; overflow-y: auto; padding: 0 4px; margin-bottom: 16px;" class="scrollable-conferences">
         `;
         
         sortedConfs.forEach((conf, index) => {
             const typeColor = this.getMarkerColor(conf.type);
+            const isEven = index % 2 === 0;
             
             html += `
-                <div style="
-                    background: ${index % 2 === 0 ? '#f8fafc' : 'white'}; 
-                    padding: 16px; 
-                    border-radius: 12px; 
-                    margin-bottom: 12px; 
-                    border-left: 4px solid ${typeColor}; 
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-                    transition: transform 0.2s ease;
-                " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                        <h5 style="margin: 0; color: #1f2937; font-size: 14px; font-weight: 700; line-height: 1.3; flex: 1; padding-right: 8px;">
-                            ${conf.title}
-                        </h5>
-                        <span style="
-                            background: ${typeColor}; 
-                            color: white; 
-                            padding: 4px 8px; 
-                            border-radius: 12px; 
-                            font-size: 10px; 
-                            font-weight: 600; 
-                            white-space: nowrap;
-                            text-transform: uppercase;
-                        ">
-                            ${conf.type}
-                        </span>
+                <div style="background: ${isEven ? '#f8fafc' : 'white'}; padding: 20px; border-radius: 16px; margin-bottom: 16px; border-left: 5px solid ${typeColor}; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.2s ease; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 12px;">
+                        <h5 style="margin: 0; color: #1f2937; font-size: 16px; font-weight: 700; line-height: 1.4; flex: 1;">${conf.title}</h5>
+                        <span style="background: ${typeColor}; color: white; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px;">${conf.type}</span>
                     </div>
                     
-                    <div style="margin-bottom: 8px;">
-                        <strong style="color: #6b7280; font-size: 11px;">🏛️ Conference:</strong><br>
-                        <span style="color: #1f2937; font-size: 12px;">${conf.conference}</span>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px;">
+                        <div style="background: rgba(79, 70, 229, 0.05); padding: 12px; border-radius: 10px;">
+                            <div style="font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">📅 Date</div>
+                            <div style="color: #1f2937; font-weight: 600; font-size: 13px;">${new Date(conf.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</div>
+                        </div>
+                        <div style="background: rgba(16, 185, 129, 0.05); padding: 12px; border-radius: 10px;">
+                            <div style="font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">📅 Year</div>
+                            <div style="color: #1f2937; font-weight: 600; font-size: 13px;">${conf.year}</div>
+                        </div>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                        <div>
-                            <strong style="color: #6b7280; font-size: 11px;">📅 Date:</strong><br>
-                            <span style="color: #1f2937; font-size: 12px;">${new Date(conf.date).toLocaleDateString()}</span>
-                        </div>
-                        <div>
-                            <strong style="color: #6b7280; font-size: 11px;">📅 Year:</strong><br>
-                            <span style="color: #1f2937; font-size: 12px;">${conf.year}</span>
-                        </div>
+                    <div style="background: rgba(245, 158, 11, 0.05); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">🏛️ Conference</div>
+                        <div style="color: #1f2937; font-weight: 600; font-size: 13px; line-height: 1.4;">${conf.conference}</div>
+                    </div>
+                    
+                    <div style="background: rgba(124, 58, 237, 0.05); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">👥 Authors</div>
+                        <div style="color: #1f2937; font-size: 12px; line-height: 1.4;">${conf.authors}</div>
                     </div>
                     
                     ${conf.award ? `
-                        <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; margin-top: 8px; text-align: center;">
-                            🏆 ${conf.award}
+                        <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; padding: 12px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; margin-top: 12px; text-align: center; box-shadow: 0 4px 6px rgba(245, 158, 11, 0.2);">
+                            🏆 Award: ${conf.award}
                         </div>
                     ` : ''}
-                </div>
-            `;
-        });
-        
-        html += `
-                </div>
-                <div style="background: #f1f5f9; padding: 12px; margin: 16px -12px -12px -12px; border-radius: 0 0 12px 12px; text-align: center; font-size: 11px; color: #6b7280;">
-                    💡 Scroll above to see all ${conferences.length} presentations
+                    
+                    ${conf.doi ? `
+                        <div style="margin-top: 12px; text-align: center;">
+                            <a href="${conf.doi}" target="_blank" style="color: #4f46e5; text-decoration: none; font-size: 12px; font-weight: 600; padding: 8px 16px; border: 2px solid #4f46e5; border-radius: 20px; display: inline-block; transition: all 0.2s ease;">
+                                🔗 View Publication
+                            </a>
+                        </div>                    ` : ''}
                 </div>
             </div>
         `;
@@ -659,9 +689,7 @@ class ConferencesPage {
         if (typeNormalized.includes('online')) return '#ef4444';
         
         return '#6b7280';
-    }
-
-    getCoordinates(conf) {
+    }    getCoordinates(conf) {
         // First priority: Use coordinates directly from JSON if available
         if (conf.coordinates && Array.isArray(conf.coordinates) && conf.coordinates.length === 2) {
             const lat = parseFloat(conf.coordinates[0]);
@@ -717,62 +745,35 @@ class ConferencesPage {
         return { valid: validCoords, invalid: invalidCoords };
     }
 
-    getDaysUntil(date) {
-        const now = new Date();
-        const target = new Date(date);
-        const diffTime = target - now;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        return diffDays;
-    }
-
-    getTypeIcon(type) {
-        if (!type) return 'fa-microphone';
+    createAllMarkers() {
+        console.log(`🎯 Creating markers for ${this.conferencesData.length} conferences...`);
         
-        const normalizedType = type.toLowerCase().replace(/\s+/g, '-');
-        switch (normalizedType) {
-            case 'keynote':
-            case 'keynote-presentation':
-                return 'fa-microphone-alt';
-            case 'invited':
-            case 'invited-talk':
-                return 'fa-user-friends';
-            case 'oral':
-            case 'oral-presentation':
-                return 'fa-comments';
-            case 'poster':
-            case 'poster-presentation':
-                return 'fa-image';
-            default:
-                return 'fa-microphone';
-        }
-    }
-
-    getTypeCssClass(type) {
-        if (!type) return 'presentation';
+        // Group conferences by location
+        const locationGroups = new Map();
         
-        const typeNormalized = type.toLowerCase().replace(/\s+/g, '-');
-        
-        if (typeNormalized.includes('keynote')) return 'keynote-presentation';
-        if (typeNormalized.includes('invited')) return 'invited-presentation';
-        if (typeNormalized.includes('online') && typeNormalized.includes('poster')) return 'online-poster-presentation';
-        if (typeNormalized.includes('online')) return 'online-presentation';
-        if (typeNormalized.includes('oral')) return 'oral-presentation';
-        if (typeNormalized.includes('poster')) return 'poster-presentation';
-        
-        return typeNormalized;
-    }
+        this.conferencesData.forEach((conf, index) => {
+            const coords = this.getCoordinates(conf);
+            if (coords && coords.length === 2) {
+                // Round coordinates to avoid tiny differences
+                const lat = Math.round(coords[0] * 1000) / 1000;
+                const lng = Math.round(coords[1] * 1000) / 1000;
+                const key = `${lat},${lng}`;
+                
+                if (!locationGroups.has(key)) {
+                    locationGroups.set(key, {
+                        coordinates: [lat, lng],
+                        conferences: [],
+                        locationName: this.formatLocation(conf)
+                    });
+                }
+                locationGroups.get(key).conferences.push(conf);
+            }
+        });
 
-    formatLocation(conf) {
-        // Use new city/country structure if available
-        if (conf.city && conf.country) {
-            return `${conf.city}, ${conf.country}`;
-        }
-        // Fallback to original location field
-        return conf.location || 'Location TBD';
-    }
-}
+        console.log(`📍 Found ${locationGroups.size} unique locations`);
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new ConferencesPage();
-});
+        // Create markers for each location
+        locationGroups.forEach((group, key) => {
+            try {
+                const marker = this.createMarkerForLocation(group);
+                if
