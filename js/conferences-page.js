@@ -340,33 +340,43 @@ class ConferencesPage {
             attribution: '© OpenStreetMap contributors'
         }).addTo(this.map);
 
+        console.log(`🗺️ Processing ${this.conferencesData.length} conferences for map markers...`);
+
         // Group conferences by location
         const locationGroups = this.groupConferencesByLocation();
+        console.log(`📍 Found ${locationGroups.length} unique locations:`, locationGroups.map(g => `${g.locationName} (${g.conferences.length} conferences)`));
 
         // Create markers for each location group
         const allMarkers = [];
-        locationGroups.forEach(group => {
+        locationGroups.forEach((group, index) => {
             const marker = this.createLocationGroupMarker(group);
             if (marker) {
                 marker.addTo(this.map);
                 allMarkers.push(marker);
+                console.log(`✅ Marker ${index + 1}: ${group.locationName} with ${group.conferences.length} conference(s)`);
+            } else {
+                console.error(`❌ Failed to create marker for: ${group.locationName}`);
             }
         });
+
+        console.log(`🎯 Total markers created: ${allMarkers.length}`);
 
         // Fit map to show all markers
         if (allMarkers.length > 0) {
             const group = new L.featureGroup(allMarkers);
             this.map.fitBounds(group.getBounds().pad(0.1));
+            console.log('🔍 Map bounds fitted to show all markers');
+        } else {
+            console.warn('⚠️ No markers to display on map');
         }
-    }
-
-    groupConferencesByLocation() {
+    }    groupConferencesByLocation() {
         const groups = new Map();
 
-        this.conferencesData.forEach(conf => {
+        this.conferencesData.forEach((conf, index) => {
             const coords = this.getCoordinates(conf);
             if (coords) {
-                const key = `${coords[0]},${coords[1]}`;
+                // Use more precise key to avoid floating point issues
+                const key = `${coords[0].toFixed(4)},${coords[1].toFixed(4)}`;
                 if (!groups.has(key)) {
                     groups.set(key, {
                         coordinates: coords,
@@ -375,10 +385,22 @@ class ConferencesPage {
                     });
                 }
                 groups.get(key).conferences.push(conf);
+                console.log(`📌 Conference ${index + 1}: "${conf.title}" grouped at ${key} (${this.formatLocation(conf)})`);
+            } else {
+                console.warn(`⚠️ Skipping conference ${index + 1}: "${conf.title}" - no coordinates`);
             }
         });
 
-        return Array.from(groups.values());
+        const groupArray = Array.from(groups.values());
+        console.log(`🗂️ Location grouping complete. ${groupArray.length} unique locations found.`);
+        
+        // Debug: Show details of each group
+        groupArray.forEach((group, i) => {
+            console.log(`Group ${i + 1}: ${group.locationName} - ${group.conferences.length} conferences`, 
+                       group.conferences.map(c => `"${c.title}" (${c.type})`));
+        });
+
+        return groupArray;
     }
 
     createLocationGroupMarker(group) {
@@ -477,36 +499,67 @@ class ConferencesPage {
                 </div>
             </div>
         `;
-    }
-
-    createClusteredPopup(group) {
+    }    createClusteredPopup(group) {
         const { conferences, locationName } = group;
         
         // Sort conferences by date (newest first)
         const sortedConfs = conferences.sort((a, b) => new Date(b.date) - new Date(a.date));
         
         let html = `
-            <div style="min-width: 320px; max-width: 400px;">
-                <h4 style="margin: 0 0 12px 0; color: #1f2937; font-size: 16px; font-weight: 600;">📍 ${locationName}</h4>
-                <p style="margin: 0 0 16px 0; color: #6b7280; font-size: 14px; font-weight: 500;">${conferences.length} presentations at this location</p>
-                <div style="max-height: 250px; overflow-y: auto;">
+            <div style="min-width: 350px; max-width: 450px;">
+                <div style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 16px; border-radius: 12px 12px 0 0; margin: -12px -12px 16px -12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700;">📍 ${locationName}</h4>
+                    <p style="margin: 0; font-size: 14px; opacity: 0.9;">${conferences.length} presentations at this location</p>
+                </div>
+                <div style="max-height: 320px; overflow-y: auto; padding-right: 8px;" class="scrollable-conferences">
         `;
         
         sortedConfs.forEach((conf, index) => {
+            const typeColor = this.getMarkerColor(conf.type);
             html += `
-                <div style="background: ${index % 2 === 0 ? '#f8fafc' : 'white'}; padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid ${this.getMarkerColor(conf.type)};">
-                    <h5 style="margin: 0 0 8px 0; color: #1f2937; font-size: 14px; font-weight: 600; line-height: 1.3;">${conf.title}</h5>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; color: #6b7280;">
-                        <p style="margin: 0;"><strong>Conference:</strong><br>${conf.conference}</p>
-                        <p style="margin: 0;"><strong>Date:</strong><br>${new Date(conf.date).toLocaleDateString()}</p>
-                        <p style="margin: 0;"><strong>Type:</strong><br><span style="background: ${this.getMarkerColor(conf.type)}; color: white; padding: 2px 6px; border-radius: 10px; font-size: 10px;">${conf.type}</span></p>
-                        ${conf.award ? `<p style="margin: 0; color: #f59e0b; font-weight: 600;"><strong>Award:</strong><br>🏆 ${conf.award}</p>` : '<p style="margin: 0;"></p>'}
+                <div style="background: ${index % 2 === 0 ? '#f8fafc' : 'white'}; padding: 16px; border-radius: 12px; margin-bottom: 12px; border-left: 4px solid ${typeColor}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <h5 style="margin: 0; color: #1f2937; font-size: 15px; font-weight: 600; line-height: 1.3; flex: 1; padding-right: 8px;">${conf.title}</h5>
+                        <span style="background: ${typeColor}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: 600; white-space: nowrap;">${conf.type}</span>
                     </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px;">
+                        <div style="font-size: 12px; color: #6b7280;">
+                            <strong style="color: #374151;">📅 Date:</strong><br>
+                            <span style="color: #1f2937;">${new Date(conf.date).toLocaleDateString()}</span>
+                        </div>
+                        <div style="font-size: 12px; color: #6b7280;">
+                            <strong style="color: #374151;">👥 Authors:</strong><br>
+                            <span style="color: #1f2937; font-size: 11px;">${conf.authors}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">
+                        <strong style="color: #374151;">🏛️ Conference:</strong><br>
+                        <span style="color: #1f2937;">${conf.conference}</span>
+                    </div>
+                    
+                    ${conf.award ? `
+                        <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; margin-top: 8px;">
+                            🏆 Award: ${conf.award}
+                        </div>
+                    ` : ''}
+                    
+                    ${conf.doi ? `
+                        <div style="margin-top: 8px;">
+                            <a href="${conf.doi}" target="_blank" style="color: #4f46e5; text-decoration: none; font-size: 11px; font-weight: 500;">
+                                🔗 View Publication
+                            </a>
+                        </div>
+                    ` : ''}
                 </div>
             `;
         });
         
         html += `
+                </div>
+                <div style="background: #f8fafc; padding: 12px; border-radius: 0 0 12px 12px; margin: 16px -12px -12px -12px; text-align: center; font-size: 11px; color: #6b7280;">
+                    💡 Scroll to see all presentations at this location
                 </div>
             </div>
         `;
@@ -529,12 +582,12 @@ class ConferencesPage {
     }    getCoordinates(conf) {
         // First priority: Use coordinates directly from JSON if available
         if (conf.coordinates && Array.isArray(conf.coordinates) && conf.coordinates.length === 2) {
+            console.log(`Using coordinates for ${conf.title} in ${conf.city}: [${conf.coordinates[0]}, ${conf.coordinates[1]}]`);
             return conf.coordinates;
         }
 
         // If no coordinates in JSON, return null
-        // This encourages adding coordinates to the JSON file for accurate positioning
-        console.warn(`No coordinates found for conference: ${conf.title} in ${conf.location || conf.city + ', ' + conf.country}`);
+        console.warn(`❌ No coordinates found for conference: "${conf.title}" in ${conf.location || (conf.city + ', ' + conf.country)}`);
         return null;
     }
 

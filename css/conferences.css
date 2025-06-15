@@ -1254,13 +1254,25 @@
 .leaflet-popup-content-wrapper {
     border-radius: 16px !important;
     padding: 0 !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
     border: 1px solid #e5e7eb !important;
+    max-width: 500px !important;
 }
 
 .leaflet-popup-content {
-    margin: 16px !important;
-    line-height: 1.5 !important;
+    margin: 12px !important;
+    line-height: 1.6 !important;
+    max-width: none !important;
+    width: auto !important;
+}
+
+.leaflet-popup {
+    margin-bottom: 20px !important;
+}
+
+/* Ensure popup doesn't get cut off */
+.leaflet-popup-tip-container {
+    height: 11px !important;
 }
 
 .leaflet-popup-tip {
@@ -1268,39 +1280,21 @@
     border: 1px solid #e5e7eb !important;
 }
 
-/* Custom scrollbar for popup content */
-.leaflet-popup-content div::-webkit-scrollbar {
-    width: 6px;
+/* Enhanced scrollable popup styles */
+.scrollable-conferences::-webkit-scrollbar {
+    width: 8px;
 }
 
-.leaflet-popup-content div::-webkit-scrollbar-track {
+.scrollable-conferences::-webkit-scrollbar-track {
     background: #f1f5f9;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 
-.leaflet-popup-content div::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
+.scrollable-conferences::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+    border-radius: 4px;
 }
 
-.leaflet-popup-content div::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
-
-/* Responsive map */
-@media (max-width: 768px) {
-    .map-container {
-        padding: 1rem;
-        margin-top: 1.5rem;
-    }
-    
-    .world-map {
-        height: 400px !important;
-    }
-    
-    .map-legend {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
+.scrollable-conferences::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #94a3b8, #64748b);
 }
