@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <!-- Navigation -->
@@ -136,14 +138,9 @@
             <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title">Global Conference Participation</h2>
                 <p class="section-subtitle">Interactive map showing conference locations worldwide</p>
-            </div>
-            <div class="map-container" data-aos="fade-up">
-                <div id="world-map" class="world-map">
+            </div>            <div class="map-container" data-aos="fade-up">
+                <div id="world-map" class="world-map" style="height: 500px; border-radius: 16px; overflow: hidden;">
                     <!-- Interactive map will be rendered here -->
-                    <div class="map-placeholder">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <p>Interactive world map showing conference locations</p>
-                    </div>
                 </div>
                 <div class="map-legend">
                     <div class="legend-item">
@@ -161,6 +158,10 @@
                     <div class="legend-item">
                         <span class="legend-color poster"></span>
                         <span>Poster Presentation</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color online"></span>
+                        <span>Online Presentation</span>
                     </div>
                 </div>
             </div>
@@ -225,8 +226,9 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Scripts -->    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/data-manager.js"></script>
     <script src="js/conferences-page.js"></script>
     <script>

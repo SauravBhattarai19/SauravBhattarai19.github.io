@@ -7,6 +7,7 @@
     "city": "Kathmandu",
     "country": "Nepal",
     "location": "Kathmandu, Nepal",
+    "coordinates": [27.7172, 85.3240],
     "date": "November 29, 2024",
     "type": "Invited Talk",
     "status": "presented"
@@ -19,6 +20,7 @@
     "city": "Anchorage",
     "country": "USA",
     "location": "Anchorage, Alaska",
+    "coordinates": [61.2181, -149.9003],
     "date": "May 20, 2025",
     "type": "Oral Presentation",
     "status": "presented"
@@ -31,6 +33,7 @@
     "city": "Anchorage",
     "country": "USA",
     "location": "Anchorage, Alaska",
+    "coordinates": [61.2181, -149.9003],
     "date": "May 20, 2025",
     "type": "Oral Presentation",
     "status": "presented"
@@ -43,6 +46,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
+    "coordinates": [38.9072, -77.0369],
     "date": "Dec 11, 2024",
     "type": "Poster Presentation",
     "status": "presented"
@@ -55,6 +59,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
+    "coordinates": [38.9072, -77.0369],
     "date": "Dec 12, 2024",
     "type": "Poster Presentation",
     "status": "presented"
@@ -67,6 +72,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
+    "coordinates": [38.9072, -77.0369],
     "date": "Dec 9-13, 2024",
     "type": "Poster Presentation",
     "status": "presented"
@@ -79,6 +85,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
+    "coordinates": [38.9072, -77.0369],
     "date": "Dec 28, 2024",
     "type": "Online Poster Presentation",
     "status": "presented"
@@ -91,6 +98,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
+    "coordinates": [38.9072, -77.0369],
     "date": "Dec 13, 2024",
     "type": "Poster Presentation",
     "status": "presented"
@@ -103,6 +111,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
+    "coordinates": [38.9072, -77.0369],
     "date": "Dec 13, 2024",
     "type": "Oral Presentation",
     "status": "presented"
@@ -115,6 +124,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
+    "coordinates": [38.9072, -77.0369],
     "date": "Dec 13, 2024",
     "type": "Oral Presentation",
     "status": "presented"
@@ -127,6 +137,7 @@
     "city": "Washington DC",
     "country": "USA",
     "location": "Washington DC",
+    "coordinates": [38.9072, -77.0369],
     "date": "Dec 13, 2024",
     "type": "Poster Presentation",
     "status": "presented"
@@ -139,6 +150,7 @@
     "city": "Jackson",
     "country": "USA",
     "location": "Jackson, MS",
+    "coordinates": [32.2988, -90.1848],
     "date": "2024",
     "type": "Conference Paper",
     "status": "published",
@@ -152,6 +164,7 @@
     "city": "Amsterdam",
     "country": "Netherlands",
     "location": "Amsterdam, Netherlands",
+    "coordinates": [52.3676, 4.9041],
     "date": "June 13, 2024",
     "type": "Oral Presentation",
     "status": "presented"
@@ -164,6 +177,7 @@
     "city": "Milwaukee",
     "country": "USA",
     "location": "Milwaukee, WI",
+    "coordinates": [43.0389, -87.9065],
     "date": "May 21, 2024",
     "type": "Oral Presentation",
     "status": "presented"
@@ -176,6 +190,7 @@
     "city": "Milwaukee",
     "country": "USA",
     "location": "Milwaukee, WI",
+    "coordinates": [43.0389, -87.9065],
     "date": "May 22, 2024",
     "type": "Oral Presentation",
     "status": "presented"
@@ -188,6 +203,7 @@
     "city": "Vienna",
     "country": "Austria",
     "location": "Vienna, Austria",
+    "coordinates": [48.2082, 16.3738],
     "date": "Apt 19, 2024",
     "type": "Oral Presentation",
     "status": "presented",
@@ -201,6 +217,7 @@
     "city": "Honolulu",
     "country": "USA",
     "location": "Honolulu, HI",
+    "coordinates": [21.3069, -157.8583],
     "date": "Feb 16, 2024",
     "type": "Poster Presentation",
     "status": "presented"
@@ -213,6 +230,7 @@
     "city": "Honolulu",
     "country": "USA",
     "location": "Honolulu, HI",
+    "coordinates": [21.3069, -157.8583],
     "date": "Feb 16, 2024",
     "type": "Poster Presentation",
     "status": "presented"
@@ -225,6 +243,7 @@
     "city": "Baltimore",
     "country": "USA",
     "location": "Baltimore, MD",
+    "coordinates": [39.2904, -76.6122],
     "date": "Feb 1, 2024",
     "type": "Oral Presentation",
     "status": "presented"
@@ -237,6 +256,7 @@
     "city": "San Francisco",
     "country": "USA",
     "location": "San Francisco",
+    "coordinates": [37.7749, -122.4194],
     "date": "Dec 12, 2023",
     "type": "Oral Presentation",
     "status": "presented"
@@ -249,6 +269,7 @@
     "city": "Jackson",
     "country": "USA",
     "location": "Jackson, MS",
+    "coordinates": [32.2988, -90.1848],
     "date": "Oct 26, 2023",
     "type": "Poster Presentation",
     "status": "presented"

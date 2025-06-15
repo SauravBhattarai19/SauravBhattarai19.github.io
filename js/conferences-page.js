@@ -1,22 +1,22 @@
 // Conferences page functionality
 class ConferencesPage {
     constructor() {
-        this.dataManager = new DataManager();
-        this.currentFilter = 'all';
+        this.dataManager = new DataManager();        this.currentFilter = 'all';
         this.currentSort = 'date-desc';
         this.conferencesData = null;
+        this.map = null;
         this.init();
     }
 
     async init() {
         try {
             this.conferencesData = await this.dataManager.getConferences();
-            if (this.conferencesData) {
-                this.renderUpcomingConferences();
+            if (this.conferencesData) {                this.renderUpcomingConferences();
                 this.renderRecentPresentations();
                 this.renderAllConferences();
                 this.setupEventListeners();
                 this.updateStats();
+                this.initializeMap();
             }
         } catch (error) {
             console.error('Error initializing conferences page:', error);
@@ -331,6 +331,116 @@ class ConferencesPage {
         // Fallback to original location field
         return conf.location || 'Location TBD';
     }
+
+    initializeMap() {
+        // Initialize the map
+        this.map = L.map('world-map').setView([40.0, 0.0], 2);
+
+        // Add tile layer (map background)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(this.map);
+
+        // Create a marker cluster group
+        const markers = L.layerGroup().addTo(this.map);
+
+        // Add markers for each conference
+        this.conferencesData.forEach(conf => {
+            const coords = this.getCoordinates(conf);
+            if (coords) {
+                const marker = this.createConferenceMarker(conf, coords);
+                marker.addTo(markers);
+            }
+        });
+
+        // Fit map to show all markers
+        if (markers.getLayers().length > 0) {
+            const group = new L.featureGroup(markers.getLayers());
+            this.map.fitBounds(group.getBounds().pad(0.1));
+        }
+    }
+
+    createConferenceMarker(conf, coords) {
+        // Get color based on presentation type
+        const color = this.getMarkerColor(conf.type);
+        
+        // Create custom icon
+        const icon = L.divIcon({
+            className: 'custom-marker',
+            html: `<div style="background-color: ${color}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
+
+        // Create popup content
+        const popupContent = `
+            <div style="min-width: 250px;">
+                <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 14px; font-weight: 600;">${conf.title}</h4>
+                <p style="margin: 4px 0; color: #6b7280; font-size: 12px;"><strong>Conference:</strong> ${conf.conference}</p>
+                <p style="margin: 4px 0; color: #6b7280; font-size: 12px;"><strong>Location:</strong> ${this.formatLocation(conf)}</p>
+                <p style="margin: 4px 0; color: #6b7280; font-size: 12px;"><strong>Date:</strong> ${new Date(conf.date).toLocaleDateString()}</p>
+                <p style="margin: 4px 0; color: #6b7280; font-size: 12px;"><strong>Type:</strong> ${conf.type}</p>
+                ${conf.award ? `<p style="margin: 4px 0; color: #f59e0b; font-size: 12px;"><strong>🏆 Award:</strong> ${conf.award}</p>` : ''}
+            </div>
+        `;
+
+        return L.marker(coords, { icon: icon }).bindPopup(popupContent);
+    }
+
+    getMarkerColor(type) {
+        if (!type) return '#6b7280';
+        
+        const typeNormalized = type.toLowerCase();
+        
+        if (typeNormalized.includes('keynote')) return '#8b5cf6';
+        if (typeNormalized.includes('invited')) return '#06b6d4';
+        if (typeNormalized.includes('oral')) return '#10b981';
+        if (typeNormalized.includes('poster')) return '#f59e0b';
+        if (typeNormalized.includes('online')) return '#ef4444';
+        
+        return '#6b7280';
+    }
+
+    getCoordinates(conf) {
+        // You'll need to add coordinates to your JSON or use a geocoding service
+        // For now, here's a basic mapping for common locations
+        const locationCoords = {
+            // USA locations
+            'anchorage': [61.2181, -149.9003],
+            'san francisco': [37.7749, -122.4194],
+            'washington dc': [38.9072, -77.0369],
+            'honolulu': [21.3099, -157.8581],
+            
+            // International locations
+            'amsterdam': [52.3676, 4.9041],
+            'netherlands': [52.3676, 4.9041],
+            
+            // Add more as needed
+        };
+
+        // Try to match city from new structure
+        if (conf.city) {
+            const cityKey = conf.city.toLowerCase();
+            if (locationCoords[cityKey]) {
+                return locationCoords[cityKey];
+            }
+        }
+
+        // Fallback to parsing location field
+        if (conf.location) {
+            const locationKey = conf.location.toLowerCase();
+            for (const [key, coords] of Object.entries(locationCoords)) {
+                if (locationKey.includes(key)) {
+                    return coords;
+                }
+            }
+        }
+
+        return null; // Return null if location not found
+    }
+
+    // ...existing code...
 }
 
 // Initialize when DOM is loaded
