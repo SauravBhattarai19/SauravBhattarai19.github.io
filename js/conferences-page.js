@@ -6,12 +6,14 @@ class ConferencesPage {
         this.conferencesData = null;
         this.map = null;
         this.init();
-    }
-
-    async init() {
+    }    async init() {
         try {
             this.conferencesData = await this.dataManager.getConferences();
-            if (this.conferencesData) {                this.renderUpcomingConferences();
+            if (this.conferencesData) {
+                // Debug coordinates first
+                this.debugCoordinates();
+                
+                this.renderUpcomingConferences();
                 this.renderRecentPresentations();
                 this.renderAllConferences();
                 this.setupEventListeners();
@@ -21,7 +23,7 @@ class ConferencesPage {
         } catch (error) {
             console.error('Error initializing conferences page:', error);
         }
-    }    renderUpcomingConferences() {
+    }renderUpcomingConferences() {
         const upcomingGrid = document.getElementById('upcoming-conferences-grid');
         if (!upcomingGrid) return;
 
@@ -235,6 +237,26 @@ class ConferencesPage {
                 this.renderAllConferences();
             });
         }
+
+        // Handle window resize for map
+        window.addEventListener('resize', () => {
+            if (this.map) {
+                setTimeout(() => {
+                    this.map.invalidateSize();
+                    console.log('🔄 Map resized due to window resize');
+                }, 100);
+            }
+        });
+
+        // Handle tab visibility change (in case map is in a hidden tab)
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && this.map) {
+                setTimeout(() => {
+                    this.map.invalidateSize();
+                    console.log('🔄 Map resized due to visibility change');
+                }, 100);
+            }
+        });
     }updateStats() {
         if (!this.conferencesData || this.conferencesData.length === 0) {
             document.getElementById('total-presentations').textContent = '0';
@@ -331,55 +353,105 @@ class ConferencesPage {
         // Fallback to original location field
         return conf.location || 'Location TBD';
     }    initializeMap() {
-        // Initialize the map
-        this.map = L.map('world-map').setView([40.0, 0.0], 2);
-
-        // Add tile layer (map background)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(this.map);
-
-        console.log(`🗺️ Processing ${this.conferencesData.length} conferences for map markers...`);
-
-        // Group conferences by location
-        const locationGroups = this.groupConferencesByLocation();
-        console.log(`📍 Found ${locationGroups.length} unique locations:`, locationGroups.map(g => `${g.locationName} (${g.conferences.length} conferences)`));
-
-        // Create markers for each location group
-        const allMarkers = [];
-        locationGroups.forEach((group, index) => {
-            const marker = this.createLocationGroupMarker(group);
-            if (marker) {
-                marker.addTo(this.map);
-                allMarkers.push(marker);
-                console.log(`✅ Marker ${index + 1}: ${group.locationName} with ${group.conferences.length} conference(s)`);
-            } else {
-                console.error(`❌ Failed to create marker for: ${group.locationName}`);
-            }
-        });
-
-        console.log(`🎯 Total markers created: ${allMarkers.length}`);
-
-        // Fit map to show all markers
-        if (allMarkers.length > 0) {
-            const group = new L.featureGroup(allMarkers);
-            this.map.fitBounds(group.getBounds().pad(0.1));
-            console.log('🔍 Map bounds fitted to show all markers');
-        } else {
-            console.warn('⚠️ No markers to display on map');
+        const mapContainer = document.getElementById('world-map');
+        if (!mapContainer) {
+            console.error('❌ Map container element not found');
+            return;
         }
-    }    groupConferencesByLocation() {
+
+        // Clear any existing map instance
+        if (this.map) {
+            this.map.remove();
+        }
+
+        try {
+            // Initialize the map
+            this.map = L.map('world-map', {
+                zoomControl: true,
+                scrollWheelZoom: true,
+                doubleClickZoom: true,
+                boxZoom: true,
+                keyboard: true,
+                dragging: true,
+                touchZoom: true
+            }).setView([40.0, 0.0], 2);
+
+            // Add tile layer (map background)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(this.map);
+
+            console.log(`🗺️ Processing ${this.conferencesData.length} conferences for map markers...`);
+
+            // Group conferences by location
+            const locationGroups = this.groupConferencesByLocation();
+            console.log(`📍 Found ${locationGroups.length} unique locations:`, locationGroups.map(g => `${g.locationName} (${g.conferences.length} conferences)`));
+
+            // Create markers for each location group
+            const allMarkers = [];
+            locationGroups.forEach((group, index) => {
+                const marker = this.createLocationGroupMarker(group);
+                if (marker) {
+                    marker.addTo(this.map);
+                    allMarkers.push(marker);
+                    console.log(`✅ Marker ${index + 1}: ${group.locationName} with ${group.conferences.length} conference(s)`);
+                } else {
+                    console.error(`❌ Failed to create marker for: ${group.locationName}`);
+                }
+            });
+
+            console.log(`🎯 Total markers created: ${allMarkers.length}`);
+
+            // Fit map to show all markers with proper timing
+            if (allMarkers.length > 0) {
+                // Use setTimeout to ensure map is fully loaded
+                setTimeout(() => {
+                    try {
+                        const group = new L.featureGroup(allMarkers);
+                        this.map.fitBounds(group.getBounds().pad(0.1));
+                        console.log('🔍 Map bounds fitted to show all markers');
+                    } catch (error) {
+                        console.error('Error fitting map bounds:', error);
+                        // Fallback to default view
+                        this.map.setView([40.0, 0.0], 2);
+                    }
+                }, 500);
+            } else {
+                console.warn('⚠️ No markers to display on map');
+            }            // Force map resize after initialization and with multiple retries
+            setTimeout(() => {
+                this.map.invalidateSize();
+                console.log('🔄 Map size invalidated (first attempt)');
+            }, 100);
+
+            setTimeout(() => {
+                this.map.invalidateSize();
+                console.log('🔄 Map size invalidated (second attempt)');
+            }, 500);
+
+            setTimeout(() => {
+                this.map.invalidateSize();
+                console.log('🔄 Map size invalidated (final attempt)');
+            }, 1000);
+
+        } catch (error) {
+            console.error('❌ Error initializing map:', error);
+        }
+    }groupConferencesByLocation() {
         const groups = new Map();
 
         this.conferencesData.forEach((conf, index) => {
             const coords = this.getCoordinates(conf);
-            if (coords) {
-                // Use more precise key to avoid floating point issues
-                const key = `${coords[0].toFixed(4)},${coords[1].toFixed(4)}`;
+            if (coords && coords.length === 2 && !isNaN(coords[0]) && !isNaN(coords[1])) {
+                // Use more precise key to avoid floating point issues, but round to avoid tiny differences
+                const lat = Math.round(coords[0] * 10000) / 10000;
+                const lng = Math.round(coords[1] * 10000) / 10000;
+                const key = `${lat},${lng}`;
+                
                 if (!groups.has(key)) {
                     groups.set(key, {
-                        coordinates: coords,
+                        coordinates: [lat, lng],
                         conferences: [],
                         locationName: this.formatLocation(conf)
                     });
@@ -387,7 +459,7 @@ class ConferencesPage {
                 groups.get(key).conferences.push(conf);
                 console.log(`📌 Conference ${index + 1}: "${conf.title}" grouped at ${key} (${this.formatLocation(conf)})`);
             } else {
-                console.warn(`⚠️ Skipping conference ${index + 1}: "${conf.title}" - no coordinates`);
+                console.warn(`⚠️ Skipping conference ${index + 1}: "${conf.title}" - invalid coordinates:`, coords);
             }
         });
 
@@ -396,7 +468,7 @@ class ConferencesPage {
         
         // Debug: Show details of each group
         groupArray.forEach((group, i) => {
-            console.log(`Group ${i + 1}: ${group.locationName} - ${group.conferences.length} conferences`, 
+            console.log(`Group ${i + 1}: ${group.locationName} - ${group.conferences.length} conferences at [${group.coordinates[0]}, ${group.coordinates[1]}]`, 
                        group.conferences.map(c => `"${c.title}" (${c.type})`));
         });
 
@@ -413,23 +485,33 @@ class ConferencesPage {
             // Multiple conferences - use clustered marker
             return this.createClusteredMarker(group);
         }
-    }
-
-    createSingleConferenceMarker(conf, coords) {
+    }    createSingleConferenceMarker(conf, coords) {
         const color = this.getMarkerColor(conf.type);
         
         const icon = L.divIcon({
-            className: 'custom-marker',
-            html: `<div style="background-color: ${color}; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 3px 6px rgba(0,0,0,0.4);"></div>`,
-            iconSize: [24, 24],
-            iconAnchor: [12, 12]
+            className: 'custom-marker single-marker',
+            html: `<div style="background-color: ${color}; width: 28px; height: 28px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-microphone" style="color: white; font-size: 12px;"></i>
+            </div>`,
+            iconSize: [28, 28],
+            iconAnchor: [14, 14]
         });
 
         const popupContent = this.createSingleConferencePopup(conf);
-        return L.marker(coords, { icon: icon }).bindPopup(popupContent);
-    }
+        const marker = L.marker(coords, { icon: icon });
+        
+        marker.bindPopup(popupContent, {
+            maxWidth: 400,
+            minWidth: 300,
+            autoPan: true,
+            keepInView: true,
+            closeButton: true,
+            autoClose: false,
+            className: 'custom-popup-single'
+        });
 
-    createClusteredMarker(group) {
+        return marker;
+    }createClusteredMarker(group) {
         const { coordinates, conferences, locationName } = group;
         
         // Get all unique presentation types at this location
@@ -447,10 +529,40 @@ class ConferencesPage {
         });
 
         const popupContent = this.createClusteredPopup(group);
-        return L.marker(coordinates, { icon: icon }).bindPopup(popupContent, {
-            maxWidth: 400,
-            maxHeight: 300
+        const marker = L.marker(coordinates, { icon: icon });
+        
+        // Configure popup with better options for scrolling
+        marker.bindPopup(popupContent, {
+            maxWidth: 500,
+            minWidth: 380,
+            maxHeight: 600,
+            autoPan: true,
+            keepInView: true,
+            closeButton: true,
+            autoClose: false,
+            className: 'custom-popup-clustered'
         });
+
+        // Add event listener to ensure popup opens properly
+        marker.on('click', function() {
+            // Small delay to ensure popup is rendered before adjusting scrolling
+            setTimeout(() => {
+                const popup = marker.getPopup();
+                if (popup && popup.isOpen()) {
+                    const popupElement = popup.getElement();
+                    if (popupElement) {
+                        const scrollContainer = popupElement.querySelector('.scrollable-conferences');
+                        if (scrollContainer) {
+                            // Reset scroll position to top
+                            scrollContainer.scrollTop = 0;
+                            console.log('📋 Popup opened with scrollable content initialized');
+                        }
+                    }
+                }
+            }, 100);
+        });
+
+        return marker;
     }
 
     createMultiColorMarker(colors, count) {
@@ -506,48 +618,55 @@ class ConferencesPage {
         const sortedConfs = conferences.sort((a, b) => new Date(b.date) - new Date(a.date));
         
         let html = `
-            <div style="min-width: 350px; max-width: 450px;">
-                <div style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 16px; border-radius: 12px 12px 0 0; margin: -12px -12px 16px -12px;">
-                    <h4 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700;">📍 ${locationName}</h4>
-                    <p style="margin: 0; font-size: 14px; opacity: 0.9;">${conferences.length} presentations at this location</p>
+            <div style="min-width: 380px; max-width: 480px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                <div style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 20px; border-radius: 16px 16px 0 0; margin: -12px -12px 20px -12px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 20px; font-weight: 700; line-height: 1.3;">📍 ${locationName}</h4>
+                    <p style="margin: 0; font-size: 15px; opacity: 0.95; font-weight: 500;">${conferences.length} presentation${conferences.length > 1 ? 's' : ''} at this location</p>
                 </div>
-                <div style="max-height: 320px; overflow-y: auto; padding-right: 8px;" class="scrollable-conferences">
+                <div style="max-height: 400px; overflow-y: auto; padding: 0 4px; margin-bottom: 16px;" class="scrollable-conferences">
         `;
         
         sortedConfs.forEach((conf, index) => {
             const typeColor = this.getMarkerColor(conf.type);
+            const isEven = index % 2 === 0;
+            
             html += `
-                <div style="background: ${index % 2 === 0 ? '#f8fafc' : 'white'}; padding: 16px; border-radius: 12px; margin-bottom: 12px; border-left: 4px solid ${typeColor}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                        <h5 style="margin: 0; color: #1f2937; font-size: 15px; font-weight: 600; line-height: 1.3; flex: 1; padding-right: 8px;">${conf.title}</h5>
-                        <span style="background: ${typeColor}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: 600; white-space: nowrap;">${conf.type}</span>
+                <div style="background: ${isEven ? '#f8fafc' : 'white'}; padding: 20px; border-radius: 16px; margin-bottom: 16px; border-left: 5px solid ${typeColor}; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.2s ease; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 12px;">
+                        <h5 style="margin: 0; color: #1f2937; font-size: 16px; font-weight: 700; line-height: 1.4; flex: 1;">${conf.title}</h5>
+                        <span style="background: ${typeColor}; color: white; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px;">${conf.type}</span>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px;">
-                        <div style="font-size: 12px; color: #6b7280;">
-                            <strong style="color: #374151;">📅 Date:</strong><br>
-                            <span style="color: #1f2937;">${new Date(conf.date).toLocaleDateString()}</span>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px;">
+                        <div style="background: rgba(79, 70, 229, 0.05); padding: 12px; border-radius: 10px;">
+                            <div style="font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">📅 Date</div>
+                            <div style="color: #1f2937; font-weight: 600; font-size: 13px;">${new Date(conf.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</div>
                         </div>
-                        <div style="font-size: 12px; color: #6b7280;">
-                            <strong style="color: #374151;">👥 Authors:</strong><br>
-                            <span style="color: #1f2937; font-size: 11px;">${conf.authors}</span>
+                        <div style="background: rgba(16, 185, 129, 0.05); padding: 12px; border-radius: 10px;">
+                            <div style="font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">📅 Year</div>
+                            <div style="color: #1f2937; font-weight: 600; font-size: 13px;">${conf.year}</div>
                         </div>
                     </div>
                     
-                    <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">
-                        <strong style="color: #374151;">🏛️ Conference:</strong><br>
-                        <span style="color: #1f2937;">${conf.conference}</span>
+                    <div style="background: rgba(245, 158, 11, 0.05); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">🏛️ Conference</div>
+                        <div style="color: #1f2937; font-weight: 600; font-size: 13px; line-height: 1.4;">${conf.conference}</div>
+                    </div>
+                    
+                    <div style="background: rgba(124, 58, 237, 0.05); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                        <div style="font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">👥 Authors</div>
+                        <div style="color: #1f2937; font-size: 12px; line-height: 1.4;">${conf.authors}</div>
                     </div>
                     
                     ${conf.award ? `
-                        <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; margin-top: 8px;">
+                        <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; padding: 12px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; margin-top: 12px; text-align: center; box-shadow: 0 4px 6px rgba(245, 158, 11, 0.2);">
                             🏆 Award: ${conf.award}
                         </div>
                     ` : ''}
                     
                     ${conf.doi ? `
-                        <div style="margin-top: 8px;">
-                            <a href="${conf.doi}" target="_blank" style="color: #4f46e5; text-decoration: none; font-size: 11px; font-weight: 500;">
+                        <div style="margin-top: 12px; text-align: center;">
+                            <a href="${conf.doi}" target="_blank" style="color: #4f46e5; text-decoration: none; font-size: 12px; font-weight: 600; padding: 8px 16px; border: 2px solid #4f46e5; border-radius: 20px; display: inline-block; transition: all 0.2s ease;">
                                 🔗 View Publication
                             </a>
                         </div>
@@ -558,8 +677,8 @@ class ConferencesPage {
         
         html += `
                 </div>
-                <div style="background: #f8fafc; padding: 12px; border-radius: 0 0 12px 12px; margin: 16px -12px -12px -12px; text-align: center; font-size: 11px; color: #6b7280;">
-                    💡 Scroll to see all presentations at this location
+                <div style="background: linear-gradient(135deg, #f1f5f9, #e2e8f0); padding: 16px; border-radius: 0 0 16px 16px; margin: 16px -12px -12px -12px; text-align: center; font-size: 12px; color: #64748b; font-weight: 500;">
+                    💡 Scroll above to see all ${conferences.length} presentations at this location
                 </div>
             </div>
         `;
@@ -582,8 +701,17 @@ class ConferencesPage {
     }    getCoordinates(conf) {
         // First priority: Use coordinates directly from JSON if available
         if (conf.coordinates && Array.isArray(conf.coordinates) && conf.coordinates.length === 2) {
-            console.log(`Using coordinates for ${conf.title} in ${conf.city}: [${conf.coordinates[0]}, ${conf.coordinates[1]}]`);
-            return conf.coordinates;
+            const lat = parseFloat(conf.coordinates[0]);
+            const lng = parseFloat(conf.coordinates[1]);
+            
+            // Validate that coordinates are valid numbers and within reasonable ranges
+            if (!isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
+                console.log(`✅ Using coordinates for "${conf.title}" in ${this.formatLocation(conf)}: [${lat}, ${lng}]`);
+                return [lat, lng];
+            } else {
+                console.warn(`⚠️ Invalid coordinates for "${conf.title}": [${conf.coordinates[0]}, ${conf.coordinates[1]}] (lat: ${lat}, lng: ${lng})`);
+                return null;
+            }
         }
 
         // If no coordinates in JSON, return null
@@ -591,7 +719,40 @@ class ConferencesPage {
         return null;
     }
 
-    // ...existing code...
+    // Add debugging method to verify all coordinates
+    debugCoordinates() {
+        console.log('🔍 Debugging conference coordinates:');
+        const validCoords = [];
+        const invalidCoords = [];
+        
+        this.conferencesData.forEach((conf, index) => {
+            const coords = this.getCoordinates(conf);
+            if (coords) {
+                validCoords.push({
+                    title: conf.title,
+                    location: this.formatLocation(conf),
+                    coords: coords,
+                    year: conf.year
+                });
+            } else {
+                invalidCoords.push({
+                    title: conf.title,
+                    location: this.formatLocation(conf),
+                    rawCoords: conf.coordinates
+                });
+            }
+        });
+        
+        console.log(`✅ Valid coordinates: ${validCoords.length}`);
+        console.table(validCoords);
+        
+        if (invalidCoords.length > 0) {
+            console.log(`❌ Invalid coordinates: ${invalidCoords.length}`);
+            console.table(invalidCoords);
+        }
+        
+        return { valid: validCoords, invalid: invalidCoords };
+    }
 }
 
 // Initialize when DOM is loaded
