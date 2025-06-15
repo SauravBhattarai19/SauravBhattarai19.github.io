@@ -1228,14 +1228,63 @@
     border: none !important;
 }
 
+/* Enhanced marker styles for clustering */
+.clustered-marker {
+    background: none !important;
+    border: none !important;
+    animation: pulse-marker 2s ease-in-out infinite;
+}
+
+.clustered-marker:hover {
+    animation: none;
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+@keyframes pulse-marker {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
 /* Map popup customization */
 .leaflet-popup-content-wrapper {
-    border-radius: 12px !important;
+    border-radius: 16px !important;
     padding: 0 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid #e5e7eb !important;
 }
 
 .leaflet-popup-content {
-    margin: 12px !important;
+    margin: 16px !important;
+    line-height: 1.5 !important;
+}
+
+.leaflet-popup-tip {
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+/* Custom scrollbar for popup content */
+.leaflet-popup-content div::-webkit-scrollbar {
+    width: 6px;
+}
+
+.leaflet-popup-content div::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.leaflet-popup-content div::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.leaflet-popup-content div::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
 }
 
 /* Responsive map */

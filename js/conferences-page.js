@@ -330,9 +330,7 @@ class ConferencesPage {
         }
         // Fallback to original location field
         return conf.location || 'Location TBD';
-    }
-
-    initializeMap() {
+    }    initializeMap() {
         // Initialize the map
         this.map = L.map('world-map').setView([40.0, 0.0], 2);
 
@@ -342,50 +340,178 @@ class ConferencesPage {
             attribution: '© OpenStreetMap contributors'
         }).addTo(this.map);
 
-        // Create a marker cluster group
-        const markers = L.layerGroup().addTo(this.map);
+        // Group conferences by location
+        const locationGroups = this.groupConferencesByLocation();
 
-        // Add markers for each conference
-        this.conferencesData.forEach(conf => {
-            const coords = this.getCoordinates(conf);
-            if (coords) {
-                const marker = this.createConferenceMarker(conf, coords);
-                marker.addTo(markers);
+        // Create markers for each location group
+        const allMarkers = [];
+        locationGroups.forEach(group => {
+            const marker = this.createLocationGroupMarker(group);
+            if (marker) {
+                marker.addTo(this.map);
+                allMarkers.push(marker);
             }
         });
 
         // Fit map to show all markers
-        if (markers.getLayers().length > 0) {
-            const group = new L.featureGroup(markers.getLayers());
+        if (allMarkers.length > 0) {
+            const group = new L.featureGroup(allMarkers);
             this.map.fitBounds(group.getBounds().pad(0.1));
         }
     }
 
-    createConferenceMarker(conf, coords) {
-        // Get color based on presentation type
-        const color = this.getMarkerColor(conf.type);
-        
-        // Create custom icon
-        const icon = L.divIcon({
-            className: 'custom-marker',
-            html: `<div style="background-color: ${color}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
-            iconSize: [20, 20],
-            iconAnchor: [10, 10]
+    groupConferencesByLocation() {
+        const groups = new Map();
+
+        this.conferencesData.forEach(conf => {
+            const coords = this.getCoordinates(conf);
+            if (coords) {
+                const key = `${coords[0]},${coords[1]}`;
+                if (!groups.has(key)) {
+                    groups.set(key, {
+                        coordinates: coords,
+                        conferences: [],
+                        locationName: this.formatLocation(conf)
+                    });
+                }
+                groups.get(key).conferences.push(conf);
+            }
         });
 
-        // Create popup content
-        const popupContent = `
-            <div style="min-width: 250px;">
-                <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 14px; font-weight: 600;">${conf.title}</h4>
-                <p style="margin: 4px 0; color: #6b7280; font-size: 12px;"><strong>Conference:</strong> ${conf.conference}</p>
-                <p style="margin: 4px 0; color: #6b7280; font-size: 12px;"><strong>Location:</strong> ${this.formatLocation(conf)}</p>
-                <p style="margin: 4px 0; color: #6b7280; font-size: 12px;"><strong>Date:</strong> ${new Date(conf.date).toLocaleDateString()}</p>
-                <p style="margin: 4px 0; color: #6b7280; font-size: 12px;"><strong>Type:</strong> ${conf.type}</p>
-                ${conf.award ? `<p style="margin: 4px 0; color: #f59e0b; font-size: 12px;"><strong>🏆 Award:</strong> ${conf.award}</p>` : ''}
+        return Array.from(groups.values());
+    }
+
+    createLocationGroupMarker(group) {
+        const { coordinates, conferences, locationName } = group;
+        
+        if (conferences.length === 1) {
+            // Single conference - use simple marker
+            return this.createSingleConferenceMarker(conferences[0], coordinates);
+        } else {
+            // Multiple conferences - use clustered marker
+            return this.createClusteredMarker(group);
+        }
+    }
+
+    createSingleConferenceMarker(conf, coords) {
+        const color = this.getMarkerColor(conf.type);
+        
+        const icon = L.divIcon({
+            className: 'custom-marker',
+            html: `<div style="background-color: ${color}; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 3px 6px rgba(0,0,0,0.4);"></div>`,
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
+
+        const popupContent = this.createSingleConferencePopup(conf);
+        return L.marker(coords, { icon: icon }).bindPopup(popupContent);
+    }
+
+    createClusteredMarker(group) {
+        const { coordinates, conferences, locationName } = group;
+        
+        // Get all unique presentation types at this location
+        const types = [...new Set(conferences.map(c => c.type))];
+        const colors = types.map(type => this.getMarkerColor(type));
+        
+        // Create multi-colored marker for mixed types
+        const markerHtml = this.createMultiColorMarker(colors, conferences.length);
+        
+        const icon = L.divIcon({
+            className: 'custom-marker clustered-marker',
+            html: markerHtml,
+            iconSize: [36, 36],
+            iconAnchor: [18, 18]
+        });
+
+        const popupContent = this.createClusteredPopup(group);
+        return L.marker(coordinates, { icon: icon }).bindPopup(popupContent, {
+            maxWidth: 400,
+            maxHeight: 300
+        });
+    }
+
+    createMultiColorMarker(colors, count) {
+        if (colors.length === 1) {
+            // Single color with count
+            return `
+                <div style="position: relative; width: 36px; height: 36px;">
+                    <div style="background-color: ${colors[0]}; width: 36px; height: 36px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-weight: bold; font-size: 14px;">${count}</span>
+                    </div>
+                </div>
+            `;
+        } else {
+            // Multi-colored pie chart style
+            const anglePerColor = 360 / colors.length;
+            let gradientStops = [];
+            
+            colors.forEach((color, index) => {
+                const startAngle = index * anglePerColor;
+                const endAngle = (index + 1) * anglePerColor;
+                gradientStops.push(`${color} ${startAngle}deg ${endAngle}deg`);
+            });
+            
+            return `
+                <div style="position: relative; width: 36px; height: 36px;">
+                    <div style="background: conic-gradient(${gradientStops.join(', ')}); width: 36px; height: 36px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
+                        <div style="background: rgba(255,255,255,0.9); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: #1f2937; font-weight: bold; font-size: 12px;">${count}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    createSingleConferencePopup(conf) {
+        return `
+            <div style="min-width: 280px; max-width: 350px;">
+                <h4 style="margin: 0 0 12px 0; color: #1f2937; font-size: 16px; font-weight: 600; line-height: 1.4;">${conf.title}</h4>
+                <div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <p style="margin: 4px 0; color: #374151; font-size: 13px;"><strong>📍 Conference:</strong> ${conf.conference}</p>
+                    <p style="margin: 4px 0; color: #374151; font-size: 13px;"><strong>🗺️ Location:</strong> ${this.formatLocation(conf)}</p>
+                    <p style="margin: 4px 0; color: #374151; font-size: 13px;"><strong>📅 Date:</strong> ${new Date(conf.date).toLocaleDateString()}</p>
+                    <p style="margin: 4px 0; color: #374151; font-size: 13px;"><strong>🎤 Type:</strong> <span style="background: ${this.getMarkerColor(conf.type)}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px;">${conf.type}</span></p>
+                    ${conf.award ? `<p style="margin: 8px 0 4px 0; color: #f59e0b; font-size: 13px; font-weight: 600;"><strong>🏆 Award:</strong> ${conf.award}</p>` : ''}
+                </div>
             </div>
         `;
+    }
 
-        return L.marker(coords, { icon: icon }).bindPopup(popupContent);
+    createClusteredPopup(group) {
+        const { conferences, locationName } = group;
+        
+        // Sort conferences by date (newest first)
+        const sortedConfs = conferences.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        let html = `
+            <div style="min-width: 320px; max-width: 400px;">
+                <h4 style="margin: 0 0 12px 0; color: #1f2937; font-size: 16px; font-weight: 600;">📍 ${locationName}</h4>
+                <p style="margin: 0 0 16px 0; color: #6b7280; font-size: 14px; font-weight: 500;">${conferences.length} presentations at this location</p>
+                <div style="max-height: 250px; overflow-y: auto;">
+        `;
+        
+        sortedConfs.forEach((conf, index) => {
+            html += `
+                <div style="background: ${index % 2 === 0 ? '#f8fafc' : 'white'}; padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid ${this.getMarkerColor(conf.type)};">
+                    <h5 style="margin: 0 0 8px 0; color: #1f2937; font-size: 14px; font-weight: 600; line-height: 1.3;">${conf.title}</h5>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; color: #6b7280;">
+                        <p style="margin: 0;"><strong>Conference:</strong><br>${conf.conference}</p>
+                        <p style="margin: 0;"><strong>Date:</strong><br>${new Date(conf.date).toLocaleDateString()}</p>
+                        <p style="margin: 0;"><strong>Type:</strong><br><span style="background: ${this.getMarkerColor(conf.type)}; color: white; padding: 2px 6px; border-radius: 10px; font-size: 10px;">${conf.type}</span></p>
+                        ${conf.award ? `<p style="margin: 0; color: #f59e0b; font-weight: 600;"><strong>Award:</strong><br>🏆 ${conf.award}</p>` : '<p style="margin: 0;"></p>'}
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `
+                </div>
+            </div>
+        `;
+        
+        return html;
     }
 
     getMarkerColor(type) {
@@ -400,44 +526,16 @@ class ConferencesPage {
         if (typeNormalized.includes('online')) return '#ef4444';
         
         return '#6b7280';
-    }
-
-    getCoordinates(conf) {
-        // You'll need to add coordinates to your JSON or use a geocoding service
-        // For now, here's a basic mapping for common locations
-        const locationCoords = {
-            // USA locations
-            'anchorage': [61.2181, -149.9003],
-            'san francisco': [37.7749, -122.4194],
-            'washington dc': [38.9072, -77.0369],
-            'honolulu': [21.3099, -157.8581],
-            
-            // International locations
-            'amsterdam': [52.3676, 4.9041],
-            'netherlands': [52.3676, 4.9041],
-            
-            // Add more as needed
-        };
-
-        // Try to match city from new structure
-        if (conf.city) {
-            const cityKey = conf.city.toLowerCase();
-            if (locationCoords[cityKey]) {
-                return locationCoords[cityKey];
-            }
+    }    getCoordinates(conf) {
+        // First priority: Use coordinates directly from JSON if available
+        if (conf.coordinates && Array.isArray(conf.coordinates) && conf.coordinates.length === 2) {
+            return conf.coordinates;
         }
 
-        // Fallback to parsing location field
-        if (conf.location) {
-            const locationKey = conf.location.toLowerCase();
-            for (const [key, coords] of Object.entries(locationCoords)) {
-                if (locationKey.includes(key)) {
-                    return coords;
-                }
-            }
-        }
-
-        return null; // Return null if location not found
+        // If no coordinates in JSON, return null
+        // This encourages adding coordinates to the JSON file for accurate positioning
+        console.warn(`No coordinates found for conference: ${conf.title} in ${conf.location || conf.city + ', ' + conf.country}`);
+        return null;
     }
 
     // ...existing code...
