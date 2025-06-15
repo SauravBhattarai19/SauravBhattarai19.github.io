@@ -458,14 +458,9 @@ async function initializeHomepage(dataManager) {
             dataManager.getAchievements()
         ]);
 
-        // Update homepage statistics
+        // Update homepage statistics only (minimal overview)
         updateHomepageStats(publications, research, conferences, achievements);
         
-        // Render preview sections
-        renderResearchPreview(research);
-        renderPublicationsPreview(publications);
-        renderConferencesPreview(conferences);
-        renderAchievementsPreview(achievements);
     } catch (error) {
         console.error('Error loading homepage data:', error);
     }
@@ -524,9 +519,7 @@ function updateHomepageStats(publications, research, conferences, achievements) 
     if (upcomingConferencesElement && conferences) {
         const upcomingCount = conferences.filter(c => c.status === 'upcoming').length;
         upcomingConferencesElement.textContent = upcomingCount;
-    }
-
-    // Update achievements stats
+    }    // Update achievements stats
     const totalAchievementsElement = document.getElementById('total-achievements-count');
     const recentAchievementsElement = document.getElementById('recent-achievements-count');
     
@@ -537,158 +530,16 @@ function updateHomepageStats(publications, research, conferences, achievements) 
     if (recentAchievementsElement && achievements) {
         const currentYear = new Date().getFullYear();
         const recentAchievements = achievements.filter(a => {
-            const achievementYear = new Date(a.date).getFullYear();
-            return achievementYear === currentYear;
+            // Handle both single year and year range formats
+            const yearStr = a.year.toString();
+            if (yearStr.includes('-')) {
+                const years = yearStr.split('-');
+                const endYear = parseInt(years[1]);
+                return endYear === currentYear;
+            } else {
+                return parseInt(yearStr) === currentYear;
+            }
         }).length;
         recentAchievementsElement.textContent = recentAchievements;
     }
-}
-
-function renderResearchPreview(research) {
-    const researchPreview = document.getElementById('research-preview');
-    if (!researchPreview || !research) return;
-
-    const featuredResearch = research
-        .filter(item => item.featured || item.status === 'ongoing')
-        .slice(0, 2); // Show only 2 for minimal view
-
-    if (featuredResearch.length === 0) {
-        researchPreview.innerHTML = '<p class="no-data">No featured research available.</p>';
-        return;
-    }
-
-    researchPreview.innerHTML = `
-        <div class="preview-grid">
-            ${featuredResearch.map(researchItem => `
-                <div class="preview-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>${researchItem.title}</h3>
-                            <span class="status-badge ${researchItem.status}">${researchItem.status}</span>
-                        </div>
-                        <p>${researchItem.description.substring(0, 120)}...</p>
-                        <div class="card-technologies">
-                            ${researchItem.technologies.slice(0, 3).map(tech => 
-                                `<span class="tech-tag">${tech}</span>`
-                            ).join('')}
-                        </div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-    `;
-}
-
-function renderPublicationsPreview(publications) {
-    const publicationsPreview = document.getElementById('publications-preview');
-    if (!publicationsPreview || !publications) return;
-
-    const recentPublications = [
-        ...(publications.published?.slice(0, 2) || []),
-        ...(publications.underReview?.slice(0, 1) || [])
-    ].slice(0, 2); // Show only 2 for minimal view
-
-    if (recentPublications.length === 0) {
-        publicationsPreview.innerHTML = '<p class="no-data">No recent publications available.</p>';
-        return;
-    }
-
-    publicationsPreview.innerHTML = `
-        <div class="preview-list">
-            ${recentPublications.map(pub => `
-                <div class="preview-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="item-header">
-                        <span class="type-badge ${pub.type || 'journal'}">${pub.type || 'journal'}</span>
-                        <span class="year-badge">${pub.year || 'Under Review'}</span>
-                    </div>
-                    <h4>${pub.title}</h4>
-                    <p class="authors">${pub.authors}</p>
-                    <p class="venue">${pub.journal || pub.conference || pub.venue || ''}</p>
-                    ${pub.doi ? `
-                        <div class="item-link">
-                            <a href="${pub.doi}" target="_blank">
-                                <i class="fas fa-external-link-alt"></i>
-                                View Publication
-                            </a>
-                        </div>
-                    ` : ''}
-                </div>
-            `).join('')}
-        </div>
-    `;
-}
-
-function renderConferencesPreview(conferences) {
-    const conferencesPreview = document.getElementById('conferences-preview');
-    if (!conferencesPreview || !conferences) return;
-
-    const recentConferences = conferences
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 2); // Show only 2 for minimal view
-
-    if (recentConferences.length === 0) {
-        conferencesPreview.innerHTML = '<p class="no-data">No recent conferences available.</p>';
-        return;
-    }
-
-    conferencesPreview.innerHTML = `
-        <div class="preview-timeline">
-            ${recentConferences.map(conf => `
-                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="timeline-marker">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="conf-header">
-                            <h4>${conf.title}</h4>
-                            <span class="conf-date">${new Date(conf.date).toLocaleDateString()}</span>
-                        </div>
-                        <p class="conf-event">${conf.conference}</p>
-                        <div class="conf-details">
-                            <span class="conf-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                ${conf.location}
-                            </span>
-                            <span class="conf-type ${conf.type || conf.presentationType}">${conf.type || conf.presentationType || 'Presentation'}</span>
-                        </div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-    `;
-}
-
-function renderAchievementsPreview(achievements) {
-    const achievementsPreview = document.getElementById('achievements-preview');
-    if (!achievementsPreview || !achievements) return;
-
-    const recentAchievements = achievements
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 2); // Show only 2 for minimal view
-
-    if (recentAchievements.length === 0) {
-        achievementsPreview.innerHTML = '<p class="no-data">No recent achievements available.</p>';
-        return;
-    }
-
-    achievementsPreview.innerHTML = `
-        <div class="preview-grid">
-            ${recentAchievements.map(achievement => `
-                <div class="achievement-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="achievement-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="achievement-content">
-                        <h4>${achievement.title}</h4>
-                        <p class="achievement-org">${achievement.organization}</p>
-                        <p class="achievement-desc">${achievement.description.substring(0, 80)}...</p>
-                        <div class="achievement-date">
-                            <i class="fas fa-calendar"></i>
-                            ${new Date(achievement.date).toLocaleDateString()}
-                        </div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-    `;
 }

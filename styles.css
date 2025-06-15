@@ -1128,3 +1128,86 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 0.8rem;
     }
 }
+
+/* Overview Content Styles for Simplified Sections */
+.overview-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.overview-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.overview-stats .stat-item {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.overview-stats .stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+    border-color: rgba(37, 99, 235, 0.2);
+}
+
+.overview-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 2rem 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overview-content .btn {
+    margin-top: 1.5rem;
+    padding: 12px 24px;
+    font-weight: 500;
+}
+
+/* Responsive adjustments for overview sections */
+@media (max-width: 768px) {
+    .overview-stats {
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .overview-stats .stat-item {
+        min-width: 120px;
+        padding: 1.5rem 2rem;
+    }
+    
+    .overview-description {
+        font-size: 1rem;
+        margin: 1.5rem 0;
+        padding: 0 1rem;
+    }
+    
+    .overview-content {
+        padding: 1.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .overview-stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .overview-stats .stat-item {
+        width: 100%;
+        max-width: 200px;
+    }
+}
