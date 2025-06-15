@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements - Saurav Bhattarai</title>    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/achievements.css">
+    <link rel="stylesheet" href="css/page-layouts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Saurav Bhattarai</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="research.html" class="nav-link">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </li>
+                <li class="nav-item">
+                    <a href="conferences.html" class="nav-link">Conferences</a>
+                </li>
+                <li class="nav-item">
+                    <a href="achievements.html" class="nav-link active">Achievements</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content" data-aos="fade-up">
+                <h1 class="page-title">Achievements & Awards</h1>
+                <p class="page-subtitle">Recognition for excellence in research, academics, and professional development</p>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span class="separator">/</span>
+                    <span>Achievements</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Overview -->
+    <section class="achievement-overview">
+        <div class="container">
+            <div class="overview-stats" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="total-awards">12</span>
+                        <span class="stat-label">Awards & Honors</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="academic-gpa">4.0</span>
+                        <span class="stat-label">Academic GPA</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="total-funding">$450K</span>
+                        <span class="stat-label">Funding Secured</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="certifications">8</span>
+                        <span class="stat-label">Certifications</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Achievements -->
+    <section class="recent-achievements">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Recent Achievements</h2>
+                <p class="section-subtitle">Latest recognitions and accomplishments</p>
+            </div>
+            <div class="recent-grid" id="recent-achievements-grid">
+                <!-- Recent achievements will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Categories -->
+    <section class="achievement-categories">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Achievement Categories</h2>
+                <p class="section-subtitle">Excellence across multiple domains</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="category-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Academic Excellence</h3>
+                    <p>Recognition for outstanding academic performance and scholarly achievements.</p>
+                    <div class="category-count">5 Awards</div>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Research Excellence</h3>
+                    <p>Awards for innovative research contributions and scientific discoveries.</p>
+                    <div class="category-count">4 Awards</div>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="category-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Professional Recognition</h3>
+                    <p>Industry acknowledgments and professional development achievements.</p>
+                    <div class="category-count">3 Awards</div>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="category-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Leadership & Service</h3>
+                    <p>Recognition for leadership roles and service to the academic community.</p>
+                    <div class="category-count">2 Awards</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Timeline -->
+    <section class="achievement-timeline">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Achievement Timeline</h2>
+                <p class="section-subtitle">Journey of success and recognition over the years</p>
+            </div>
+            <div class="timeline-container" id="achievement-timeline">
+                <!-- Achievement timeline will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- All Achievements -->
+    <section class="all-achievements">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">All Achievements</h2>
+                <div class="filter-controls">
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="academic">Academic</button>
+                        <button class="filter-btn" data-filter="research">Research</button>
+                        <button class="filter-btn" data-filter="professional">Professional</button>
+                        <button class="filter-btn" data-filter="leadership">Leadership</button>
+                    </div>
+                    <div class="sort-controls">
+                        <select id="sort-select">
+                            <option value="date-desc">Date (Newest First)</option>
+                            <option value="date-asc">Date (Oldest First)</option>
+                            <option value="importance">Importance</option>
+                            <option value="title">Title</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="achievements-grid" id="achievements-grid">
+                <!-- All achievements will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Saurav Bhattarai</h3>
+                    <p>Water Resource Engineer & Hydro-climatology Researcher</p>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:Saurav.bhattarai@students.jsums.edu">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/saurav-bhattarai-7133a3176" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/Saurav-JSU" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://bit.ly/jsu_water" target="_blank">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Saurav Bhattarai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/achievements-page.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Mobile Navigation Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            mobileMenu.classList.toggle('is-active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

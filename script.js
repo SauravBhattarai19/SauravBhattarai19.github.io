@@ -1,9 +1,16 @@
-// Initialize AOS (Animate On Scroll)
-AOS.init({
-    duration: 1000,
-    easing: 'ease-in-out',
-    once: true,
-    mirror: false
+// Main script for homepage functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+    });
+
+    // Initialize data manager and load preview content
+    const dataManager = new DataManager();
+    initializeHomepage(dataManager);
 });
 
 // Mobile Navigation Toggle
@@ -439,3 +446,148 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Homepage preview functionality
+async function initializeHomepage(dataManager) {
+    try {
+        await dataManager.loadData();
+        renderResearchPreview(dataManager);
+        renderPublicationsPreview(dataManager);
+        renderConferencesPreview(dataManager);
+        renderAchievementsPreview(dataManager);
+    } catch (error) {
+        console.error('Error loading homepage data:', error);
+    }
+}
+
+function renderResearchPreview(dataManager) {
+    const researchPreview = document.getElementById('research-preview');
+    if (!researchPreview) return;
+
+    const featuredResearch = dataManager.research
+        .filter(item => item.featured || item.status === 'ongoing')
+        .slice(0, 3);
+
+    researchPreview.innerHTML = `
+        <div class="preview-grid">
+            ${featuredResearch.map(research => `
+                <div class="preview-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-image">
+                        <img src="assets/research/${research.image || 'default.jpg'}" alt="${research.title}">
+                        <div class="card-overlay">
+                            <span class="status-badge ${research.status}">${research.status}</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>${research.title}</h3>
+                        <p>${research.description.substring(0, 120)}...</p>
+                        <div class="card-technologies">
+                            ${research.technologies.slice(0, 3).map(tech => 
+                                `<span class="tech-tag">${tech}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function renderPublicationsPreview(dataManager) {
+    const publicationsPreview = document.getElementById('publications-preview');
+    if (!publicationsPreview) return;
+
+    const recentPublications = [
+        ...dataManager.publications.published.slice(0, 2),
+        ...dataManager.publications.underReview.slice(0, 1)
+    ].slice(0, 3);
+
+    publicationsPreview.innerHTML = `
+        <div class="preview-list">
+            ${recentPublications.map(pub => `
+                <div class="preview-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="item-header">
+                        <span class="type-badge ${pub.type}">${pub.type}</span>
+                        <span class="year-badge">${pub.year || 'Under Review'}</span>
+                    </div>
+                    <h4>${pub.title}</h4>
+                    <p class="authors">${pub.authors}</p>
+                    <p class="venue">${pub.journal || pub.conference || pub.venue}</p>
+                    ${pub.doi ? `
+                        <div class="item-link">
+                            <a href="${pub.doi}" target="_blank">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Publication
+                            </a>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function renderConferencesPreview(dataManager) {
+    const conferencesPreview = document.getElementById('conferences-preview');
+    if (!conferencesPreview) return;
+
+    const recentConferences = dataManager.conferences
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 3);
+
+    conferencesPreview.innerHTML = `
+        <div class="preview-timeline">
+            ${recentConferences.map(conf => `
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-marker">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="conf-header">
+                            <h4>${conf.title}</h4>
+                            <span class="conf-date">${new Date(conf.date).toLocaleDateString()}</span>
+                        </div>
+                        <p class="conf-event">${conf.conference}</p>
+                        <div class="conf-details">
+                            <span class="conf-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${conf.location}
+                            </span>
+                            <span class="conf-type ${conf.presentationType}">${conf.presentationType}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function renderAchievementsPreview(dataManager) {
+    const achievementsPreview = document.getElementById('achievements-preview');
+    if (!achievementsPreview) return;
+
+    const recentAchievements = dataManager.achievements
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 3);
+
+    achievementsPreview.innerHTML = `
+        <div class="preview-grid">
+            ${recentAchievements.map(achievement => `
+                <div class="achievement-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="achievement-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h4>${achievement.title}</h4>
+                        <p class="achievement-org">${achievement.organization}</p>
+                        <p class="achievement-desc">${achievement.description.substring(0, 100)}...</p>
+                        <div class="achievement-date">
+                            <i class="fas fa-calendar"></i>
+                            ${new Date(achievement.date).toLocaleDateString()}
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}

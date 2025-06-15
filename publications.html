@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - Saurav Bhattarai</title>    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/publications.css">
+    <link rel="stylesheet" href="css/page-layouts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Saurav Bhattarai</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="research.html" class="nav-link">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a href="publications.html" class="nav-link active">Publications</a>
+                </li>
+                <li class="nav-item">
+                    <a href="conferences.html" class="nav-link">Conferences</a>
+                </li>
+                <li class="nav-item">
+                    <a href="achievements.html" class="nav-link">Achievements</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content" data-aos="fade-up">
+                <h1 class="page-title">Publications</h1>
+                <p class="page-subtitle">Peer-reviewed research and scholarly contributions to water resource engineering</p>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span class="separator">/</span>
+                    <span>Publications</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Overview -->
+    <section class="publications-overview">
+        <div class="container">
+            <div class="overview-stats" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="total-publications">15</span>
+                        <span class="stat-label">Total Publications</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="total-citations">250+</span>
+                        <span class="stat-label">Citations</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="h-index">8</span>
+                        <span class="stat-label">H-Index</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="years-active">4</span>
+                        <span class="stat-label">Years Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Publications -->
+    <section class="featured-publications">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Featured Publications</h2>
+                <p class="section-subtitle">Highlighting our most impactful recent publications</p>
+            </div>
+            <div class="featured-grid" id="featured-publications-grid">
+                <!-- Featured publications will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Publication Metrics -->
+    <section class="publication-metrics">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Publication Metrics</h2>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Publications by Year</h3>
+                    <canvas id="publications-by-year"></canvas>
+                </div>
+                <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Publication Types</h3>
+                    <div class="type-breakdown">
+                        <div class="type-item">
+                            <span class="type-label">Journal Articles</span>
+                            <span class="type-count" id="journal-count">8</span>
+                        </div>
+                        <div class="type-item">
+                            <span class="type-label">Conference Papers</span>
+                            <span class="type-count" id="conference-count">5</span>
+                        </div>
+                        <div class="type-item">
+                            <span class="type-label">Under Review</span>
+                            <span class="type-count" id="review-count">2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Publications -->
+    <section class="all-publications">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">All Publications</h2>
+                <div class="filter-controls">
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="published">Published</button>
+                        <button class="filter-btn" data-filter="under-review">Under Review</button>
+                        <button class="filter-btn" data-filter="journal">Journal Articles</button>
+                        <button class="filter-btn" data-filter="conference">Conference Papers</button>
+                    </div>
+                    <div class="sort-controls">
+                        <select id="sort-select">
+                            <option value="year-desc">Year (Newest First)</option>
+                            <option value="year-asc">Year (Oldest First)</option>
+                            <option value="title">Title (A-Z)</option>
+                            <option value="citations">Citations</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="publications-list" id="publications-list">
+                <!-- All publications will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Saurav Bhattarai</h3>
+                    <p>Water Resource Engineer & Hydro-climatology Researcher</p>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:Saurav.bhattarai@students.jsums.edu">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/saurav-bhattarai-7133a3176" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/Saurav-JSU" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://bit.ly/jsu_water" target="_blank">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Saurav Bhattarai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/publications-page.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Mobile Navigation Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            mobileMenu.classList.toggle('is-active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

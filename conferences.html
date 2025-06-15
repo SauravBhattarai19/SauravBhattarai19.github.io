@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferences - Saurav Bhattarai</title>    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/conferences.css">
+    <link rel="stylesheet" href="css/page-layouts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Saurav Bhattarai</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="research.html" class="nav-link">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </li>
+                <li class="nav-item">
+                    <a href="conferences.html" class="nav-link active">Conferences</a>
+                </li>
+                <li class="nav-item">
+                    <a href="achievements.html" class="nav-link">Achievements</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content" data-aos="fade-up">
+                <h1 class="page-title">Conferences & Presentations</h1>
+                <p class="page-subtitle">Sharing research insights at national and international conferences</p>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span class="separator">/</span>
+                    <span>Conferences</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conference Overview -->
+    <section class="conference-overview">
+        <div class="container">
+            <div class="overview-stats" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="total-presentations">25</span>
+                        <span class="stat-label">Presentations</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="countries-visited">5</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="awards-received">3</span>
+                        <span class="stat-label">Presentation Awards</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" id="network-connections">150+</span>
+                        <span class="stat-label">Network Connections</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Conferences -->
+    <section class="upcoming-conferences">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Upcoming Conferences</h2>
+                <p class="section-subtitle">Future presentations and conference participation</p>
+            </div>
+            <div class="upcoming-grid" id="upcoming-conferences-grid">
+                <!-- Upcoming conferences will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Presentations -->
+    <section class="recent-presentations">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Recent Presentations</h2>
+                <p class="section-subtitle">Latest conference presentations and talks</p>
+            </div>
+            <div class="presentations-timeline" id="recent-presentations-timeline">
+                <!-- Recent presentations timeline will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Conference Map -->
+    <section class="conference-map">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Global Conference Participation</h2>
+                <p class="section-subtitle">Interactive map showing conference locations worldwide</p>
+            </div>
+            <div class="map-container" data-aos="fade-up">
+                <div id="world-map" class="world-map">
+                    <!-- Interactive map will be rendered here -->
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Interactive world map showing conference locations</p>
+                    </div>
+                </div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <span class="legend-color keynote"></span>
+                        <span>Keynote Speaker</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color invited"></span>
+                        <span>Invited Speaker</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color oral"></span>
+                        <span>Oral Presentation</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color poster"></span>
+                        <span>Poster Presentation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Conferences -->
+    <section class="all-conferences">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">All Conference Participations</h2>
+                <div class="filter-controls">
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="keynote">Keynote</button>
+                        <button class="filter-btn" data-filter="invited">Invited</button>
+                        <button class="filter-btn" data-filter="oral">Oral</button>
+                        <button class="filter-btn" data-filter="poster">Poster</button>
+                    </div>
+                    <div class="sort-controls">
+                        <select id="sort-select">
+                            <option value="date-desc">Date (Newest First)</option>
+                            <option value="date-asc">Date (Oldest First)</option>
+                            <option value="location">Location</option>
+                            <option value="title">Title</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="conferences-list" id="conferences-list">
+                <!-- All conferences will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Saurav Bhattarai</h3>
+                    <p>Water Resource Engineer & Hydro-climatology Researcher</p>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:Saurav.bhattarai@students.jsums.edu">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/saurav-bhattarai-7133a3176" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/Saurav-JSU" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://bit.ly/jsu_water" target="_blank">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Saurav Bhattarai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/conferences-page.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Mobile Navigation Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            mobileMenu.classList.toggle('is-active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
