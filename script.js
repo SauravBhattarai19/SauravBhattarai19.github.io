@@ -407,4 +407,35 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.outline = 'none';
         });
     });
+
+    // Initialize all managers after DOM is loaded
+    if (typeof window.dataManager !== 'undefined') {
+        // Initialize publications manager
+        if (typeof PublicationsManager !== 'undefined' && document.getElementById('publications-content')) {
+            window.publicationsManager = new PublicationsManager('publications-content');
+            window.publicationsManager.init();
+        }
+
+        // Initialize research manager
+        if (typeof ResearchManager !== 'undefined' && document.getElementById('research-content')) {
+            window.researchManager = new ResearchManager('research-content');
+            window.researchManager.init();
+        }
+
+        // Initialize conferences manager
+        if (typeof ConferencesManager !== 'undefined' && document.getElementById('conferences-content')) {
+            window.conferencesManager = new ConferencesManager('conferences-content');
+            window.conferencesManager.init();
+        }
+
+        // Initialize achievements manager
+        if (typeof AchievementsManager !== 'undefined') {
+            const achievementsContainer = document.querySelector('#achievements .container');
+            if (achievementsContainer) {
+                achievementsContainer.id = 'achievements-content';
+                window.achievementsManager = new AchievementsManager('achievements-content');
+                window.achievementsManager.init();
+            }
+        }
+    }
 });
