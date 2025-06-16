@@ -2,8 +2,6 @@
 class ResearchPage {
     constructor() {
         this.dataManager = new DataManager();
-        this.currentFilter = 'all';
-        this.currentSort = 'date-desc';
         this.researchData = null;
         this.init();
     }
@@ -12,149 +10,101 @@ class ResearchPage {
         try {
             this.researchData = await this.dataManager.getResearch();
             if (this.researchData) {
-                this.renderFeaturedResearch();
-                this.renderAllResearch();
-                this.setupEventListeners();
+                this.renderOngoingResearch();
+                this.renderCompletedResearch();
+                this.setupScrollControls();
                 this.updateStats();
             }
         } catch (error) {
             console.error('Error initializing research page:', error);
         }
-    }    renderFeaturedResearch() {
-        const featuredGrid = document.getElementById('featured-research-grid');
-        if (!featuredGrid || !this.researchData) return;
+    }
 
-        const featuredResearch = this.researchData.filter(item => item.featured);
+    renderOngoingResearch() {
+        const ongoingGrid = document.getElementById('ongoing-research-grid');
+        if (!ongoingGrid || !this.researchData) return;
+
+        const ongoingResearch = this.researchData.filter(item => item.status === 'ongoing');
         
-        if (featuredResearch.length === 0) {
-            featuredGrid.innerHTML = '<p class="no-data">No featured research available.</p>';
+        if (ongoingResearch.length === 0) {
+            ongoingGrid.innerHTML = '<p class="no-data">No ongoing research available.</p>';
             return;
         }
         
-        featuredGrid.innerHTML = featuredResearch.map(research => `
-            <div class="featured-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="card-image">
-                    <img src="assets/research/${research.image || 'default.jpg'}" alt="${research.title}">
-                    <div class="card-overlay">
-                        <span class="status-badge ${research.status}">${research.status}</span>
-                    </div>
+        ongoingGrid.innerHTML = ongoingResearch.map((research, index) => `
+            <div class="ongoing-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+                <div class="ongoing-image">
+                    ${research.image ? 
+                        `<img src="assets/research/${research.image}" alt="${research.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                         <div class="placeholder-image" style="display:none;"><i class="fas fa-flask"></i></div>` :
+                        `<div class="placeholder-image"><i class="fas fa-flask"></i></div>`
+                    }
+                    <div class="ongoing-status">Ongoing</div>
                 </div>
-                <div class="card-content">
-                    <h3 class="card-title">${research.title}</h3>
-                    <p class="card-description">${research.description}</p>
-                    <div class="card-technologies">
-                        ${research.technologies.slice(0, 3).map(tech => 
-                            `<span class="tech-tag">${tech}</span>`
-                        ).join('')}
-                        ${research.technologies.length > 3 ? `<span class="tech-more">+${research.technologies.length - 3} more</span>` : ''}
+                <div class="ongoing-content">
+                    <h3 class="ongoing-title">${research.title}</h3>
+                    <p class="ongoing-description">${research.description}</p>
+                    
+                    <div class="ongoing-meta">
+                        ${research.funding ? `
+                            <div class="meta-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>${research.funding}</span>
+                            </div>
+                        ` : ''}
+                        
+                        ${research.collaborators?.length > 0 ? `
+                            <div class="meta-item">
+                                <i class="fas fa-users"></i>
+                                <span>${research.collaborators.join(', ')}</span>
+                            </div>
+                        ` : ''}
                     </div>
-                    <div class="card-footer">
-                        <div class="collaborators">
-                            <i class="fas fa-users"></i>
-                            <span>${research.collaborators ? research.collaborators.length : 0} Collaborators</span>
-                        </div>
-                        <div class="publications">
-                            <i class="fas fa-file-alt"></i>
-                            <span>${research.publications ? research.publications.length : 0} Publications</span>
-                        </div>
+                    
+                    <div class="ongoing-technologies">
+                        ${research.technologies?.slice(0, 5).map(tech => 
+                            `<span class="tech-tag-compact">${tech}</span>`
+                        ).join('') || ''}
+                        ${research.technologies?.length > 5 ? `<span class="tech-tag-compact">+${research.technologies.length - 5} more</span>` : ''}
                     </div>
                 </div>
             </div>
         `).join('');
     }
 
-    renderAllResearch() {
-        const researchGrid = document.getElementById('research-grid');
-        if (!researchGrid) return;
+    renderCompletedResearch() {
+        const completedScroll = document.getElementById('completed-research-scroll');
+        if (!completedScroll || !this.researchData) return;
 
-        let filteredResearch = this.researchData || [];
-
-        // Apply filters
-        if (this.currentFilter !== 'all') {
-            filteredResearch = filteredResearch.filter(research => {
-                switch (this.currentFilter) {
-                    case 'ongoing':
-                        return research.status === 'ongoing';
-                    case 'completed':
-                        return research.status === 'completed';
-                    case 'featured':
-                        return research.featured;
-                    default:
-                        return true;
-                }
-            });
+        const completedResearch = this.researchData.filter(item => item.status === 'completed');
+        
+        if (completedResearch.length === 0) {
+            completedScroll.innerHTML = '<p class="no-data">No completed research available.</p>';
+            return;
         }
-
-        // Apply sorting
-        filteredResearch.sort((a, b) => {
-            switch (this.currentSort) {
-                case 'date-desc':
-                    return new Date(b.startDate || '2024-01-01') - new Date(a.startDate || '2024-01-01');
-                case 'date-asc':
-                    return new Date(a.startDate || '2024-01-01') - new Date(b.startDate || '2024-01-01');
-                case 'title':
-                    return a.title.localeCompare(b.title);
-                default:
-                    return 0;
-            }
-        });        researchGrid.innerHTML = filteredResearch.map((research, index) => `
-            <div class="research-card ${research.featured ? 'featured' : ''}" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}">
-                <div class="research-image">
+        
+        completedScroll.innerHTML = completedResearch.map((research, index) => `
+            <div class="completed-card" data-aos="fade-up" data-aos-delay="${index * 50}">
+                <div class="completed-image">
                     ${research.image ? 
                         `<img src="assets/research/${research.image}" alt="${research.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                         <div class="placeholder-image" style="display:none;"><i class="fas fa-flask"></i></div>` :
-                        `<div class="placeholder-image"><i class="fas fa-flask"></i></div>`
+                         <div class="placeholder-image" style="display:none;"><i class="fas fa-microscope"></i></div>` :
+                        `<div class="placeholder-image"><i class="fas fa-microscope"></i></div>`
                     }
-                    <div class="research-overlay">
-                        <span class="research-status status-${research.status}">${research.status}</span>
-                        ${research.featured ? '<span class="featured-tag"><i class="fas fa-star"></i> Featured</span>' : ''}
-                    </div>
+                    <div class="completed-status">Completed</div>
                 </div>
-                <div class="research-content">
-                    <h3 class="research-title">${research.title}</h3>
-                    <p class="research-description">${research.description}</p>
-                    
-                    <div class="research-technologies">
-                        ${research.technologies?.slice(0, 4).map(tech => 
-                            `<span class="tech-tag">${tech}</span>`
-                        ).join('') || ''}
-                        ${research.technologies?.length > 4 ? `<span class="tech-more">+${research.technologies.length - 4}</span>` : ''}
-                    </div>
-                    
-                    <div class="research-details">
-                        ${research.funding ? `
-                            <div class="detail-item">
-                                <i class="fas fa-dollar-sign"></i>
-                                <span class="detail-text">${research.funding}</span>
-                            </div>
-                        ` : ''}
-                        
-                        ${research.collaborators?.length > 0 ? `
-                            <div class="detail-item">
-                                <i class="fas fa-users"></i>
-                                <span class="detail-text">${research.collaborators.length} Collaborator${research.collaborators.length > 1 ? 's' : ''}</span>
-                            </div>
-                        ` : ''}
-                        
-                        ${research.publications?.length > 0 ? `
-                            <div class="detail-item">
-                                <i class="fas fa-file-alt"></i>
-                                <span class="detail-text">${research.publications.length} Publication${research.publications.length > 1 ? 's' : ''}</span>
-                            </div>
-                        ` : ''}
-                    </div>
+                <div class="completed-content">
+                    <h3 class="completed-title">${research.title}</h3>
+                    <p class="completed-description">${research.description}</p>
                     
                     ${research.publications && research.publications.length > 0 ? `
-                        <div class="research-publications">
-                            <div class="publications-header">
-                                <i class="fas fa-scroll"></i>
-                                <span>Key Publications</span>
+                        <div class="completed-publications">
+                            <div class="publications-count">
+                                <i class="fas fa-file-alt"></i>
+                                ${research.publications.length} Publication${research.publications.length > 1 ? 's' : ''}
                             </div>
-                            <div class="publications-list">
-                                ${research.publications.slice(0, 2).map(pub => 
-                                    `<div class="publication-item">${pub}</div>`
-                                ).join('')}
-                                ${research.publications.length > 2 ? `<div class="publication-more">+${research.publications.length - 2} more publications</div>` : ''}
+                            <div class="publication-preview">
+                                ${research.publications[0].substring(0, 80)}${research.publications[0].length > 80 ? '...' : ''}
                             </div>
                         </div>
                     ` : ''}
@@ -163,33 +113,48 @@ class ResearchPage {
         `).join('');
     }
 
-    setupEventListeners() {
-        // Filter buttons
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        filterButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                e.target.classList.add('active');
-                this.currentFilter = e.target.dataset.filter;
-                this.renderAllResearch();
+    setupScrollControls() {
+        const scrollLeft = document.getElementById('scroll-left');
+        const scrollRight = document.getElementById('scroll-right');
+        const completedScroll = document.getElementById('completed-research-scroll');
+        
+        if (!scrollLeft || !scrollRight || !completedScroll) return;
+
+        scrollLeft.addEventListener('click', () => {
+            completedScroll.scrollBy({
+                left: -340,
+                behavior: 'smooth'
             });
         });
 
-        // Sort dropdown
-        const sortSelect = document.getElementById('sort-select');
-        if (sortSelect) {
-            sortSelect.addEventListener('change', (e) => {
-                this.currentSort = e.target.value;
-                this.renderAllResearch();
+        scrollRight.addEventListener('click', () => {
+            completedScroll.scrollBy({
+                left: 340,
+                behavior: 'smooth'
             });
-        }
-    }    updateStats() {
+        });
+
+        // Update button states based on scroll position
+        const updateScrollButtons = () => {
+            const isAtStart = completedScroll.scrollLeft <= 0;
+            const isAtEnd = completedScroll.scrollLeft >= (completedScroll.scrollWidth - completedScroll.clientWidth);
+            
+            scrollLeft.style.opacity = isAtStart ? '0.5' : '1';
+            scrollRight.style.opacity = isAtEnd ? '0.5' : '1';
+            scrollLeft.style.pointerEvents = isAtStart ? 'none' : 'all';
+            scrollRight.style.pointerEvents = isAtEnd ? 'none' : 'all';
+        };
+
+        completedScroll.addEventListener('scroll', updateScrollButtons);
+        updateScrollButtons(); // Initial state
+    }
+
+    updateStats() {
         // Update statistics based on actual data
         if (!this.researchData) return;
         
         const activeProjects = this.researchData.filter(r => r.status === 'ongoing').length;
         const completedProjects = this.researchData.filter(r => r.status === 'completed').length;
-        const totalProjects = this.researchData.length;
         
         // Get unique collaborators
         const allCollaborators = this.researchData.flatMap(r => r.collaborators || []);
@@ -206,7 +171,7 @@ class ResearchPage {
         
         if (activeProjectsEl) activeProjectsEl.textContent = activeProjects;
         if (collaborationsEl) collaborationsEl.textContent = uniqueCollaborators;
-        if (fundingAmountEl) fundingAmountEl.textContent = `${totalProjects}+`;
+        if (fundingAmountEl) fundingAmountEl.textContent = `${completedProjects}`;
         if (impactAreasEl) impactAreasEl.textContent = `${totalPublications}`;
         
         // Update stat labels to be more accurate
@@ -214,7 +179,7 @@ class ResearchPage {
         if (impactAreasLabel) impactAreasLabel.textContent = 'Publications';
         
         const fundingLabel = document.querySelector('#funding-amount + .stat-label');
-        if (fundingLabel) fundingLabel.textContent = 'Research Projects';
+        if (fundingLabel) fundingLabel.textContent = 'Completed Projects';
     }
 }
 
