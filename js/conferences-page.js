@@ -33,10 +33,10 @@ class ConferencesPage {
                 this.renderAllConferences();
                 this.setupEventListeners();
                 this.updateStats();
-                
-                // Initialize map with delay to ensure DOM is ready
+                  // Initialize map with delay to ensure DOM is ready
                 setTimeout(() => {
                     this.initializeMap();
+                    this.setupRecentPresentationsScroll();
                 }, 500);
             } else {
                 console.error('❌ No conference data loaded');
@@ -760,15 +760,63 @@ class ConferencesPage {
         if (typeNormalized.includes('poster')) return 'poster-presentation';
         
         return typeNormalized;
-    }
-
-    formatLocation(conf) {
+    }    formatLocation(conf) {
         // Use new city/country structure if available
         if (conf.city && conf.country) {
             return `${conf.city}, ${conf.country}`;
         }
         // Fallback to original location field
         return conf.location || 'Location TBD';
+    }
+
+    // Add smooth scroll functionality for horizontal scrolling
+    setupRecentPresentationsScroll() {
+        const scrollContainer = document.querySelector('.recent-presentations-horizontal-scroll');
+        if (!scrollContainer) return;
+
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        scrollContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+            scrollContainer.style.cursor = 'grabbing';
+        });
+
+        scrollContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+            scrollContainer.style.cursor = 'grab';
+        });
+
+        scrollContainer.addEventListener('mouseup', () => {
+            isDown = false;
+            scrollContainer.style.cursor = 'grab';
+        });
+
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 2;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+
+        // Touch events for mobile
+        scrollContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+
+        scrollContainer.addEventListener('touchmove', (e) => {
+            const x = e.touches[0].pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 2;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+
+        // Set initial cursor style
+        scrollContainer.style.cursor = 'grab';
     }
 }
 
