@@ -1,56 +1,170 @@
 [
   {
-    "title": "Climate Change Impact Assessment and Modeling",
-    "description": "Advanced research on climate change impacts using satellite data, machine learning, and hydrological modeling. Focus on extreme weather events, precipitation patterns, and flood risk assessment.",
-    "technologies": ["Python", "Machine Learning", "Remote Sensing", "GIS", "Climate Modeling"],
+    "title": "High-Resolution Groundwater Storage Monitoring using Multi-Model Machine Learning",
+    "description": "Development of a machine learning framework combining Random Forest and deep learning models to downscale GRACE satellite data for groundwater monitoring across the Mississippi River Basin.",
+    "technologies": ["GRACE Satellite", "Random Forest", "Convolutional Neural Networks", "Hydrological Modeling", "Remote Sensing"],
     "status": "ongoing",
     "featured": true,
-    "image": "climate_modeling.jpg",
-    "publications": [
-      "Understanding spatiotemporal variation of heatwave projections across US cities",
-      "Projected Changes in Precipitation Extremes Across the Mississippi River Basin"
-    ],
-    "funding": "HICORPS Project - ERDC and WOOLPERT Collaboration",
-    "collaborators": ["Jackson State University", "U.S. Army Corps of Engineers", "WOOLPERT"]
-  },
-  {
-    "title": "Heatwave Analysis and Urban Climate Studies",
-    "description": "Comprehensive analysis of heatwave patterns, urban heat islands, and their impacts on vulnerable communities using satellite-based observations and machine learning techniques.",
-    "technologies": ["Satellite Remote Sensing", "Google Earth Engine", "Deep Learning", "Geospatial Analysis"],
-    "status": "ongoing",
-    "featured": true,
-    "image": "heatwave_analysis.jpg",
-    "publications": [
-      "Spatiotemporal Characterization of Heatwave Exposure across Historically Vulnerable Communities",
-      "Spatiotemporal characterization of heatwaves on an urban center using satellite-based estimates"
-    ],
-    "funding": "NSF Graduate Research Fellowship",
-    "collaborators": ["Jackson State University", "University Partners"]
-  },
-  {
-    "title": "Compound Hazard Assessment",
-    "description": "Research on compound climate hazards including the interaction between precipitation, storm surge, and coastal flooding. Development of multi-hazard risk assessment frameworks.",
-    "technologies": ["Coastal Modeling", "Statistical Analysis", "Risk Assessment", "GIS"],
-    "status": "ongoing",
-    "featured": true,
-    "image": "compound_hazards.jpg",
-    "publications": [
-      "Evaluating the Compound Effects of Precipitation and Storm Surge on Coastal Flooding Risk"
-    ],
+    "image": "grace_groundwater_ml.jpg",
+    "publications": [],
     "funding": "ORISE Fellowship - U.S. Department of Defense",
-    "collaborators": ["ERDC-CHL", "U.S. Army Corps of Engineers"]
+    "collaborators": ["Jackson State University", "U.S. Army Corps of Engineers (ERDC)"]
   },
   {
-    "title": "Satellite-Based Precipitation Analysis",
-    "description": "Comparative analysis of satellite precipitation products across different geographic regions, validation studies, and development of optimal satellite performance metrics.",
-    "technologies": ["Satellite Data Processing", "Validation Techniques", "Statistical Modeling"],
+    "title": "Precipitation Temporal Disaggregation for Event-Based Hydrological Modeling",
+    "description": "A study aimed at disaggregating daily satellite precipitation data into sub-daily scales to support flood modeling and hydrological event analysis in the Kathmandu Watershed, Nepal.",
+    "technologies": ["CHIRPS", "Temporal Disaggregation", "Python", "Flood Modeling"],
+    "status": "ongoing",
+    "featured": true,
+    "image": "temporal_disaggregation.jpg",
+    "publications": [],
+    "funding": "ORISE Fellowship - U.S. Department of Defense",
+    "collaborators": ["Jackson State University", "U.S. Army Corps of Engineers (ERDC)"]
+  },
+  {
+    "title": "Soil Moisture Dataset Comparison for Hydrological Applications",
+    "description": "Comparison of various soil moisture products to evaluate consistency, biases, and suitability for hydrological modeling and drought monitoring.",
+    "technologies": ["Soil Moisture", "Remote Sensing", "Python", "Hydrology", "Statistical Evaluation"],
+    "status": "ongoing",
+    "featured": false,
+    "image": "soil_moisture_comparison.jpg",
+    "publications": [],
+    "funding": "Graduate Research Assistantship",
+    "collaborators": ["Jackson State University"]
+  },
+  {
+    "title": "Urban Climate Mitigation using WRF-Urban Modeling",
+    "description": "Using WRF-Urban to evaluate urban heat mitigation strategies such as rooftop farming, reflective surfaces, and solar panel installations in urban areas.",
+    "technologies": ["WRF-Urban", "Urban Climate Modeling", "Remote Sensing", "Python", "Scenario Analysis"],
+    "status": "ongoing",
+    "featured": true,
+    "image": "wrf_urban_rooftop_farming.jpg",
+    "publications": [],
+    "funding": "NCAR Collaborative Research",
+    "collaborators": ["Jackson State University", "National Center for Atmospheric Research (NCAR)"]
+  },
+  {
+    "title": "Wildfire Watershed Clustering and Change Detection",
+    "description": "Clustering watersheds based on fire event characteristics and analyzing post-fire changes in landscape and hydrological response.",
+    "technologies": ["Clustering", "Google Earth Engine", "Python", "Wildfire Analysis", "Watershed Modeling"],
+    "status": "ongoing",
+    "featured": true,
+    "image": "wildfire_watershed_clustering.jpg",
+    "publications": [],
+    "funding": "NCAR Collaborative Research",
+    "collaborators": ["Jackson State University", "National Center for Atmospheric Research (NCAR)"]
+  },
+  {
+    "title": "Compound Hazard Risk Assessment in Coastal Areas",
+    "description": "Evaluation of compound climate hazards involving storm surge and extreme precipitation using advanced statistical approaches including copulas and Bayesian modeling.",
+    "technologies": ["Copula Theory", "Bayesian Analysis", "Risk Modeling", "Flood Hazard Assessment", "GIS"],
+    "status": "ongoing",
+    "featured": true,
+    "image": "compound_hazard_conus.jpg",
+    "publications": ["Evaluating the Compound Effects of Precipitation and Storm Surge on Coastal Flooding Risk"],
+    "funding": "ORISE Fellowship - U.S. Department of Defense",
+    "collaborators": ["ERDC-CHL", "Jackson State University"]
+  },
+  {
+    "title": "GeoClimate Workshop Tool Development",
+    "description": "Development of a workshop framework and open-source tools for climate data acquisition, index calculation, and validation, featuring GeoClimate-Fetcher, Index-Visualizer, and GeeData-GroundData-Validator.",
+    "technologies": ["Python", "Google Earth Engine", "Climate Indices", "Tool Development", "Validation"],
+    "status": "ongoing",
+    "featured": true,
+    "image": "geoclimate_workshop_tools.jpg",
+    "publications": [],
+    "funding": "Microsoft + Jackson State University",
+    "collaborators": ["Jackson State University", "Microsoft"]
+  },
+  {
+    "title": "Cooling Effects of Blue-Green Spaces in Kathmandu Valley",
+    "description": "Quantified the temperature reduction potential of urban blue-green infrastructure (ponds, parks, forests) in the Kathmandu Valley using satellite-derived surface temperature data.",
+    "technologies": ["Urban Climate", "Remote Sensing", "GIS", "Land Use Mapping"],
     "status": "completed",
     "featured": false,
-    "image": "precipitation_satellite.jpg",
+    "image": "blue_green_spaces_kathmandu.jpg",
     "publications": [
-      "Comparative Analysis of Satellite-Based Precipitation Data across the CONUS and Hawaii"
+      "Bhattarai, S., et al. (2025). Quantifying the cooling effects of blue-green spaces across urban landscapes: A case study of Kathmandu Valley, Nepal. *Urban Climate*, 61, 102493. https://doi.org/10.1016/j.uclim.2025.102493"
+    ],
+    "funding": "CDRI",
+    "collaborators": ["Jackson State University", "Tribhuvan University"]
+  },
+  {
+    "title": "Spatiotemporal Heatwave Projections Across US Cities",
+    "description": "Used climate model projections and statistical tools to understand spatial and temporal variability of heatwaves across major US cities.",
+    "technologies": ["Climate Projections", "Heatwave Indexing", "Machine Learning", "CMIP6"],
+    "status": "completed",
+    "featured": true,
+    "image": "heatwave_us_projection.jpg",
+    "publications": [
+      "Bhattarai, S., et al. (2025). Understanding spatiotemporal variation of heatwave projections across US cities. *Scientific Reports*, 15, 10643. https://doi.org/10.1038/s41598-025-95097-5"
     ],
     "funding": "Graduate Research Assistantship",
     "collaborators": ["Jackson State University"]
+  },
+  {
+    "title": "Projected Changes in Precipitation Extremes Using NEX-GDDP-CMIP6",
+    "description": "Analyzed changes in precipitation extremes across the Mississippi River Basin using downscaled NASA CMIP6 datasets, evaluating trends under different climate scenarios.",
+    "technologies": ["CMIP6", "NASA NEX-GDDP", "Statistical Climate Analysis", "Extreme Value Theory"],
+    "status": "completed",
+    "featured": false,
+    "image": "precip_extremes_mississippi.jpg",
+    "publications": [
+      "Talchabhadel, R., Bhattarai, S., Bista, S. (2024). Projected Changes in Precipitation Extremes Across the Mississippi River Basin. *International Journal of Climatology*. https://doi.org/10.1002/joc.8748"
+    ],
+    "funding": "Collaborative Research",
+    "collaborators": ["Jackson State University"]
+  },
+  {
+    "title": "Heatwave Exposure in Vulnerable Communities",
+    "description": "Explored the spatial patterns and temporal dynamics of heatwave exposure across socioeconomically vulnerable populations in the U.S.",
+    "technologies": ["Geospatial Analysis", "Vulnerability Mapping", "Remote Sensing", "Climate Risk"],
+    "status": "completed",
+    "featured": true,
+    "image": "heatwave_vulnerable_communities.jpg",
+    "publications": [
+      "Bhattarai, S., et al. (2024). Spatiotemporal Characterization of Heatwave Exposure across Historically Vulnerable Communities. *Scientific Reports*. https://doi.org/10.1038/s41598-024-71704-9"
+    ],
+    "funding": "Graduate Research Assistantship",
+    "collaborators": ["Jackson State University"]
+  },
+  {
+    "title": "Comparative Analysis of Satellite-Based Precipitation Products",
+    "description": "Conducted a comparative analysis of satellite-based precipitation products over the Continental U.S. and Hawaii to determine the most reliable dataset for hydrological modeling.",
+    "technologies": ["Remote Sensing", "Precipitation Validation", "Statistical Evaluation", "GIS"],
+    "status": "completed",
+    "featured": false,
+    "image": "satellite_precipitation_comparison.jpg",
+    "publications": [
+      "Bhattarai, S., Talchabhadel, R. (2024). Comparative Analysis of Satellite-Based Precipitation Data across the CONUS and Hawaii. *Remote Sensing*, 16(16), 3058. https://doi.org/10.3390/rs16163058"
+    ],
+    "funding": "Graduate Research Assistantship",
+    "collaborators": ["Jackson State University"]
+  },
+  {
+    "title": "Urban Heatwave Characterization Using Satellite Data",
+    "description": "Used satellite-based land surface temperature data to assess urban heatwave dynamics and land cover influences in an urban center.",
+    "technologies": ["Urban Heat Island", "MODIS", "Remote Sensing", "Temporal Analysis"],
+    "status": "completed",
+    "featured": false,
+    "image": "urban_heatwave_satellite.jpg",
+    "publications": [
+      "Banjara, P., Bhattarai, S., Pandey, V.P. et al. (2024). Spatiotemporal characterization of heatwaves on an urban center using satellite-based estimates. *Theoretical and Applied Climatology*. https://doi.org/10.1007/s00704-024-05026-1"
+    ],
+    "funding": "Independent Collaboration",
+    "collaborators": ["Jackson State University"]
+  },
+  {
+    "title": "Hydro-Climatic Extremes in Western Nepal",
+    "description": "Projected hydro-climatic extremes in Western Nepal using CMIP6 models, focusing on rainfall variability and climate risks for rain-fed river basins.",
+    "technologies": ["CMIP6", "Extreme Value Analysis", "Hydrology", "Climate Modeling"],
+    "status": "completed",
+    "featured": false,
+    "image": "hydro_climate_nepal.jpg",
+    "publications": [
+      "Bhattarai, T.N., et al. (2022). Projected changes in hydro-climatic extremes with CMIP6 climate model outputs. *Stochastic Environmental Research and Risk Assessment*. https://doi.org/10.1007/s00477-022-02312-0"
+    ],
+    "funding": "Collaborative Research",
+    "collaborators": ["Tribhuvan University", "Hydrological Institutions in Nepal"]
   }
 ]
