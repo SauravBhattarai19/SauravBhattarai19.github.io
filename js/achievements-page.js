@@ -1,10 +1,9 @@
-// Achievements page functionality
+// Redesigned Achievements page functionality
 class AchievementsPage {
     constructor() {
         this.dataManager = new DataManager();
-        this.currentFilter = 'all';
-        this.currentSort = 'date-desc';
         this.achievementsData = null;
+        this.categories = ['Fellowship', 'Scholarship', 'Competition', 'Travel Grant', 'Leadership', 'Participation'];
         this.init();
     }
 
@@ -12,192 +11,116 @@ class AchievementsPage {
         try {
             this.achievementsData = await this.dataManager.getAchievements();
             if (this.achievementsData) {
-                this.renderRecentAchievements();
-                this.renderAchievementTimeline();
-                this.renderAllAchievements();
-                this.setupEventListeners();
-                this.updateStats();
+                this.renderFeaturedAchievements();
+                this.renderCategoryAchievements();
+                this.updateCategoryCounts();
             }
         } catch (error) {
             console.error('Error initializing achievements page:', error);
         }
-    }    renderRecentAchievements() {
-        const recentGrid = document.getElementById('recent-achievements-grid');
-        if (!recentGrid) return;
+    }
 
-        const recentAchievements = (this.achievementsData || [])
+    renderFeaturedAchievements() {
+        const featuredGrid = document.getElementById('featured-achievements-grid');
+        if (!featuredGrid) return;
+
+        const featuredAchievements = (this.achievementsData || [])
             .filter(achievement => achievement.featured)
-            .sort((a, b) => parseInt(b.year) - parseInt(a.year))
-            .slice(0, 3);
+            .sort((a, b) => parseInt(b.year) - parseInt(a.year));
 
-        if (recentAchievements.length === 0) {
-            recentGrid.innerHTML = '<p class="no-data">No recent achievements available.</p>';
+        if (featuredAchievements.length === 0) {
+            featuredGrid.innerHTML = '<p class="no-data">No featured achievements available.</p>';
             return;
         }
 
-        recentGrid.innerHTML = recentAchievements.map((achievement, index) => `
-            <div class="recent-achievement-card" data-aos="fade-up" data-aos-delay="${index * 100}">
-                <div class="achievement-header">
-                    <div class="achievement-icon">
+        featuredGrid.innerHTML = featuredAchievements.map((achievement, index) => `
+            <div class="featured-achievement-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+                <div class="featured-achievement-header">
+                    <div class="featured-achievement-icon ${achievement.category.toLowerCase().replace(/\s+/g, '-')}">
                         <i class="fas ${this.getCategoryIcon(achievement.category)}"></i>
                     </div>
-                    <div class="achievement-year">${achievement.year}</div>
+                    <div class="featured-achievement-year">${achievement.year}</div>
                 </div>
-                <div class="achievement-content">
-                    <h3 class="achievement-title">${achievement.title}</h3>
-                    <p class="achievement-organization">${achievement.organization}</p>
-                    ${achievement.location ? `<p class="achievement-location"><i class="fas fa-map-marker-alt"></i> ${achievement.location}</p>` : ''}
-                    <p class="achievement-description">${achievement.description}</p>
-                    <div class="achievement-footer">
-                        <div class="achievement-category-badge ${achievement.category.toLowerCase().replace(/\s+/g, '-')}">
+                <div class="featured-achievement-content">
+                    <h3 class="featured-achievement-title">${achievement.title}</h3>
+                    <p class="featured-achievement-organization">${achievement.organization}</p>
+                    ${achievement.location ? `<p class="featured-achievement-location"><i class="fas fa-map-marker-alt"></i> ${achievement.location}</p>` : ''}
+                    <p class="featured-achievement-description">${achievement.description}</p>
+                    <div class="featured-achievement-footer">
+                        <div class="featured-category-badge ${achievement.category.toLowerCase().replace(/\s+/g, '-')}">
                             ${achievement.category}
                         </div>
-                        ${achievement.award_amount ? `<div class="achievement-amount">$${achievement.award_amount}</div>` : ''}
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    }    renderAchievementTimeline() {
-        const timeline = document.getElementById('achievement-timeline');
-        if (!timeline) return;
-
-        const sortedAchievements = (this.achievementsData || [])
-            .sort((a, b) => parseInt(b.year) - parseInt(a.year));
-
-        timeline.innerHTML = sortedAchievements.map((achievement, index) => `
-            <div class="timeline-item" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}">
-                <div class="timeline-marker">
-                    <div class="marker-icon ${achievement.category.toLowerCase().replace(/\s+/g, '-')}">
-                        <i class="fas ${this.getCategoryIcon(achievement.category)}"></i>
-                    </div>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-header">
-                        <h4 class="timeline-title">${achievement.title}</h4>
-                        <span class="timeline-date">${achievement.year}</span>
-                    </div>
-                    <p class="timeline-organization">${achievement.organization}</p>
-                    ${achievement.location ? `<p class="timeline-location"><i class="fas fa-map-marker-alt"></i> ${achievement.location}</p>` : ''}
-                    <p class="timeline-description">${achievement.description}</p>
-                    <div class="timeline-badges">
-                        <span class="category-badge ${achievement.category.toLowerCase().replace(/\s+/g, '-')}">${achievement.category}</span>
-                        ${achievement.award_amount ? `<span class="amount-badge">$${achievement.award_amount}</span>` : ''}
-                        ${achievement.featured ? '<span class="featured-badge"><i class="fas fa-star"></i> Featured</span>' : ''}
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    }    renderAllAchievements() {
-        const achievementsGrid = document.getElementById('achievements-grid');
-        if (!achievementsGrid) return;
-
-        let filteredAchievements = this.achievementsData || [];
-
-        // Apply filters
-        if (this.currentFilter !== 'all') {
-            filteredAchievements = filteredAchievements.filter(achievement => {
-                return achievement.category.toLowerCase().replace(/\s+/g, '-') === this.currentFilter;
-            });
-        }
-
-        // Apply sorting
-        filteredAchievements.sort((a, b) => {
-            switch (this.currentSort) {
-                case 'date-desc':
-                    return parseInt(b.year) - parseInt(a.year);
-                case 'date-asc':
-                    return parseInt(a.year) - parseInt(b.year);
-                case 'importance':
-                    return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
-                case 'title':
-                    return a.title.localeCompare(b.title);
-                default:
-                    return 0;
-            }
-        });
-
-        achievementsGrid.innerHTML = filteredAchievements.map((achievement, index) => `
-            <div class="achievement-card ${achievement.featured ? 'featured' : ''}" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}">
-                <div class="card-header">
-                    <div class="achievement-icon ${achievement.category.toLowerCase().replace(/\s+/g, '-')}">
-                        <i class="fas ${this.getCategoryIcon(achievement.category)}"></i>
-                    </div>
-                    <div class="achievement-year">${achievement.year}</div>
-                </div>
-                <div class="card-body">
-                    <h3 class="achievement-title">${achievement.title}</h3>
-                    <p class="achievement-organization">${achievement.organization}</p>
-                    ${achievement.location ? `<p class="achievement-location"><i class="fas fa-map-marker-alt"></i> ${achievement.location}</p>` : ''}
-                    <p class="achievement-description">${achievement.description}</p>
-                    
-                    <div class="achievement-footer">
-                        <div class="achievement-badges">
-                            <span class="category-badge ${achievement.category.toLowerCase().replace(/\s+/g, '-')}">${achievement.category}</span>
-                            ${achievement.featured ? '<span class="featured-badge"><i class="fas fa-star"></i> Featured</span>' : ''}
-                        </div>
-                        ${achievement.award_amount ? `
-                            <div class="achievement-amount">
-                                <i class="fas fa-dollar-sign"></i>
-                                $${achievement.award_amount}
-                            </div>
-                        ` : ''}
+                        ${achievement.award_amount ? `<div class="featured-achievement-amount">$${achievement.award_amount}</div>` : ''}
                     </div>
                 </div>
             </div>
         `).join('');
     }
 
-    setupEventListeners() {
-        // Filter buttons
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        filterButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                e.target.classList.add('active');
-                this.currentFilter = e.target.dataset.filter;
-                this.renderAllAchievements();
-            });
+    renderCategoryAchievements() {
+        this.categories.forEach(category => {
+            this.renderCategorySection(category);
         });
+    }
 
-        // Sort dropdown
-        const sortSelect = document.getElementById('sort-select');
-        if (sortSelect) {
-            sortSelect.addEventListener('change', (e) => {
-                this.currentSort = e.target.value;
-                this.renderAllAchievements();
-            });
+    renderCategorySection(category) {
+        const categoryKey = category.toLowerCase().replace(/\s+/g, '-');
+        const container = document.getElementById(`${categoryKey}-achievements`);
+        if (!container) return;
+
+        const categoryAchievements = (this.achievementsData || [])
+            .filter(achievement => achievement.category === category)
+            .sort((a, b) => parseInt(b.year) - parseInt(a.year));
+
+        if (categoryAchievements.length === 0) {
+            container.innerHTML = `
+                <div class="category-empty">
+                    <i class="fas ${this.getCategoryIcon(category)}"></i>
+                    <p>No ${category.toLowerCase()} achievements yet.</p>
+                </div>
+            `;
+            return;
         }
-    }    updateStats() {
-        if (!this.achievementsData) return;
-        
-        const totalAwards = this.achievementsData.length;
-        const featuredAchievements = this.achievementsData.filter(a => a.featured).length;
-        
-        // Calculate total funding from awards that have award_amount
-        const totalFunding = this.achievementsData
-            .filter(a => a.award_amount)
-            .reduce((sum, a) => sum + parseFloat(a.award_amount), 0);
-        
-        // Count different categories
-        const fellowships = this.achievementsData.filter(a => 
-            a.category.toLowerCase().includes('fellowship')).length;
-        const scholarships = this.achievementsData.filter(a => 
-            a.category.toLowerCase().includes('scholarship')).length;
-        
-        // Update DOM elements if they exist
-        const totalAwardsEl = document.getElementById('total-awards');
-        const totalFundingEl = document.getElementById('total-funding');
-        const certificationsEl = document.getElementById('certifications');
-        const fellowshipsEl = document.getElementById('fellowships');
-        
-        if (totalAwardsEl) totalAwardsEl.textContent = totalAwards;
-        if (totalFundingEl) {
-            totalFundingEl.textContent = totalFunding > 0 ? 
-                `$${(totalFunding / 1000).toFixed(0)}K+` : 'Multiple';
-        }
-        if (certificationsEl) certificationsEl.textContent = featuredAchievements;
-        if (fellowshipsEl) fellowshipsEl.textContent = fellowships + scholarships;
-    }getCategoryIcon(category) {
+
+        container.innerHTML = categoryAchievements.map((achievement, index) => `
+            <div class="achievement-card" data-aos="fade-right" data-aos-delay="${index * 50}">
+                <div class="achievement-card-header">
+                    <div class="achievement-card-icon ${categoryKey}">
+                        <i class="fas ${this.getCategoryIcon(achievement.category)}"></i>
+                    </div>
+                    <div class="achievement-card-year">${achievement.year}</div>
+                </div>
+                <div class="achievement-card-body">
+                    <h4 class="achievement-card-title">${achievement.title}</h4>
+                    <p class="achievement-card-organization">${achievement.organization}</p>
+                    ${achievement.location ? `<p class="achievement-card-location"><i class="fas fa-map-marker-alt"></i> ${achievement.location}</p>` : ''}
+                    <p class="achievement-card-description">${achievement.description}</p>
+                    <div class="achievement-card-footer">
+                        <div class="achievement-card-category ${categoryKey}">
+                            ${achievement.category}
+                        </div>
+                        ${achievement.award_amount ? `<div class="achievement-card-amount">$${achievement.award_amount}</div>` : ''}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    updateCategoryCounts() {
+        this.categories.forEach(category => {
+            const categoryKey = category.toLowerCase().replace(/\s+/g, '-');
+            const countElement = document.getElementById(`${categoryKey}-count`);
+            if (!countElement) return;
+
+            const count = (this.achievementsData || [])
+                .filter(achievement => achievement.category === category)
+                .length;
+
+            countElement.textContent = `${count} Achievement${count !== 1 ? 's' : ''}`;
+        });
+    }
+
+    getCategoryIcon(category) {
         const normalizedCategory = category.toLowerCase().replace(/\s+/g, '-');
         switch (normalizedCategory) {
             case 'fellowship':
@@ -208,21 +131,70 @@ class AchievementsPage {
                 return 'fa-trophy';
             case 'travel-grant':
                 return 'fa-plane';
-            case 'academic':
-                return 'fa-graduation-cap';
-            case 'research':
-                return 'fa-flask';
-            case 'professional':
-                return 'fa-briefcase';
             case 'leadership':
                 return 'fa-users';
+            case 'participation':
+                return 'fa-certificate';
             default:
                 return 'fa-star';
         }
+    }
+
+    // Add smooth scroll functionality for horizontal scrolling
+    setupScrollControls() {
+        const scrollContainers = document.querySelectorAll('.achievements-horizontal-scroll');
+        
+        scrollContainers.forEach(container => {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            container.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+                container.style.cursor = 'grabbing';
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isDown = false;
+                container.style.cursor = 'grab';
+            });
+
+            container.addEventListener('mouseup', () => {
+                isDown = false;
+                container.style.cursor = 'grab';
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2;
+                container.scrollLeft = scrollLeft - walk;
+            });
+
+            // Touch events for mobile
+            container.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                const x = e.touches[0].pageX - container.offsetLeft;
+                const walk = (x - startX) * 2;
+                container.scrollLeft = scrollLeft - walk;
+            });
+        });
     }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new AchievementsPage();
+    const achievementsPage = new AchievementsPage();
+    
+    // Setup scroll controls after a short delay to ensure elements are rendered
+    setTimeout(() => {
+        achievementsPage.setupScrollControls();
+    }, 500);
 });

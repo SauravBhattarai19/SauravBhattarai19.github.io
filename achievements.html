@@ -59,61 +59,15 @@
                 </nav>
             </div>
         </div>
-    </section>
-
-    <!-- Achievement Overview -->
-    <section class="achievement-overview">
-        <div class="container">
-            <div class="overview-stats" data-aos="fade-up">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-number" id="total-awards">12</span>
-                        <span class="stat-label">Awards & Honors</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-number" id="academic-gpa">4.0</span>
-                        <span class="stat-label">Academic GPA</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-number" id="total-funding">$450K</span>
-                        <span class="stat-label">Funding Secured</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-number" id="certifications">8</span>
-                        <span class="stat-label">Certifications</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Recent Achievements -->
-    <section class="recent-achievements">
+    </section>    <!-- Featured Achievements -->
+    <section class="featured-achievements">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">Recent Achievements</h2>
-                <p class="section-subtitle">Latest recognitions and accomplishments</p>
+                <h2 class="section-title">Featured Achievements</h2>
+                <p class="section-subtitle">Highlighting my most significant accomplishments and recognitions</p>
             </div>
-            <div class="recent-grid" id="recent-achievements-grid">
-                <!-- Recent achievements will be loaded here -->
+            <div class="featured-grid" id="featured-achievements-grid">
+                <!-- Featured achievements will be loaded here -->
             </div>
         </div>
     </section>
@@ -121,85 +75,124 @@
     <!-- Achievement Categories -->
     <section class="achievement-categories">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">Achievement Categories</h2>
-                <p class="section-subtitle">Excellence across multiple domains</p>
-            </div>
-            <div class="categories-grid">
-                <div class="category-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="category-icon">
-                        <i class="fas fa-university"></i>
+            <div class="category-section" id="category-fellowship">
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-title-group">
+                        <div class="category-icon fellowship">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div>
+                            <h3 class="category-title">Fellowships</h3>
+                            <p class="category-description">Prestigious fellowship programs and research opportunities</p>
+                        </div>
                     </div>
-                    <h3>Academic Excellence</h3>
-                    <p>Recognition for outstanding academic performance and scholarly achievements.</p>
-                    <div class="category-count">5 Awards</div>
+                    <div class="category-count" id="fellowship-count">0</div>
                 </div>
-                <div class="category-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="category-icon">
-                        <i class="fas fa-flask"></i>
+                <div class="category-scroll-container">
+                    <div class="achievements-horizontal-scroll" id="fellowship-achievements">
+                        <!-- Fellowship achievements will be loaded here -->
                     </div>
-                    <h3>Research Excellence</h3>
-                    <p>Awards for innovative research contributions and scientific discoveries.</p>
-                    <div class="category-count">4 Awards</div>
-                </div>
-                <div class="category-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="category-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3>Professional Recognition</h3>
-                    <p>Industry acknowledgments and professional development achievements.</p>
-                    <div class="category-count">3 Awards</div>
-                </div>
-                <div class="category-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="category-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Leadership & Service</h3>
-                    <p>Recognition for leadership roles and service to the academic community.</p>
-                    <div class="category-count">2 Awards</div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Achievement Timeline -->
-    <section class="achievement-timeline">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">Achievement Timeline</h2>
-                <p class="section-subtitle">Journey of success and recognition over the years</p>
-            </div>
-            <div class="timeline-container" id="achievement-timeline">
-                <!-- Achievement timeline will be loaded here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- All Achievements -->
-    <section class="all-achievements">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">All Achievements</h2>
-                <div class="filter-controls">
-                    <div class="filter-tabs">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="academic">Academic</button>
-                        <button class="filter-btn" data-filter="research">Research</button>
-                        <button class="filter-btn" data-filter="professional">Professional</button>
-                        <button class="filter-btn" data-filter="leadership">Leadership</button>
+            <div class="category-section" id="category-scholarship">
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-title-group">
+                        <div class="category-icon scholarship">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div>
+                            <h3 class="category-title">Scholarships</h3>
+                            <p class="category-description">Merit-based academic scholarships and educational funding</p>
+                        </div>
                     </div>
-                    <div class="sort-controls">
-                        <select id="sort-select">
-                            <option value="date-desc">Date (Newest First)</option>
-                            <option value="date-asc">Date (Oldest First)</option>
-                            <option value="importance">Importance</option>
-                            <option value="title">Title</option>
-                        </select>
+                    <div class="category-count" id="scholarship-count">0</div>
+                </div>
+                <div class="category-scroll-container">
+                    <div class="achievements-horizontal-scroll" id="scholarship-achievements">
+                        <!-- Scholarship achievements will be loaded here -->
                     </div>
                 </div>
             </div>
-            <div class="achievements-grid" id="achievements-grid">
-                <!-- All achievements will be loaded here -->
+
+            <div class="category-section" id="category-competition">
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-title-group">
+                        <div class="category-icon competition">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h3 class="category-title">Competitions & Awards</h3>
+                            <p class="category-description">Competition victories and academic excellence awards</p>
+                        </div>
+                    </div>
+                    <div class="category-count" id="competition-count">0</div>
+                </div>
+                <div class="category-scroll-container">
+                    <div class="achievements-horizontal-scroll" id="competition-achievements">
+                        <!-- Competition achievements will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="category-travel-grant">
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-title-group">
+                        <div class="category-icon travel-grant">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div>
+                            <h3 class="category-title">Travel Grants</h3>
+                            <p class="category-description">Conference and workshop travel support funding</p>
+                        </div>
+                    </div>
+                    <div class="category-count" id="travel-grant-count">0</div>
+                </div>
+                <div class="category-scroll-container">
+                    <div class="achievements-horizontal-scroll" id="travel-grant-achievements">
+                        <!-- Travel grant achievements will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="category-leadership">
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-title-group">
+                        <div class="category-icon leadership">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h3 class="category-title">Leadership & Service</h3>
+                            <p class="category-description">Leadership roles and community service recognition</p>
+                        </div>
+                    </div>
+                    <div class="category-count" id="leadership-count">0</div>
+                </div>
+                <div class="category-scroll-container">
+                    <div class="achievements-horizontal-scroll" id="leadership-achievements">
+                        <!-- Leadership achievements will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="category-participation">
+                <div class="category-header" data-aos="fade-up">
+                    <div class="category-title-group">
+                        <div class="category-icon participation">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div>
+                            <h3 class="category-title">Participation & Recognition</h3>
+                            <p class="category-description">Conference participation and special recognitions</p>
+                        </div>
+                    </div>
+                    <div class="category-count" id="participation-count">0</div>
+                </div>
+                <div class="category-scroll-container">
+                    <div class="achievements-horizontal-scroll" id="participation-achievements">
+                        <!-- Participation achievements will be loaded here -->
+                    </div>
+                </div>
             </div>
         </div>
     </section>

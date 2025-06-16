@@ -37,7 +37,7 @@
     "year": "2024",
     "title": "AGU-Chapman Travel Grant",
     "organization": "American Geophysical Union",
-    "description": "Travel support for Chapman Conference on Remote Sensing of the Water Cycle, Honolulu, HI, Feb 13-16, 2024.",
+    "description": "Travel support for Chapman Conference on Remote Sensing of the Water Cycle, Honolulu, HI, Feb 13–16, 2024.",
     "category": "Travel Grant",
     "featured": false
   },
@@ -64,5 +64,45 @@
     "description": "Awarded for securing 19th rank out of approximately 15,000 engineering aspirants for undergraduate study in Civil Engineering.",
     "category": "Scholarship",
     "featured": true
+  },
+  {
+    "year": "2015–2017",
+    "title": "Merit-Based Full Two-Year Scholarship",
+    "organization": "Capital Secondary School (CCRC)",
+    "description": "Awarded full scholarship for higher secondary education based on academic excellence.",
+    "category": "Scholarship",
+    "featured": false
+  },
+  {
+    "year": "2014",
+    "title": "Second Position, Western Regional Inter-Secondary School Mathematics Quiz Contest",
+    "organization": "Council for Mathematics Education, Kaski",
+    "description": "Secured second place in a regional inter-school mathematics competition.",
+    "category": "Competition",
+    "featured": false
+  },
+  {
+    "year": "2014",
+    "title": "President, Junior Red Cross Society",
+    "organization": "KEF High School",
+    "description": "Provided leadership and oversight of the chapter's activities and community service initiatives.",
+    "category": "Leadership",
+    "featured": false
+  },
+  {
+    "year": "2013",
+    "title": "Participant, i-Plea – 1st International Environment Olympiad",
+    "organization": "City Montessori School (CMS), Lucknow, India",
+    "description": "Honored with Certificate of Participation at an international-level environment event.",
+    "category": "Participation",
+    "featured": false
+  },
+  {
+    "year": "2012",
+    "title": "First Position, International Mathematics Competition Nepal",
+    "organization": "Asia Association of Education and Exchange (AAEE), Tokyo, Japan",
+    "description": "Won first place in the national-level mathematics competition organized by AAEE.",
+    "category": "Competition",
+    "featured": false
   }
 ]
