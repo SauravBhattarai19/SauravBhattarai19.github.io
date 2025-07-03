@@ -1,6 +1,15 @@
 [
   {
     "year": "2025",
+    "title": "Travel Grant Recipient, Tethys Summit 2025",
+    "organization": "Tethys Geoscience Foundation",
+    "location": "Tampa, FL",
+    "description": "Awarded a travel grant to attend the Tethys Summit 2025 in recognition of contributions to the Tethys Platform and GEOGLOWS open-source ecosystems.",
+    "category": "Travel Grant",
+    "featured": true
+  }
+  {
+    "year": "2025",
     "title": "Selected Participant, NCAR Graduate Visitor Program (GVP)",
     "organization": "National Center for Atmospheric Research",
     "location": "Boulder, CO",
