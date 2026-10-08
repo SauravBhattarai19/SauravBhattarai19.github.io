@@ -253,6 +253,7 @@
         <p class="tagline">Earth Engine's catalog, without writing a line of code.</p>
         <ul class="ticks">
           <li>1,042 datasets and 23 climate indices across nine tools, from data download, climate indices, and return periods to raster math and multi-geometry export.</li>
+          <li>No install and no code: a 30-year daily rainfall analysis for a 784 km² area runs in under a minute.</li>
           <li>Earth Engine implementations of two ERDC algorithms: GLOBAL-SAM snow depth and SERVES root-zone soil moisture.</li>
           <li>Used by 16 undergraduates in Advanced Water Resources Engineering (Fall 2025) and in a faculty workshop with 28 registered faculty.</li>
           <li>Best in Show and first place, Microsoft × AUC Data Science Initiative Data Challenge (2025).</li>
@@ -264,8 +265,14 @@
         </div>
       </div>
       <figure class="fig tool-media reveal">
-        <div class="plate"><img src="assets/img/geoclimate-workflow.webp" alt="Screenshots of the GeoData Explorer: selecting an area of interest, a dataset and bands, a time period, and export options" width="1600" height="1192" loading="lazy"></div>
-        <figcaption><b>GeoClimate</b>A GeoData Explorer session, from choosing an area and a dataset to exporting the result.</figcaption>
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">geeclimate.streamlit.app</span><a class="open" href="https://geeclimate.streamlit.app">Open app</a></div>
+          <picture>
+            <source srcset="assets/img/geoclimate/gc-walkthrough-still.webp" media="(prefers-reduced-motion: reduce)">
+            <img src="assets/img/geoclimate/gc-walkthrough.webp" alt="Animated walkthrough of the GeoClimate Hydrology Analyzer: choosing the tool, setting an area around Jackson, Mississippi, running 30 years of rainfall, reading statistics, return periods, IDF curves, and downloading results" width="1200" height="833" loading="lazy">
+          </picture>
+        </div>
+        <figcaption><b>GeoClimate</b>A real run of the Hydrology Analyzer: 30 years of CHIRPS rainfall for 784 km² around Jackson, Mississippi, from picking the tool to downloading the results. <a href="software.html#walkthrough">Step through it</a>.</figcaption>
       </figure>
     </article>
 

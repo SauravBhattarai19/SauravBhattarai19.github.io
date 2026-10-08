@@ -157,7 +157,31 @@ run_pipeline(cfg)                             <span class="c"># results/hydrogra
       <p class="lede">A Streamlit web platform on Google Earth Engine that lets students, engineers, and researchers search, analyze, and export environmental data in a browser: 1,042 datasets and 23 climate indices, with no code. Free for research and teaching.</p>
     </div>
 
-    <ol class="tools-grid">
+    <h3 class="list-head">See it working</h3>
+    <p style="color:var(--ink-2);max-width:70ch;margin:8px 0 22px">Every screenshot here comes from a real run of the platform in October 2026. Click a step, or let it play.</p>
+    <div class="walkthrough c-access reveal" data-walkthrough id="walkthrough">
+      <ol class="walk-steps" role="tablist" aria-label="GeoClimate walkthrough, step by step">
+        <li><button type="button" role="tab" aria-selected="true" data-src="assets/img/geoclimate/gc-01-tools.webp" data-alt="GeoClimate home page with tool cards for GeoData Explorer, Climate Intelligence Hub, Hydrology Analyzer, and Optimal Product Selector"><span class="k">1</span><b>Pick a tool</b><small>Nine tools on one page, from data download and climate indices to snow depth and soil moisture.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/geoclimate/gc-02-setup.webp" data-alt="Hydrology Analyzer configuration with a 783.62 square kilometre area, the CHIRPS dataset, and a custom 30-year period"><span class="k">2</span><b>Set the area, data, and dates</b><small>Type a bounding box, draw on the map, or upload a GeoJSON. Here: 784 km² around Jackson, Mississippi, CHIRPS daily rainfall, 1995–2024.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/geoclimate/gc-03-timeseries.webp" data-alt="Daily precipitation time series from 1995 to 2024 and monthly analysis"><span class="k">3</span><b>Run it on Earth Engine</b><small>Google Earth Engine does the computing; this 30-year daily record arrived in under a minute, with daily and monthly charts.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/geoclimate/gc-04-stats.webp" data-alt="Statistical summary with daily statistics, yearly statistics and trends, and key insights"><span class="k">4</span><b>Read the statistics</b><small>Daily and yearly statistics, trends, and key insights such as the wettest and driest years.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/geoclimate/gc-05-return.webp" data-alt="Return period analysis with the best-fitting Gumbel distribution and a table of return period values"><span class="k">5</span><b>Get return periods</b><small>Several distributions are fitted to the annual maxima; the best fit, here Gumbel, gives design rainfall from 2 to 1,000 years.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/geoclimate/gc-06-idf.webp" data-alt="Intensity-duration-frequency curves for several return periods and the IDF values table"><span class="k">6</span><b>Build IDF curves</b><small>Intensity–duration–frequency curves and tables, ready for drainage and culvert design.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/geoclimate/gc-07-download.webp" data-alt="Download page with buttons for raw precipitation data, yearly statistics, return periods, and annual maxima"><span class="k">7</span><b>Download the results</b><small>Raw data, yearly statistics, return periods, and annual maxima as CSV files.</small></button></li>
+      </ol>
+      <div class="walk-stage">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">geeclimate.streamlit.app · Hydrology Analyzer</span><a class="open" href="https://geeclimate.streamlit.app">Open app</a></div>
+          <button class="shot" type="button" data-full="assets/img/geoclimate/gc-01-tools.webp" aria-label="Enlarge this screenshot"><img decoding="async" loading="lazy" src="assets/img/geoclimate/gc-01-tools.webp" alt="GeoClimate home page with tool cards for GeoData Explorer, Climate Intelligence Hub, Hydrology Analyzer, and Optimal Product Selector" width="1600" height="1111"></button>
+        </div>
+        <div class="walk-progress" aria-hidden="true"><i></i></div>
+        <div class="walk-caption"><span>Step 1 of 7 · Pick a tool</span><span class="walk-nav"><button type="button" data-walk-prev aria-label="Previous step"><svg class="icon" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" data-walk-next aria-label="Next step"><svg class="icon" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></span></div>
+      </div>
+    </div>
+
+    <h3 class="list-head" style="margin-top:clamp(40px,6vw,64px)">The nine tools</h3>
+
+    <ol class="tools-grid" style="margin-top:14px">
       <li class="step c-access reveal"><span class="n">Tool 1</span><h3 style="font-size:1.35rem">GeoData Explorer</h3><p>Search and download from the STAC API and Earth Engine catalog, with map preview, flexible areas, and GeoTIFF, NetCDF, or CSV export.</p></li>
       <li class="step c-access reveal"><span class="n">Tool 2</span><h3 style="font-size:1.35rem">Climate Intelligence Hub</h3><p>ETCCDI climate indices such as TXx, RX1day, and CDD, with Mann–Kendall trend tests, time series, and maps.</p></li>
       <li class="step c-access reveal"><span class="n">Tool 3</span><h3 style="font-size:1.35rem">Hydrology Analyzer</h3><p>Precipitation analysis with return periods, frequency analysis, IDF curves, and drought indices.</p></li>
@@ -169,14 +193,49 @@ run_pipeline(cfg)                             <span class="c"># results/hydrogra
       <li class="step c-access reveal"><span class="n">Tool 9</span><h3 style="font-size:1.35rem">SERVES</h3><p>Soil moisture, snow water equivalent, and land-surface analysis with the method of Dr. Nawa Raj Pradhan (ERDC).</p></li>
     </ol>
 
-    <div class="fig-row" style="margin-top:clamp(32px,5vw,56px)">
-      <figure class="fig reveal">
-        <button class="plate" type="button" data-full="assets/img/geoclimate-hydrology.webp" aria-label="Enlarge figure 4"><img decoding="async" src="assets/img/geoclimate-hydrology.webp" width="1400" height="1447" alt="Hydrology Analyzer outputs: daily precipitation, monthly totals, yearly trends, return period curves, and goodness-of-fit tables" loading="lazy"></button>
-        <figcaption><b>Figure 4</b>Hydrology Analyzer outputs: precipitation series; yearly trends; return-period curves; distribution fit.</figcaption>
+    <h3 class="list-head" style="margin-top:clamp(40px,6vw,64px)">More tools, real outputs</h3>
+    <div class="shot-gallery" style="margin-top:clamp(28px,4vw,40px)">
+      <figure class="reveal">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">Climate Intelligence Hub</span></div>
+          <button class="shot" type="button" data-full="assets/img/geoclimate/gc-climate-steps.webp" aria-label="Enlarge: Climate Intelligence Hub"><img decoding="async" src="assets/img/geoclimate/gc-climate-steps.webp" width="1600" height="1033" alt="Climate Intelligence Hub showing the seven-step progress bar and the index selection step" loading="lazy"></button>
+        </div>
+        <figcaption><b>Climate Intelligence Hub</b>A guided seven-step workflow for ETCCDI climate indices, with progress shown at the top.</figcaption>
       </figure>
-      <figure class="fig reveal">
-        <button class="plate" type="button" data-full="assets/img/geoclimate-modules.webp" aria-label="Enlarge figure 5"><img decoding="async" src="assets/img/geoclimate-modules.webp" width="1200" height="1160" alt="Architecture diagram of the five original modules on Google Earth Engine" loading="lazy"></button>
-        <figcaption><b>Figure 5</b>Five integrated modules of the GeoClimate Intelligence Platform on Google Earth Engine, as published in 2026; four tools have been added since.</figcaption>
+      <figure class="reveal">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">Climate Intelligence Hub</span></div>
+          <button class="shot" type="button" data-full="assets/img/geoclimate/gc-climate-trend.webp" aria-label="Enlarge: Climate Intelligence Hub"><img decoding="async" src="assets/img/geoclimate/gc-climate-trend.webp" width="1600" height="1111" alt="Time series of two temperature indices with linear and Sen slope trend lines" loading="lazy"></button>
+        </div>
+        <figcaption><b>Climate Intelligence Hub</b>Index time series with linear and Sen’s slope trends: Daymet over Mississippi, 1994–2024.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">Climate Intelligence Hub</span></div>
+          <button class="shot" type="button" data-full="assets/img/geoclimate/gc-climate-map.webp" aria-label="Enlarge: Climate Intelligence Hub"><img decoding="async" src="assets/img/geoclimate/gc-climate-map.webp" width="1600" height="1111" alt="Map of the TXx temperature index over Mississippi for 2023" loading="lazy"></button>
+        </div>
+        <figcaption><b>Climate Intelligence Hub</b>A map of any index for any year at the dataset’s native resolution: TXx for 2023.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">GeoData Explorer</span></div>
+          <button class="shot" type="button" data-full="assets/img/geoclimate/gc-explorer.webp" aria-label="Enlarge: GeoData Explorer"><img decoding="async" src="assets/img/geoclimate/gc-explorer.webp" width="1600" height="1111" alt="GeoData Explorer with the five-step progress bar and a dataset search box" loading="lazy"></button>
+        </div>
+        <figcaption><b>GeoData Explorer</b>Five steps from area to download, with keyword search across the Earth Engine catalog.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">SERVES</span></div>
+          <button class="shot" type="button" data-full="assets/img/geoclimate/gc-serves.webp" aria-label="Enlarge: SERVES"><img decoding="async" src="assets/img/geoclimate/gc-serves.webp" width="1600" height="1111" alt="SERVES soil moisture map over farmland with summary statistics" loading="lazy"></button>
+        </div>
+        <figcaption><b>SERVES</b>30 m root-zone soil moisture from Landsat for Mississippi Delta farmland, 15 July 2023.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">GLOBAL-SAM</span></div>
+          <button class="shot" type="button" data-full="assets/img/geoclimate/gc-globalsam.webp" aria-label="Enlarge: GLOBAL-SAM"><img decoding="async" src="assets/img/geoclimate/gc-globalsam.webp" width="1600" height="1111" alt="GLOBAL-SAM snow depth map over the Nepal Himalaya for February 2023" loading="lazy"></button>
+        </div>
+        <figcaption><b>GLOBAL-SAM</b>Monthly snow depth from MODIS and GLDAS for the Nepal Himalaya, February 2023.</figcaption>
       </figure>
     </div>
 

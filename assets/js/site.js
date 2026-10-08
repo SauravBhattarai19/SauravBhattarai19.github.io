@@ -108,7 +108,7 @@
   });
 
   /* ---------- figure lightbox ---------- */
-  var zoomables = document.querySelectorAll("button.plate[data-full]");
+  var zoomables = document.querySelectorAll("button.plate[data-full], button.shot[data-full]");
   if (zoomables.length && typeof HTMLDialogElement === "function") {
     var dlg = document.createElement("dialog");
     dlg.className = "lightbox";
@@ -124,7 +124,8 @@
         var img = b.querySelector("img");
         dImg.src = b.getAttribute("data-full");
         dImg.alt = img ? img.alt : "";
-        var cap = b.parentElement.querySelector("figcaption");
+        var fig = b.closest("figure, .walk-stage");
+        var cap = fig ? fig.querySelector("figcaption, .walk-caption span") : null;
         dCap.textContent = cap ? cap.textContent : "";
         dlg.showModal();
       });
@@ -218,6 +219,56 @@
       g.addEventListener("click", function () { show(g); });
     });
   }
+
+  /* ---------- walkthrough stepper (screenshots of a running app) ---------- */
+  document.querySelectorAll("[data-walkthrough]").forEach(function (wt) {
+    var tabs = Array.prototype.slice.call(wt.querySelectorAll(".walk-steps button"));
+    var img = wt.querySelector(".walk-stage img");
+    var zoom = wt.querySelector(".walk-stage button.shot");
+    var cap = wt.querySelector(".walk-caption span");
+    var bar = wt.querySelector(".walk-progress i");
+    var ms = 5200, timer = null, idx = 0, userTook = false;
+    // preload the other screenshots once the walkthrough is near the viewport
+    var preload = function () { tabs.forEach(function (t) { var i = new Image(); i.src = t.getAttribute("data-src"); }); };
+    function show(i, fromUser) {
+      idx = (i + tabs.length) % tabs.length;
+      tabs.forEach(function (t, k) {
+        t.setAttribute("aria-selected", String(k === idx));
+        t.tabIndex = k === idx ? 0 : -1;
+      });
+      var t = tabs[idx];
+      img.src = t.getAttribute("data-src");
+      img.alt = t.getAttribute("data-alt") || "";
+      if (zoom) zoom.setAttribute("data-full", t.getAttribute("data-src"));
+      if (cap) cap.textContent = "Step " + (idx + 1) + " of " + tabs.length + " · " + t.querySelector("b").textContent;
+      if (bar) { bar.style.animation = "none"; void bar.offsetWidth; bar.style.animation = ""; }
+      if (fromUser) stop();
+    }
+    function play() {
+      if (reduceMotion || userTook) return;
+      stop(); wt.classList.add("is-playing");
+      timer = setInterval(function () { show(idx + 1); }, ms);
+    }
+    function stop() { if (timer) clearInterval(timer); timer = null; wt.classList.remove("is-playing"); }
+    tabs.forEach(function (t, k) {
+      t.addEventListener("click", function () { userTook = true; show(k, true); });
+      t.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown" || e.key === "ArrowRight") { e.preventDefault(); userTook = true; show(idx + 1, true); tabs[idx].focus(); }
+        if (e.key === "ArrowUp" || e.key === "ArrowLeft") { e.preventDefault(); userTook = true; show(idx - 1, true); tabs[idx].focus(); }
+      });
+    });
+    var prev = wt.querySelector("[data-walk-prev]"), next = wt.querySelector("[data-walk-next]");
+    if (prev) prev.addEventListener("click", function () { userTook = true; show(idx - 1, true); });
+    if (next) next.addEventListener("click", function () { userTook = true; show(idx + 1, true); });
+    wt.style.setProperty("--walk-ms", ms + "ms");
+    show(0);
+    if ("IntersectionObserver" in window) {
+      var seen = false;
+      new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting) { if (!seen) { seen = true; preload(); } play(); } else stop();
+      }, { threshold: 0.35 }).observe(wt);
+    }
+  });
 
   /* ---------- footer year ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) {
