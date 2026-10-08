@@ -1,354 +1,482 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saurav Bhattarai - Water Resource Engineer & Hydro-climatology Researcher</title>    <link rel="stylesheet" href="styles.css">    <link rel="stylesheet" href="css/publications.css">
-    <link rel="stylesheet" href="css/research.css">
-    <link rel="stylesheet" href="css/conferences.css">
-    <link rel="stylesheet" href="css/achievements.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saurav Bhattarai · Hydrologist</title>
+<meta name="description" content="Saurav Bhattarai is a hydrologist and Ph.D. candidate at Jackson State University who builds open tools that turn open Earth data into local flood predictions: the GeoClimate Intelligence Platform and MRRpy, an open, modular, parsimonious physics-based flood model.">
+<meta name="author" content="Saurav Bhattarai">
+<link rel="canonical" href="https://sauravbhattarai19.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Saurav Bhattarai">
+<meta property="og:title" content="Saurav Bhattarai · Hydrologist">
+<meta property="og:description" content="Data that speak, physics that translates. Open tools that carry open Earth data all the way to local flood predictions.">
+<meta property="og:url" content="https://sauravbhattarai19.github.io/">
+<meta property="og:image" content="https://sauravbhattarai19.github.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4f1e9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d141c" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")d.setAttribute("data-theme",t);}catch(e){}})();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Saurav Bhattarai",
+  "url": "https://sauravbhattarai19.github.io/",
+  "image": "https://sauravbhattarai19.github.io/assets/img/headshot.jpg",
+  "jobTitle": "Ph.D. Candidate, Hydrology",
+  "affiliation": {"@type": "CollegeOrUniversity", "name": "Jackson State University"},
+  "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Tribhuvan University, Institute of Engineering, Pulchowk Campus"}],
+  "knowsAbout": ["Hydrology", "Flood modeling", "Earth observation", "Google Earth Engine", "Remote sensing", "Compound hazards"],
+  "sameAs": [
+    "https://scholar.google.com/citations?user=53EK8-8AAAAJ",
+    "https://orcid.org/0009-0006-2627-8563",
+    "https://github.com/SauravBhattarai19",
+    "https://www.linkedin.com/in/saurav-bhattarai-7133a3176"
+  ]
+}
+</script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">Saurav Bhattarai</a>
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>                <li class="nav-item">
-                    <a href="research.html" class="nav-link">Research</a>
-                </li>
-                <li class="nav-item">
-                    <a href="publications.html" class="nav-link">Publications</a>
-                </li>
-                <li class="nav-item">
-                    <a href="conferences.html" class="nav-link">Conferences</a>
-                </li>
-                <li class="nav-item">
-                    <a href="achievements.html" class="nav-link">Achievements</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
-            </ul>
-            <div class="nav-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19V5.5A2.5 2.5 0 0 1 6.5 3H20v14H6.5A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-scholar" viewBox="0 0 24 24"><path d="M12 2 1 9.5l4.6 3.2A7.2 7.2 0 0 1 12 9a7.2 7.2 0 0 1 6.4 3.7L23 9.5 12 2Zm0 9a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/></symbol>
+  <symbol id="i-orcid" viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22ZM8.3 17.3H6.6V8.1h1.7v9.2ZM7.4 7a1.05 1.05 0 1 1 0-2.1 1.05 1.05 0 0 1 0 2.1Zm10.1 5.7c0 2.7-1.8 4.6-4.7 4.6H10V8.1h2.8c2.9 0 4.7 1.9 4.7 4.6Zm-1.7 0c0-1.9-1.1-3.1-3.2-3.1h-1.2v6.2h1.2c2.1 0 3.2-1.2 3.2-3.1Z"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .6a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .6Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Saurav Bhattarai, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#1b2430"/><path d="M16 24.5V16.5M16 16.5 10.2 8M16 16.5l6.2-8.6M12.9 12l-4.6.6M19.4 11.8l3.9 1.9" fill="none" stroke="#74b0f4" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="25.2" r="2.5" fill="#f39361"/></svg>
+      <span>Saurav Bhattarai</span>
+      <small>Hydrologist</small>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="publications.html">Publications</a>
+      <a href="talks.html">Talks</a>
+      <a href="teaching.html">Teaching</a>
+      <a class="nav-cv" href="CV.pdf"><svg class="icon"><use href="#i-download"/></svg>CV</a>
     </nav>
+    <button class="icon-btn theme-toggle" type="button" aria-label="Toggle color theme"><svg class="icon icon-sun"><use href="#i-sun"/></svg><svg class="icon icon-moon"><use href="#i-moon"/></svg></button>
+    <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content" data-aos="fade-up">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="gradient-text">Saurav Bhattarai</span>
-                    </h1>
-                    <h2 class="hero-subtitle">Water Resource Engineer & Hydro-climatology Researcher</h2>
-                    <p class="hero-description">
-                        PhD candidate leveraging advanced programming and modeling tools to address global 
-                        water-resource management challenges, focusing on climate change impacts and water-related hazards.
-                    </p>                    <div class="hero-buttons">
-                        <a href="research.html" class="btn btn-primary">View Research</a>                        <a href="CV.pdf" class="btn btn-secondary" target="_blank">
-                            <i class="fas fa-download"></i> Download CV
-                        </a>
-                    </div>
-                    <div class="social-links">
-                        <a href="mailto:Saurav.bhattarai@students.jsums.edu" class="social-link">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/saurav-bhattarai-7133a3176" class="social-link" target="_blank">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/Saurav-JSU" class="social-link" target="_blank">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://bit.ly/jsu_water" class="social-link" target="_blank">
-                            <i class="fas fa-globe"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="hero-image" data-aos="fade-left" data-aos-delay="200">
-                    <div class="profile-card">
-                        <img src="Headshot.png" alt="Saurav Bhattarai" class="profile-img">                        <div class="profile-overlay">
-                            <div class="profile-stats">
-                                <div class="stat">
-                                    <span class="stat-number" id="total-pubs-count">0</span>
-                                    <span class="stat-label">Publications</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number" id="total-conf-count">0</span>
-                                    <span class="stat-label">Conferences</span>
-                                </div>
-                            </div>                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<main id="main">
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">About Me</h2>
-            <div class="about-content">
-                <div class="about-text" data-aos="fade-right">
-                    <p class="about-description">
-                        I am a dedicated PhD candidate at Jackson State University, specializing in water resource 
-                        engineering and hydro-climatology research. My work focuses on leveraging cutting-edge 
-                        technology and modeling tools to address critical water management challenges in our 
-                        changing climate.
-                    </p>
-                    <div class="about-highlights">
-                        <div class="highlight">
-                            <i class="fas fa-graduation-cap"></i>
-                            <div>
-                                <h4>Current Education</h4>
-                                <p>PhD in Civil & Environmental Engineering<br>Jackson State University (GPA: 4.0/4.0)</p>
-                            </div>
-                        </div>
-                        <div class="highlight">
-                            <i class="fas fa-briefcase"></i>
-                            <div>
-                                <h4>Current Positions</h4>
-                                <p>Graduate Research Assistant & ORISE Fellow<br>ERDC-CHL, U.S. Army Corps of Engineers</p>
-                            </div>
-                        </div>
-                        <div class="highlight">
-                            <i class="fas fa-award"></i>
-                            <div>
-                                <h4>Recent Achievement</h4>
-                                <p>NCAR Graduate Visitor Program 2025<br>National Center for Atmospheric Research</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skills-section" data-aos="fade-left">
-                    <h3>Technical Skills</h3>
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h4><i class="fas fa-map"></i> Spatial Analysis</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">QGIS</span>
-                                <span class="skill-tag">Google Earth Engine</span>
-                                <span class="skill-tag">Remote Sensing</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4><i class="fas fa-code"></i> Programming</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Python</span>
-                                <span class="skill-tag">Machine Learning</span>
-                                <span class="skill-tag">Deep Learning</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4><i class="fas fa-water"></i> Hydrological Modeling</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">HEC-HMS</span>
-                                <span class="skill-tag">HEC-RAS</span>
-                                <span class="skill-tag">GSSHA</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4><i class="fas fa-drafting-compass"></i> Design Tools</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">AutoCAD</span>
-                                <span class="skill-tag">REVIT</span>
-                                <span class="skill-tag">Civil 3D</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>    <!-- Research Section -->
-    <section id="research" class="research">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Research Overview</h2>
-            <div class="overview-content" data-aos="fade-up" data-aos-delay="100">
-                <div class="overview-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="research-projects-count">0</span>
-                        <span class="stat-label">Active Projects</span>
-                    </div>
-                </div>
-                <p class="overview-description">
-                    Focusing on climate change impact assessment, heatwave analysis, and compound hazard research using advanced modeling and satellite data.
-                </p>
-                <a href="research.html" class="btn btn-primary">
-                    <i class="fas fa-arrow-right"></i> View Research Details
-                </a>
-            </div>
-        </div>
-    </section>    <!-- Publications Section -->
-    <section id="publications" class="publications">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Publications Overview</h2>
-            <div class="overview-content" data-aos="fade-up" data-aos-delay="100">
-                <div class="overview-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="total-publications-count">0</span>
-                        <span class="stat-label">Total Publications</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="recent-publications-count">0</span>
-                        <span class="stat-label">This Year</span>
-                    </div>
-                </div>
-                <p class="overview-description">
-                    Peer-reviewed research on climate change impacts, precipitation extremes, and heatwave analysis published in leading journals.
-                </p>
-                <a href="publications.html" class="btn btn-primary">
-                    <i class="fas fa-arrow-right"></i> View All Publications
-                </a>
-            </div>
-        </div>
-    </section>    <!-- Conferences Section -->
-    <section id="conferences" class="conferences">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Conferences Overview</h2>
-            <div class="overview-content" data-aos="fade-up" data-aos-delay="100">
-                <div class="overview-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="total-conferences-count">0</span>
-                        <span class="stat-label">Total Conferences</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="upcoming-conferences-count">0</span>
-                        <span class="stat-label">Upcoming</span>
-                    </div>
-                </div>
-                <p class="overview-description">
-                    International presentations and participations at leading conferences including AGU, ASCE EWRI, and specialized climate research meetings.
-                </p>
-                <a href="conferences.html" class="btn btn-primary">
-                    <i class="fas fa-arrow-right"></i> View All Conferences
-                </a>
-            </div>
-        </div>
-    </section>    <!-- Achievements Section -->    
-    <section id="achievements" class="achievements">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Achievements Overview</h2>
-            <div class="overview-content" data-aos="fade-up" data-aos-delay="100">
-                <div class="overview-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="total-achievements-count">0</span>
-                        <span class="stat-label">Total Awards</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="recent-achievements-count">0</span>
-                        <span class="stat-label">This Year</span>
-                    </div>
-                </div>
-                <p class="overview-description">
-                    Recognition through fellowships, awards, and grants including NCAR Graduate Visitor Program, ORISE Fellowship, and AGU competition wins.
-                </p>
-                <a href="achievements.html" class="btn btn-primary">
-                    <i class="fas fa-arrow-right"></i> View All Achievements
-                </a>
-            </div>
-        </div>
-    </section><!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>Saurav.bhattarai@students.jsums.edu</p>
-                            <p>saurav.bhattarai.1999@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+1-601-918-0712</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Address</h4>
-                            <p>Department of Civil & Environmental Engineering<br>
-                            Jackson State University<br>
-                            1400 John R. Lynch St, Jackson, MS 39217</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-globe"></i>
-                        <div>
-                            <h4>Research Group</h4>
-                            <p><a href="https://bit.ly/jsu_water" target="_blank">bit.ly/jsu_water</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form" data-aos="fade-left">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="hero-id rise">
+        <img src="assets/img/headshot.webp" alt="Portrait of Saurav Bhattarai" width="68" height="68">
+        <div class="kicker">Ph.D. Candidate · Civil &amp; Environmental Engineering<br>Jackson State University · Jackson, Mississippi</div>
+      </div>
+      <h1 class="rise">Saurav Bhattarai</h1>
+      <p class="statement rise">Data that <em class="w1">speak</em>, physics that <em class="w2">translates</em>.</p>
+      <p class="intro rise">I am a hydrologist who builds open tools that carry free Earth observation data all the way to local flood predictions. I make the data reachable without code, refine coarse satellite products to the scale of a valley, and feed them to <a href="software.html#mrrpy">MRRpy</a>, the open, modular, parsimonious flood model I develop.</p>
+      <div class="rise">
+        <span class="status"><span class="pulse" aria-hidden="true"></span>Defending February 10, 2027 · Seeking postdoctoral positions</span>
+      </div>
+      <div class="actions rise">
+        <a class="btn" href="research.html">Explore the research <svg class="icon"><use href="#i-right"/></svg></a>
+        <a class="btn btn--ghost" href="CV.pdf"><svg class="icon"><use href="#i-download"/></svg>Download CV</a>
+      </div>
+      <div class="link-row rise">
+        <a href="mailto:saurav.bhattarai.1999@gmail.com"><svg class="icon"><use href="#i-mail"/></svg>Email</a>
+        <a href="https://scholar.google.com/citations?user=53EK8-8AAAAJ"><svg class="icon icon--fill"><use href="#i-scholar"/></svg>Google Scholar</a>
+        <a href="https://orcid.org/0009-0006-2627-8563"><svg class="icon icon--fill"><use href="#i-orcid"/></svg>ORCID</a>
+        <a href="https://github.com/SauravBhattarai19"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a>
+        <a href="https://www.linkedin.com/in/saurav-bhattarai-7133a3176"><svg class="icon icon--fill"><use href="#i-linkedin"/></svg>LinkedIn</a>
+      </div>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <h3>Saurav Bhattarai</h3>
-                    <p>Water Resource Engineer & Hydro-climatology Researcher</p>
-                </div>
-                <div class="footer-links">
-                    <a href="mailto:Saurav.bhattarai@students.jsums.edu">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/saurav-bhattarai-7133a3176" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/Saurav-JSU" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://bit.ly/jsu_water" target="_blank">
-                        <i class="fas fa-globe"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Saurav Bhattarai. All rights reserved.</p>
-            </div>
+    <figure class="basin-fig rise" aria-labelledby="basin-cap">
+      <header>
+        <span class="kicker">Fig. 0 · A storm on a drainage tree</span>
+        <span style="display:flex;align-items:center;gap:12px">
+          <span class="live"><i></i>Live</span>
+          <button class="basin-ctl" type="button" aria-pressed="false"><svg class="icon icon-pause"><use href="#i-pause"/></svg><svg class="icon icon-play"><use href="#i-play"/></svg><span data-label>Pause</span></button>
+        </span>
+      </header>
+      <div class="basin-canvas-wrap">
+        <canvas id="basin" role="img" aria-label="Animated drainage basin: rain falls on grid cells, flows down a branching river network to an outlet, and the outlet discharge is drawn as a hydrograph below the basin."></canvas>
+      </div>
+      <figcaption id="basin-cap">
+        <b>Click the basin to drop a storm.</b> Rain lands on grid cells, runs off, and is routed down a D8 drainage tree to the outlet; the orange trace is the outlet hydrograph. A toy model running in your browser, built on the same idea as MRRpy.
+        <span class="basin-legend" aria-hidden="true"><span><i class="sw"></i>channel</span><span><i class="sw sw--dot"></i>water</span><span><i class="sw sw--rain"></i>rain</span><span><i class="sw sw--q"></i>discharge</span></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= NUMBERS ================= -->
+<section class="section--tight" aria-label="In numbers">
+  <div class="wrap">
+    <div class="numbers reveal">
+      <div><b>14</b><span>peer-reviewed journal articles since 2023, seven as first author</span></div>
+      <div><b>1,042</b><span>Earth Engine datasets opened to non-programmers through the GeoClimate platform</span></div>
+      <div><b>0.81</b><span>median Nash–Sutcliffe efficiency of MRRpy for eight Bagmati floods, without event-wise fitting</span></div>
+      <div><b>2,643</b><span>in situ stations used to evaluate SERVES root-zone soil moisture worldwide</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESEARCH IDEA ================= -->
+<section class="section" id="research">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">01 · Research</span>
+      <h2>Models and open data fail in <em>mirror image</em>.</h2>
+    </div>
+    <div class="idea-grid">
+      <div class="prose reveal">
+        <p>Physics-based hydrological models carry mechanism but lack coverage. Open Earth data carry coverage but lack mechanism. Each is the other's missing half, yet they are rarely joined, and the reason is easy to miss: calibration. A model tuned to observed discharge absorbs the errors of its inputs in its parameters, so it cannot tell good data from bad, and it needs a discharge record that the most flood-exposed places do not have.</p>
+        <p>My dissertation builds the chain that joins them. Open data are made accessible, refined to the local scale, and combined into records of interacting hazards. They feed an open, modular model with few parameters, each starting from open data or a published equation. With little to tune, errors in the data surface in the hydrograph instead of hiding in the parameters, and the model becomes an instrument for judging the data that drive it.</p>
+      </div>
+      <aside class="callout reveal" aria-label="Key result">
+        <span class="kicker">Same model · same eight floods · Kathmandu Valley</span>
+        <div class="vs">
+          <div style="--c: var(--slate)"><b>0.54</b><span>raw satellite rainfall (IMERG)</span></div>
+          <div style="--c: var(--c-translate)"><b>0.81</b><span>S4W automatic weather stations</span></div>
         </div>
-    </footer>    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="js/data-manager.js"></script>
-    <script src="script.js"></script>
+        <p>Median Nash–Sutcliffe efficiency of MRRpy with nothing refitted between the two runs. The data speak; the physics shows which to believe.</p>
+      </aside>
+    </div>
+
+    <ol class="steps">
+      <li class="step c-access reveal">
+        <span class="n">Chapter 1</span>
+        <h3>Access</h3>
+        <p>Hear what single open datasets say about rainfall timing, heat, and water storage, and open them to everyone without code.</p>
+        <div class="chips"><span class="chip chip--pub">3 published</span></div>
+      </li>
+      <li class="step c-refine reveal">
+        <span class="n">Chapter 2</span>
+        <h3>Refine</h3>
+        <p>Make coarse data fit a valley: mass-conserving downscaling of GRACE and SMAP, IMERG correction, and compound hazards.</p>
+        <div class="chips"><span class="chip chip--done">Mostly complete</span></div>
+      </li>
+      <li class="step step--core c-translate reveal">
+        <span class="core-tag">Core</span>
+        <span class="n">Chapter 3</span>
+        <h3>Translate</h3>
+        <p>MRRpy: open, modular, parsimonious physics, solved exactly and stably, verified against analytical solutions and observed floods.</p>
+        <div class="chips"><span class="chip chip--done">On PyPI</span><span class="chip chip--prog">Verification</span></div>
+      </li>
+      <li class="step c-apply reveal">
+        <span class="n">Chapter 4</span>
+        <h3>Apply</h3>
+        <p>Find where open-data flood modeling works and where it fails: observed, design, long-term, outburst, and forecast-driven floods.</p>
+        <div class="chips"><span class="chip chip--prog">In progress</span></div>
+      </li>
+      <li class="step c-extend reveal">
+        <span class="n">Chapter 5</span>
+        <h3>Extend</h3>
+        <p>Sediment, sea-level boundaries, and machine-learning surrogates that return the model to the platform, closing the loop.</p>
+        <div class="chips"><span class="chip chip--prop">Proposed</span></div>
+      </li>
+    </ol>
+    <div class="after-steps reveal">
+      <a class="arrow-link" href="phd.html">Read the dissertation overview <svg class="icon"><use href="#i-arrow"/></svg></a>
+      <a class="arrow-link" href="research.html">All research, by theme <svg class="icon"><use href="#i-arrow"/></svg></a>
+      <span class="muted" style="font-size:15px">Two study regions in every content chapter: the data-rich Mississippi River Basin and the data-sparse Nepal Himalaya.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TOOLS ================= -->
+<section class="section" id="tools" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">02 · Open tools</span>
+      <h2>Tools anyone can <em>run</em>.</h2>
+      <p class="lede">Open science is the thread through my work. The tools are free, documented, and already used in classrooms and workshops.</p>
+    </div>
+
+    <article class="tool tool--wide-media c-translate" id="mrrpy">
+      <div class="tool-copy reveal">
+        <span class="kicker">Python package · MIT license · v0.3.0 on PyPI</span>
+        <h3>MRRpy</h3>
+        <p class="tagline">Rainfall–runoff and flood routing for any basin on Earth, from a DEM and a storm.</p>
+        <ul class="ticks">
+          <li>Runoff physics you can switch: Green–Ampt infiltration with soil recovery, variable source area, impervious surfaces, or SCS curve number, combined without counting rain twice.</li>
+          <li>Routing derived from the Saint-Venant equations: kinematic, Muskingum–Cunge, semi-implicit diffusive, and local-inertial schemes.</li>
+          <li>An exact, linear-time implicit solver on the drainage tree; water conserved to a median of 3 parts per million.</li>
+          <li>Python, a command-line wizard, a Jupyter form, and a QGIS plugin; runs on CPU, or on GPU 34 times faster at 1.38 million cells.</li>
+        </ul>
+        <div class="code"><code>pip install MRRpy</code><button class="copy-btn" type="button" data-copy="pip install MRRpy"><svg class="icon"><use href="#i-copy"/></svg><span data-label>Copy</span></button></div>
+        <div class="link-row">
+          <a href="https://mrrpy.readthedocs.io"><svg class="icon"><use href="#i-book"/></svg>Documentation</a>
+          <a href="https://github.com/SauravBhattarai19/MRRpy"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a>
+          <a href="https://pypi.org/project/MRRpy/"><svg class="icon"><use href="#i-code"/></svg>PyPI</a>
+          <a href="https://sauravbhattarai19.github.io/MRRpy/"><svg class="icon"><use href="#i-arrow"/></svg>Interactive course</a>
+        </div>
+      </div>
+      <figure class="fig tool-media reveal">
+        <div class="plate"><img src="assets/img/mrrpy-flow.webp" alt="Animation of water depth and river discharge spreading over the Kathmandu Valley terrain during one storm, with the outlet hydrograph" width="1218" height="364" loading="lazy"></div>
+        <figcaption><b>MRRpy</b>One storm over the whole Kathmandu Valley DEM: water depth, river discharge, and the hydrograph.</figcaption>
+      </figure>
+    </article>
+
+    <article class="tool tool--flip c-access" id="geoclimate">
+      <div class="tool-copy reveal">
+        <span class="kicker">Web platform · Google Earth Engine · Streamlit</span>
+        <h3>GeoClimate Intelligence Platform</h3>
+        <p class="tagline">Earth Engine's catalog, without writing a line of code.</p>
+        <ul class="ticks">
+          <li>1,042 datasets and 23 climate indices across nine tools, from data download, climate indices, and return periods to raster math and multi-geometry export.</li>
+          <li>Earth Engine implementations of two ERDC algorithms: GLOBAL-SAM snow depth and SERVES root-zone soil moisture.</li>
+          <li>Used by 16 undergraduates in Advanced Water Resources Engineering (Fall 2025) and in a faculty workshop with 28 registered faculty.</li>
+          <li>Best in Show and first place, Microsoft × AUC Data Science Initiative Data Challenge (2025).</li>
+        </ul>
+        <div class="link-row">
+          <a href="https://geeclimate.streamlit.app"><svg class="icon"><use href="#i-arrow"/></svg>Launch the platform</a>
+          <a href="https://github.com/SauravBhattarai19/GeoClimate-Fetcher"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a>
+          <a href="https://doi.org/10.1016/j.envsoft.2025.106826"><svg class="icon"><use href="#i-doc"/></svg>Paper (EMS 2026)</a>
+        </div>
+      </div>
+      <figure class="fig tool-media reveal">
+        <div class="plate"><img src="assets/img/geoclimate-workflow.webp" alt="Screenshots of the GeoData Explorer: selecting an area of interest, a dataset and bands, a time period, and export options" width="1600" height="1192" loading="lazy"></div>
+        <figcaption><b>GeoClimate</b>A GeoData Explorer session, from choosing an area and a dataset to exporting the result.</figcaption>
+      </figure>
+    </article>
+
+    <div class="mini-grid">
+      <a class="mini reveal" href="https://sauravbhattarai1999.users.earthengine.app/view/cooling-efficiency-analyzer">
+        <span class="kicker">Earth Engine app</span>
+        <h4>Cooling Efficiency Analyzer</h4>
+        <p>Estimates how much urban green and blue spaces cool their surroundings, from Landsat land surface temperature.</p>
+        <span class="go">Open the app <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="mini reveal" href="https://sauravbhattarai19.github.io/MRRpy/">
+        <span class="kicker">Interactive course</span>
+        <h4>Learn hydrology with MRRpy</h4>
+        <p>The science behind the model, from terrain and runoff to routing, taught interactively.</p>
+        <span class="go">Start the course <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="mini reveal" href="https://advancedwater.streamlit.app">
+        <span class="kicker">Course platform</span>
+        <h4>Advanced Water Resources</h4>
+        <p>Interactive materials I built for CIV 465: big-data analytics, machine learning, extreme values, and climate projections.</p>
+        <span class="go">Open the platform <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="mini reveal" href="software.html">
+        <span class="kicker">Everything else</span>
+        <h4>All software and code</h4>
+        <p>Install guides, screenshots, and the code behind published papers.</p>
+        <span class="go">See the software page <svg class="icon"><use href="#i-right"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PUBLICATIONS ================= -->
+<section class="section" id="publications" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">03 · Publications</span>
+      <h2>First-author <em>articles</em>.</h2>
+      <p class="lede">Fourteen peer-reviewed journal articles since 2023, seven as first author; 130 citations and an h-index of 7 on Google Scholar (September 2026).</p>
+    </div>
+    <ol class="pubs reveal">
+      <li class="pub">
+        <div class="tag"><b>2026</b>J13</div>
+        <div>
+          <h3><a href="https://doi.org/10.1029/2025EA004845">Do the wettest days occur together? A global analysis on disentangling precipitation intensity from seasonal timing</a></h3>
+          <p class="authors"><b>Bhattarai, S.</b>, Pradhan, N. R., &amp; Talchabhadel, R.</p>
+          <p class="venue"><i>Earth and Space Science</i>, 13(4), e2025EA004845</p>
+        </div>
+      </li>
+      <li class="pub">
+        <div class="tag"><b>2026</b>J11</div>
+        <div>
+          <h3><a href="https://doi.org/10.1007/s11069-025-07742-x">Rainfall relief or humidity havoc? The boon and curse of precipitation during heatwaves</a></h3>
+          <p class="authors"><b>Bhattarai, S.</b>, He, C., Sharma, S., Kumar, S., &amp; Talchabhadel, R.</p>
+          <p class="venue"><i>Natural Hazards</i>, 122(5), 172</p>
+        </div>
+      </li>
+      <li class="pub">
+        <div class="tag"><b>2026</b>J9</div>
+        <div>
+          <h3><a href="https://doi.org/10.1016/j.envsoft.2025.106826">GeoClimate Intelligence Platform: A web-based framework for environmental data analysis</a></h3>
+          <p class="authors"><b>Bhattarai, S.</b>, Pradhan, N. R., &amp; Talchabhadel, R.</p>
+          <p class="venue"><i>Environmental Modelling &amp; Software</i>, 197, 106826</p>
+        </div>
+      </li>
+      <li class="pub">
+        <div class="tag"><b>2025</b>J8</div>
+        <div>
+          <h3><a href="https://doi.org/10.1016/j.uclim.2025.102493">Quantifying the cooling effects of blue-green spaces across urban landscapes: A case study of Kathmandu Valley, Nepal</a></h3>
+          <p class="authors"><b>Bhattarai, S.</b>, Banjara, P., Pandey, V. P., Aryal, A., Pradhan, P., Al-Douri, F., Pradhan, N. R., &amp; Talchabhadel, R.</p>
+          <p class="venue"><i>Urban Climate</i>, 61, 102493</p>
+        </div>
+      </li>
+      <li class="pub">
+        <div class="tag"><b>2025</b>J6</div>
+        <div>
+          <h3><a href="https://doi.org/10.1038/s41598-025-95097-5">Understanding spatiotemporal variation of heatwave projections across US cities</a></h3>
+          <p class="authors"><b>Bhattarai, S.</b>, Bokati, L., Sharma, S., &amp; Talchabhadel, R.</p>
+          <p class="venue"><i>Scientific Reports</i>, 15, 10643</p>
+        </div>
+      </li>
+      <li class="pub">
+        <div class="tag"><b>2024</b>J4</div>
+        <div>
+          <h3><a href="https://doi.org/10.1038/s41598-024-71704-9">Spatiotemporal characterization of heatwave exposure across historically vulnerable communities</a></h3>
+          <p class="authors"><b>Bhattarai, S.</b>, Bista, S., Sharma, S., White, L. D., Amini, F., &amp; Talchabhadel, R.</p>
+          <p class="venue"><i>Scientific Reports</i>, 14, 20882</p>
+        </div>
+      </li>
+      <li class="pub">
+        <div class="tag"><b>2024</b>J3</div>
+        <div>
+          <h3><a href="https://doi.org/10.3390/rs16163058">Comparative analysis of satellite-based precipitation data across the CONUS and Hawaii: Identifying optimal satellite performance</a></h3>
+          <p class="authors"><b>Bhattarai, S.</b>, &amp; Talchabhadel, R.</p>
+          <p class="venue"><i>Remote Sensing</i>, 16(16), 3058</p>
+        </div>
+      </li>
+    </ol>
+    <div class="after-steps reveal">
+      <a class="arrow-link" href="publications.html">All publications, manuscripts, and data <svg class="icon"><use href="#i-arrow"/></svg></a>
+      <span class="muted" style="font-size:15px">In preparation: the MRRpy software paper (<i>Journal of Open Source Software</i>), GRACE groundwater downscaling, the 2017 IMERG shift, compound heatwave–drought, and compound coastal flooding.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECENT ================= -->
+<section class="section" id="recent" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">04 · Recent</span>
+      <h2>What's <em>new</em>.</h2>
+    </div>
+    <ul class="news reveal">
+      <li><time datetime="2026-10">Oct 2026</time><span><b>MRRpy 0.3.0</b> released on PyPI, adding a local-inertial dynamic-wave routing scheme.</span></li>
+      <li><time datetime="2026-10">Oct 2026</time><span>Defended my <b>dissertation proposal</b> before the advisory committee. <a href="phd.html">Read the overview</a>.</span></li>
+      <li><time datetime="2026-09">Sep 2026</time><span>First public release of <b>MRRpy</b> on PyPI: <code class="mono">pip install MRRpy</code>.</span></li>
+      <li><time datetime="2026-04">Apr 2026</time><span><i>Earth and Space Science</i> published our global analysis of <b>whether the wettest days occur together</b>.</span></li>
+      <li><time datetime="2026-04">Apr 2026</time><span>Presented the GeoClimate teaching platform at the <b>ASCE-EWRI World Environmental and Water Resources Congress</b> in Mobile, Alabama; the paper is in the Congress proceedings. Passed the <b>FE Civil</b> exam.</span></li>
+      <li><time datetime="2026-02">Feb 2026</time><span>The <b>GeoClimate Intelligence Platform</b> paper appeared in <i>Environmental Modelling &amp; Software</i>, and <b>"Rainfall relief or humidity havoc?"</b> in <i>Natural Hazards</i>.</span></li>
+      <li><time datetime="2026-01">Jan 2026</time><span>Talk at the <b>106th AMS Annual Meeting</b> in Houston on democratizing hydroclimatic science education.</span></li>
+      <li><time datetime="2025-12">Dec 2025</time><span>Talk on groundwater downscaling at the <b>XIX World Water Congress</b> in Marrakech; a talk, two posters, and three co-authored abstracts at <b>AGU Fall Meeting</b> in New Orleans.</span></li>
+      <li><time datetime="2025">2025</time><span><b>Best in Show</b> at the Microsoft × AUC Data Science Initiative Data Challenge for the GeoClimate platform; <b>NCAR Graduate Visitor Program</b> in Boulder; CUAHSI-SINTER Snow Measurement Field School.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">05 · About</span>
+      <h2>Civil engineer turned <em>hydrologist</em>.</h2>
+    </div>
+    <div class="about-grid">
+      <figure class="portrait reveal">
+        <img src="assets/img/headshot.webp" alt="Saurav Bhattarai" width="640" height="640" loading="lazy">
+        <figcaption>Department of Civil and Environmental Engineering, Jackson State University, Jackson, Mississippi.</figcaption>
+      </figure>
+      <div>
+        <div class="prose reveal">
+          <p>I trained as a civil engineer at Pulchowk Campus in Nepal and came to Jackson State University in 2023 to work with Prof. Rocky Talchabhadel. From 2024 to 2026 I was also an ORISE research fellow at the U.S. Army Engineer Research and Development Center's Coastal and Hydraulics Laboratory, working with Dr. Nawa Raj Pradhan. My work moves between two very different places: the data-rich Mississippi River Basin and the data-sparse Nepal Himalaya, where the same open data have to do very different jobs.</p>
+          <p>Before flood modeling I worked on heat: my <a href="ms.html">M.S. thesis</a> followed heatwaves from risk assessment to nature-based cooling and produced four of my papers. Teaching is part of the same project. I have built course platforms, taught Python and Earth Engine workshops, and mentored undergraduates at three universities.</p>
+        </div>
+        <div class="two-col" style="margin-top:36px">
+          <div class="reveal">
+            <h3 class="list-head">Education and positions</h3>
+            <ul class="timeline" style="margin-top:16px">
+              <li style="--c: var(--c-translate)"><span class="when">2023–2027</span><div class="what"><h4>Ph.D. in Engineering, Jackson State University</h4><p>Defense February 10, 2027; degree expected May 2027. Advisor: Prof. Rocky Talchabhadel.</p></div></li>
+              <li><span class="when">2023–now</span><div class="what"><h4>Graduate Research Assistant, Jackson State University</h4><p>HICORPS partnership with ERDC and Woolpert.</p></div></li>
+              <li><span class="when">2024–2026</span><div class="what"><h4>ORISE Research Fellow, U.S. Army ERDC</h4><p>Coastal and Hydraulics Laboratory, Vicksburg. Mentor: Dr. Nawa Raj Pradhan.</p></div></li>
+              <li><span class="when">2026</span><div class="what"><h4>Fundamentals of Engineering (FE) Civil</h4><p>Passed April 2026 (NCEES).</p></div></li>
+              <li><span class="when">2023–2025</span><div class="what"><h4>M.S. in Engineering, Jackson State University</h4><p>Earned en route to the Ph.D.; GPA 4.0. Thesis: <i>Heatwave Dynamics and Urban Cooling: From Risk Assessment to Nature-Based Solutions</i>.</p></div></li>
+              <li><span class="when">2024</span><div class="what"><h4>Summer Research Intern, U.S. Army ERDC</h4><p>Coupled ADCIRC storm surge to GSSHA to simulate compound rainfall and surge flooding.</p></div></li>
+              <li><span class="when">2017–2022</span><div class="what"><h4>Bachelor of Civil Engineering</h4><p>Tribhuvan University, Institute of Engineering, Pulchowk Campus, Nepal.</p></div></li>
+            </ul>
+          </div>
+          <div class="reveal" id="recognition">
+            <h3 class="list-head">Recognition</h3>
+            <ul class="list-plain">
+              <li><span>2026</span><span><b>Academic Excellence Award</b>, International Students Association, Jackson State University</span></li>
+              <li><span>2026</span><span><b>National finalist</b> (team leader), Mastercard IGS × AUC Data Science Initiative Data Challenge; top 26 of 106 teams from 13 HBCUs</span></li>
+              <li><span>2025</span><span><b>Best in Show and first place</b> (lead developer, GeoClimate platform), Microsoft × AUC Data Science Initiative Data Challenge</span></li>
+              <li><span>2025</span><span><b>Honorable Mention</b> (team leader), Mastercard × AUC Data Science Initiative Data Challenge; top 18 of 70+ teams</span></li>
+              <li><span>2025</span><span><b>NCAR Graduate Visitor Program</b>, Boulder, Colorado</span></li>
+              <li><span>2024–26</span><span><b>ORISE Research Fellowship</b>, U.S. Department of Defense, ERDC Coastal and Hydraulics Laboratory; extended on research performance</span></li>
+              <li><span>2024</span><span><b>Winner</b>, AGU Catchment Hydrology Subcommittee Early Career Competition (LSTM rainfall–runoff modeling)</span></li>
+              <li><span>2024–25</span><span><b>Co-Investigator</b>, Microsoft–AUC Mini-Grant on climate impact training for undergraduates with planetary-scale data</span></li>
+              <li><span>2017–21</span><span><b>Merit-based full scholarship</b>, Institute of Engineering, Pulchowk Campus; ranked 19th of about 15,000 applicants</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= CONTACT ================= -->
+<section class="band" id="contact">
+  <svg class="band-contours" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M735,0L739,5L744,10L749,15L754,20L760,25L765,30L770,34L775,38L780,42L785,46L791,50M0,26L10,28L15,31L22,35L29,40L35,44L40,48L45,53L50,57L55,62L60,67L65,72L70,78L75,83L80,89L85,95L88,100L92,105L95,110L100,119L103,125L100,133L94,135L85,137L75,138L65,139L60,140L50,141L40,142L30,143L20,144L10,144L0,144M0,501L10,502L20,505L25,507L30,510L36,515L41,520L45,527L49,535L51,540L55,550L56,555L59,565L60,572L61,580L62,590M581,595L580,590L575,580L572,575L568,570L563,565L556,560L550,557L545,555L535,553L525,551L515,551L505,551L495,552L485,553L475,554L465,554L455,552L450,550L443,545L437,540L432,535L428,530L424,525L420,519L415,511L411,505L408,500L404,495L400,489L395,483L390,477L385,471L380,466L375,461L370,457L365,453L360,449L355,445L347,440L340,436L335,433L326,430L320,428L310,427L300,428L294,430L285,434L280,436L273,440L265,445L260,448L255,452L249,455L240,460L235,462L227,465L220,467L210,469L200,470L190,470L180,469L170,467L162,465L155,463L147,460L140,456L135,453L130,449L125,444L120,435L118,430L115,420L114,415L113,405L111,395L110,385L109,380L108,370L107,360L107,350L106,340L107,330L108,320L110,310L111,305L115,295L117,290L120,284L125,275L128,270L131,265L135,258L139,250L141,245L145,235L146,230L147,220L146,210L145,205L142,195L140,190L136,180L133,175L130,167L127,160L124,155L120,145L120,140L125,136L130,134L140,132L147,130L155,128L165,125L170,124L179,120L185,117L190,115L199,110L205,106L210,103L215,100L222,95L230,90L235,87L240,84L249,80L255,78L263,75L270,73L280,71L285,70L295,68L305,66L312,65L320,63L330,61L335,59L345,56L350,55L360,52L365,50L375,46L380,45L390,41L395,40L405,36L410,35L420,31L425,30L435,26L440,24L448,20L455,17L460,14L467,10L474,5L480,1M741,595L740,588L737,580L734,575L730,569L725,564L720,559L715,555L707,550L700,546L695,544L685,540L680,538L670,535L665,534L655,531L650,529L640,526L635,524L625,521L620,519L610,516L605,515L595,512L585,510L580,509L570,508L560,506L550,505L545,505L535,504L525,503L515,501L508,500L500,498L490,496L485,494L475,490L470,488L464,485L456,480L450,476L445,473L440,469L434,465L428,460L421,455L415,451L410,447L405,444L399,440L392,435L385,430L380,427L375,423L370,420L363,415L356,410L350,406L345,403L340,399L333,395L325,391L320,388L313,385L305,382L295,381L285,381L275,384L270,386L262,390L255,393L250,396L240,400L235,401L225,403L215,403L205,400L200,398L195,395L189,390L185,385L180,377L177,370L175,362L174,355L175,345L176,340L179,330L182,325L185,320L190,314L195,309L200,305L206,300L212,295L218,290L225,285L230,280L235,275L239,270L243,265L246,260L250,252L253,245L255,240L259,230L260,225L264,215L265,210L268,200L270,195L273,185L275,178L277,170L280,163L283,155L285,150L290,140L293,135L296,130L300,125L305,120L310,115L317,110L324,105L330,101L335,98L341,95L350,90L355,88L361,85L370,81L375,78L383,75L390,72L395,70L405,66L410,65L420,61L425,59L435,55L440,54L450,50L455,48L462,45L470,42L475,40L485,35L490,33L496,30L505,26L510,24L520,21L525,19L535,17L545,16L555,17L565,18L575,20L580,21L590,23L600,25L605,26L615,27L625,28L635,29L645,30L650,30L660,31L670,31L680,33L690,34L695,36L705,39L710,41L717,45L725,50L730,53L735,57L740,61L745,65L750,70L755,75L760,81L765,87L770,94L774,100L777,105L780,112L784,120L786,125L790,135L792,140L795,149M795,510L785,511L779,510L770,508L762,505L755,502L749,500L740,496L735,494L725,491L720,489L710,486L705,485L695,482L685,480L680,479L670,477L660,476L650,475L645,475L635,474L625,474L615,474L605,474L595,474L585,474L575,474L565,473L555,473L545,472L535,471L528,470L520,468L510,466L505,465L495,461L490,459L480,455L475,453L469,450L460,446L455,443L449,440L440,435L435,433L430,430L420,425L415,422L410,419L403,415L395,410L390,407L385,404L379,400L372,395L366,390L360,385L355,381L350,377L345,373L340,368L335,363L330,358L325,353L320,348L315,342L310,335L306,330L303,325L300,318L297,310L295,305L293,295L291,285L291,275L291,265L292,255L293,245L294,235L295,230L297,220L300,210L301,205L304,195L306,190L309,180L311,175L315,166L318,160L321,155L325,149L330,142L335,136L340,130L345,126L350,121L355,117L360,114L366,110L374,105L380,102L385,99L393,95L400,92L405,89L415,85L420,83L428,80L435,77L442,75L450,72L455,70L465,66L470,64L480,61L485,59L495,55L500,54L510,51L515,49L525,47L535,45L540,45L550,44L560,45L565,45L575,46L585,47L595,49L603,50L610,51L620,52L630,54L640,55L645,56L655,57L665,59L672,60L680,62L690,65L695,67L702,70L710,75L715,78L720,81L725,85L730,90L735,95L740,101L745,107L750,115L753,120L756,125L760,133L763,140L765,145L770,155L772,160L775,169L777,175L780,182L783,190L785,195L789,205L792,210L795,218M545,65L555,64L565,65L570,65L580,66L590,67L600,68L610,70L615,70L625,72L635,74L643,75L650,76L660,79L665,80L675,83L680,85L690,90L695,92L700,95L707,100L713,105L719,110L723,115L728,120L731,125L735,130L740,138L744,145L746,150L750,157L753,165L756,170L760,180L762,185L765,193L768,200L770,207L773,215L775,220L779,230L780,235L783,245L785,250L788,260L790,270L791,275L792,285L793,295L793,305L793,315L792,325L791,335L790,342L789,350L787,360L786,370L785,375L782,385L780,392L777,400L774,405L770,410L765,416L760,420L752,425L745,428L739,430L730,433L720,435L715,436L705,437L695,438L685,439L677,440L670,441L660,441L650,442L640,443L630,444L620,445L615,445L605,446L595,447L585,447L575,448L565,448L555,447L545,447L535,445L530,445L520,443L510,440L505,439L495,435L490,434L481,430L475,428L468,425L460,422L455,420L445,415L440,413L433,410L425,406L420,404L413,400L405,395L400,392L395,389L389,385L382,380L376,375L370,370L365,365L360,360L355,355L351,350L347,345L343,340L340,335L335,328L331,320L328,315L325,307L323,300L320,291L319,285L317,275L316,265L316,255L316,245L317,235L318,225L320,217L322,210L325,200L326,195L330,185L332,180L335,175L340,166L344,160L347,155L351,150L355,145L360,140L366,135L372,130L378,125L385,120L390,117L395,114L403,110L410,107L415,104L425,100L430,98L437,95L445,92L450,90L460,86L465,85L475,81L480,79L490,76L495,74L505,72L511,70L520,68L530,66L540,65L545,65M520,84L530,83L540,81L550,81L560,81L570,81L580,82L590,83L600,84L607,85L615,86L625,88L634,90L640,91L650,94L655,95L665,99L670,101L679,105L685,108L690,111L695,115L702,120L707,125L712,130L716,135L720,140L725,147L730,155L733,160L736,165L740,174L743,180L745,185L749,195L751,200L755,210L757,215L760,225L761,230L764,240L765,245L768,255L769,265L770,271L771,280L771,290L770,300L770,305L768,315L766,325L765,330L762,340L760,345L756,355L753,360L750,366L745,373L740,379L735,385L730,389L725,393L720,396L713,400L705,404L700,406L690,409L685,411L675,414L669,415L660,417L650,419L642,420L635,421L625,423L615,424L605,425L600,425L590,426L580,427L570,427L560,427L550,427L540,426L535,425L525,423L515,421L510,420L500,417L493,415L485,413L478,410L470,407L464,405L455,402L450,400L440,396L435,394L428,390L420,386L415,384L409,380L401,375L395,371L390,367L385,363L380,358L375,353L370,348L365,342L360,335L357,330L354,325L350,318L346,310L344,305L340,295L339,290L336,280L335,272L334,265L334,255L334,245L335,235L335,230L337,220L339,210L341,205L345,195L347,190L350,183L355,175L358,170L361,165L365,160L370,154L375,149L380,145L386,140L392,135L400,130L405,127L410,124L418,120L425,116L430,114L440,110L445,108L452,105L460,102L466,100L475,97L480,95L490,92L497,90L505,88L515,85L520,84M550,95L560,95L570,95L575,95L585,96L595,97L605,99L613,100L620,101L630,104L635,105L645,108L651,110L660,114L665,116L673,120L680,124L685,128L690,132L695,136L700,141L705,146L710,152L715,159L719,165L722,170L725,176L730,185L732,190L735,197L738,205L740,210L743,220L745,225L748,235L750,245L751,250L752,260L753,270L753,280L753,290L752,300L750,307L748,315L745,324L743,330L740,336L735,345L732,350L728,355L724,360L720,365L714,370L708,375L701,380L695,383L690,386L681,390L675,392L667,395L660,397L650,400L645,401L635,403L625,405L620,405L610,407L600,408L590,409L580,410L570,410L560,410L550,409L540,409L530,407L520,406L515,405L505,402L496,400L490,398L480,395L475,394L465,391L460,389L450,385L445,383L438,380L430,376L425,374L419,370L411,365L405,361L400,357L395,353L390,348L385,343L380,338L375,331L371,325L368,320L365,315L360,305L358,300L355,291L353,285L351,275L350,268L349,260L349,250L349,240L350,234L351,225L354,215L355,210L359,200L361,195L365,187L369,180L373,175L376,170L381,165L385,160L391,155L397,150L403,145L410,140L415,137L420,134L428,130L435,127L440,125L450,120L455,118L463,115L470,113L477,110L485,107L493,105L500,103L510,101L515,99L525,98L535,96L545,95L550,95M530,110L540,108L550,108L560,107L570,108L580,108L590,109L596,110L605,112L615,114L621,115L630,118L638,120L645,123L650,125L660,130L665,132L670,135L677,140L683,145L689,150L693,155L698,160L702,165L705,170L710,177L715,185L717,190L720,196L724,205L726,210L730,220L731,225L734,235L735,241L737,250L738,260L738,270L738,280L737,290L735,299L733,305L730,315L728,320L725,326L720,334L716,340L712,345L708,350L703,355L697,360L690,365L685,368L680,371L672,375L665,378L660,380L650,383L644,385L635,387L625,389L620,390L610,392L600,393L590,394L580,395L574,395L565,395L555,395L550,395L540,394L530,393L520,391L512,390L505,389L495,386L490,385L480,382L473,380L465,377L458,375L450,372L445,370L435,365L430,362L425,359L418,355L411,350L405,345L400,340L395,335L390,330L386,325L383,320L380,315L375,306L372,300L370,294L367,285L365,276L364,270L363,260L363,250L363,240L365,230L366,225L368,215L370,210L374,200L377,195L380,189L385,182L390,175L395,170L400,165L405,161L410,157L415,153L420,150L427,145L435,141L440,138L447,135L455,131L460,129L470,125L475,124L485,120L490,119L500,116L505,115L515,112L525,110L530,110M545,120L555,119L565,119L575,120L580,120L590,121L600,123L610,125L615,126L625,129L630,131L640,135L645,137L651,140L660,145L665,148L670,152L675,156L680,161L685,166L690,172L695,178L700,185L703,190L705,195L710,204L712,210L715,217L718,225L720,234L721,240L723,250L724,260L724,270L723,280L722,290L720,296L717,305L715,310L710,320L707,325L703,330L699,335L695,340L690,345L683,350L676,355L670,359L665,361L657,365L650,368L644,370L635,373L625,375L620,376L610,378L600,379L595,380L585,381L575,382L565,382L555,382L545,381L535,381L529,380L520,379L510,377L500,375L495,374L485,372L480,370L470,367L464,365L455,362L450,359L441,355L435,352L430,349L424,345L417,340L412,335L406,330L402,325L398,320L394,315L390,308L386,300L384,295L380,285L379,280L377,270L376,260L376,250L376,240L378,230L380,221L382,215L385,208L389,200L392,195L395,190L400,184L405,178L410,173L415,169L420,165L426,160L434,155L440,152L445,149L453,145L460,142L465,140L475,136L480,134L490,131L495,129L505,126L511,125L520,123L530,121L540,120L545,120M520,134L530,133L540,131L550,131L560,130L570,131L580,132L590,133L600,135L605,136L615,139L620,140L630,144L635,146L643,150L650,154L655,157L660,161L665,165L671,170L676,175L680,180L685,186L690,194L694,200L696,205L700,213L703,220L705,227L707,235L709,245L710,253L710,260L710,270L710,275L708,285L705,295L703,300L700,307L696,315L692,320L688,325L684,330L678,335L672,340L665,345L660,348L655,351L645,355L640,357L631,360L625,362L615,364L610,365L600,367L590,368L580,369L570,370L560,370L550,370L540,369L530,369L520,367L510,366L505,365L495,363L485,360L480,359L470,356L465,354L456,350L450,347L445,345L437,340L430,335L425,332L420,327L415,322L410,316L405,310L402,305L399,300L395,290L393,285L390,275L389,270L388,260L388,250L389,240L390,234L392,225L395,217L398,210L401,205L405,198L410,191L415,185L420,180L425,176L430,172L435,168L440,165L448,160L455,157L460,154L469,150L475,148L482,145L490,142L497,140L505,138L515,135L520,134M525,144L535,143L545,142L555,141L565,142L575,142L585,143L594,145L600,146L610,149L615,151L625,155L630,157L636,160L644,165L650,169L655,173L660,177L665,182L670,188L675,194L679,200L682,205L685,211L689,220L691,225L694,235L695,240L696,250L697,260L696,270L695,279L693,285L690,295L688,300L685,305L680,312L675,318L670,323L665,328L660,332L655,335L646,340L640,343L635,345L625,349L620,350L610,353L600,355L595,355L585,357L575,358L565,358L555,358L545,358L535,358L525,357L515,356L510,355L500,353L490,351L485,350L475,346L470,345L460,341L455,338L449,335L441,330L435,325L430,321L425,316L420,311L416,305L413,300L410,295L406,285L404,280L402,270L400,260L400,250L401,240L404,230L405,225L409,215L412,210L415,205L420,198L425,192L430,187L435,183L440,179L445,175L453,170L460,166L465,164L473,160L480,157L485,155L495,152L500,150L510,147L520,145L525,144M530,154L540,153L550,152L560,152L570,153L580,154L586,155L595,157L605,160L610,162L619,165L625,168L630,171L637,175L644,180L649,185L655,190L659,195L663,200L667,205L670,210L675,220L677,225L680,235L681,240L683,250L683,260L682,270L680,280L678,285L675,293L671,300L668,305L663,310L658,315L653,320L646,325L640,328L635,331L626,335L620,337L610,340L605,341L595,343L585,345L580,346L570,347L560,347L550,348L540,347L530,347L520,346L513,345L505,344L495,342L489,340L480,337L474,335L465,331L460,329L453,325L446,320L440,315L435,310L430,305L426,300L423,295L420,289L416,280L415,275L413,265L412,255L413,245L415,235L416,230L420,221L423,215L426,210L430,205L435,199L440,194L445,189L451,185L458,180L465,176L470,173L477,170L485,166L490,164L500,161L505,160L515,157L525,155L530,154M535,164L545,164L555,163L565,164L575,165L580,166L590,168L598,170L605,173L611,175L620,180L625,183L630,186L635,190L641,195L646,200L650,205L655,212L660,220L662,225L665,233L667,240L668,250L669,260L667,270L665,279L662,285L660,290L655,297L650,303L645,308L640,312L635,315L627,320L620,323L615,325L605,329L600,330L590,332L580,334L574,335L565,336L555,337L545,337L535,337L525,336L516,335L510,334L500,332L491,330L485,328L477,325L470,322L465,319L458,315L451,310L446,305L441,300L437,295L434,290L430,281L428,275L426,265L425,258L425,253L426,245L428,235L430,229L435,220L438,215L441,210L446,205L451,200L456,195L463,190L470,186L475,183L481,180L490,176L495,174L505,171L510,169L520,167L530,165L535,164M550,175L557,175L565,176L575,177L585,179L590,181L600,184L605,186L612,190L620,195L625,199L630,204L635,209L640,215L643,220L646,225L650,235L651,240L653,250L653,260L651,270L650,275L645,284L641,290L637,295L632,300L625,305L620,308L615,311L605,315L600,317L590,320L585,321L575,323L565,324L560,325L550,326L540,326L530,326L522,325L515,324L505,322L495,320L490,318L481,315L475,312L470,309L464,305L458,300L453,295L449,290L445,284L441,275L440,270L438,260L438,250L440,240L442,235L445,228L449,220L453,215L458,210L463,205L469,200L475,196L480,193L486,190L495,186L500,184L510,181L515,179L525,177L535,176L545,175L550,175M525,189L535,188L545,187L555,187L565,188L575,190L580,191L590,195L595,197L601,200L609,205L615,210L620,215L624,220L627,225L630,230L634,240L635,245L636,255L635,262L633,270L630,276L625,283L620,289L615,293L610,297L604,300L595,304L590,306L580,309L575,310L565,312L555,313L545,314L535,314L525,314L515,313L505,311L500,309L490,306L485,304L479,300L472,295L466,290L462,285L459,280L455,272L453,265L452,255L453,245L455,239L459,230L462,225L466,220L471,215L477,210L484,205L490,201L495,199L504,195L510,193L520,190L525,189M520,204L530,202L540,201L550,201L560,202L570,204L575,206L585,210L590,212L595,216L600,220L605,225L610,232L614,240L615,246L615,255L615,260L611,270L607,275L603,280L596,285L590,289L585,291L576,295L570,297L560,299L555,300L545,301L535,301L525,301L518,300L510,298L500,295L495,293L489,290L483,285L478,280L474,275L470,266L469,260L469,250L470,245L474,235L477,230L482,225L487,220L494,215L500,212L505,209L515,205L520,204M525,220L535,218L545,218L555,219L560,221L570,225L575,228L580,232L585,238L588,245L589,255L585,264L580,270L575,274L570,277L563,280L555,283L545,285L540,285L530,285L525,285L515,282L508,280L500,275L495,270L492,265L490,259L490,250L491,245L495,239L500,233L505,229L511,225L520,221L525,220"/></svg>
+  <div class="wrap">
+    <span class="kicker">06 · Contact</span>
+    <h2>Let's <em>talk</em>.</h2>
+    <p>I am looking for postdoctoral positions in hydrological modeling and Earth observation from 2027, and I am always glad to hear from people who want to use MRRpy or the GeoClimate platform in research or teaching.</p>
+    <a class="mail" href="mailto:saurav.bhattarai.1999@gmail.com"><svg class="icon"><use href="#i-mail"/></svg>saurav.bhattarai.1999@gmail.com</a>
+    <div class="link-row">
+      <a href="https://scholar.google.com/citations?user=53EK8-8AAAAJ"><svg class="icon icon--fill"><use href="#i-scholar"/></svg>Google Scholar</a>
+      <a href="https://orcid.org/0009-0006-2627-8563"><svg class="icon icon--fill"><use href="#i-orcid"/></svg>ORCID</a>
+      <a href="https://github.com/SauravBhattarai19"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a>
+      <a href="https://www.linkedin.com/in/saurav-bhattarai-7133a3176"><svg class="icon icon--fill"><use href="#i-linkedin"/></svg>LinkedIn</a>
+      <a href="CV.pdf"><svg class="icon"><use href="#i-download"/></svg>CV (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span data-year>2026</span> Saurav Bhattarai · Updated October 2026</span>
+    <nav aria-label="Footer">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="publications.html">Publications</a>
+      <a href="talks.html">Talks</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="CV.pdf">CV</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+<script src="assets/js/basin.js" defer></script>
 </body>
 </html>

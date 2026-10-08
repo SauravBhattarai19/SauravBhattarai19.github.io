@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ph.D. Dissertation · Saurav Bhattarai</title>
+<meta name="description" content="Dissertation overview: accessing, refining, and combining open Earth data for MRRpy, a modular, parsimonious, physics-based hydrological model, with results from the Mississippi River Basin and the Nepal Himalaya.">
+<meta name="author" content="Saurav Bhattarai">
+<link rel="canonical" href="https://sauravbhattarai19.github.io/phd.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Saurav Bhattarai">
+<meta property="og:title" content="Ph.D. Dissertation · Saurav Bhattarai">
+<meta property="og:description" content="Dissertation overview: accessing, refining, and combining open Earth data for MRRpy, a modular, parsimonious, physics-based hydrological model, with results from the Mississippi River Basin and the Nepal Himalaya.">
+<meta property="og:url" content="https://sauravbhattarai19.github.io/phd.html">
+<meta property="og:image" content="https://sauravbhattarai19.github.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4f1e9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d141c" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")d.setAttribute("data-theme",t);}catch(e){}})();</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19V5.5A2.5 2.5 0 0 1 6.5 3H20v14H6.5A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-scholar" viewBox="0 0 24 24"><path d="M12 2 1 9.5l4.6 3.2A7.2 7.2 0 0 1 12 9a7.2 7.2 0 0 1 6.4 3.7L23 9.5 12 2Zm0 9a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/></symbol>
+  <symbol id="i-orcid" viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22ZM8.3 17.3H6.6V8.1h1.7v9.2ZM7.4 7a1.05 1.05 0 1 1 0-2.1 1.05 1.05 0 0 1 0 2.1Zm10.1 5.7c0 2.7-1.8 4.6-4.7 4.6H10V8.1h2.8c2.9 0 4.7 1.9 4.7 4.6Zm-1.7 0c0-1.9-1.1-3.1-3.2-3.1h-1.2v6.2h1.2c2.1 0 3.2-1.2 3.2-3.1Z"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .6a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .6Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Saurav Bhattarai, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#1b2430"/><path d="M16 24.5V16.5M16 16.5 10.2 8M16 16.5l6.2-8.6M12.9 12l-4.6.6M19.4 11.8l3.9 1.9" fill="none" stroke="#74b0f4" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="25.2" r="2.5" fill="#f39361"/></svg>
+      <span>Saurav Bhattarai</span>
+      <small>Hydrologist</small>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="software.html">Software</a>
+      <a href="publications.html">Publications</a>
+      <a href="talks.html">Talks</a>
+      <a href="teaching.html">Teaching</a>
+      <a class="nav-cv" href="CV.pdf"><svg class="icon"><use href="#i-download"/></svg>CV</a>
+    </nav>
+    <button class="icon-btn theme-toggle" type="button" aria-label="Toggle color theme"><svg class="icon icon-sun"><use href="#i-sun"/></svg><svg class="icon icon-moon"><use href="#i-moon"/></svg></button>
+    <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+<section class="page-head page-head--title">
+  <div class="wrap">
+    <nav class="subnav" aria-label="Research sections"><a href="research.html">By theme<small>6 themes</small></a><a href="phd.html" aria-current="page">Ph.D. dissertation<small>2023–2027</small></a><a href="ms.html">M.S. thesis<small>2023–2025</small></a></nav>
+    <span class="kicker">Ph.D. dissertation · Jackson State University · defense February 10, 2027</span>
+    <h1>Accessing, Refining, and Combining Open Earth Data for a Modular, Parsimonious, Physics-Based Hydrological Model</h1>
+    <p class="lede">Physics-based hydrological models can, in principle, predict floods anywhere, because conservation of mass and momentum holds in every basin. In practice they are used mostly where floods are already observed: their parameters are tuned to past hydrographs, their inputs must be gathered by the user, and their physics is fixed when they are built. This dissertation asks whether open Earth data, made accessible, placed at the local scale, and read for interacting hazards, can feed an open, modular, parsimonious model that runs from an outlet alone and still predicts local floods.</p>
+    <div class="meta-grid">
+      <div><span class="kicker">Advisor</span><p>Prof. Rocky Talchabhadel (Chair)</p></div>
+      <div><span class="kicker">Committee</span><p>Dr. Nawa Raj Pradhan (ERDC), Dr. Sadik Khan, Dr. Kejun Wen, Dr. Robert W. Whalin</p></div>
+      <div><span class="kicker">Study regions</span><p>Mississippi River Basin and Gulf Coast; central Nepal Himalaya</p></div>
+      <div><span class="kicker">Status</span><p>Proposal defended October 2026; final defense February 10, 2027</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="padding-bottom:clamp(24px,4vw,40px)">
+  <figure class="fig reveal">
+    <button class="plate" type="button" data-full="assets/img/graphical-abstract.webp" aria-label="Enlarge the graphical abstract"><img decoding="async" loading="lazy" src="assets/img/graphical-abstract.webp" width="1430" height="804" alt="Graphical abstract: five chapter panels named Access, Refine, Translate, Apply, and Extend, each with a key figure and result"></button>
+    <figcaption><b>Figure 1</b>Graphical abstract of the dissertation.</figcaption>
+  </figure>
+</section>
+
+<div class="wrap doc">
+  <nav class="toc" aria-label="On this page">
+    <span class="kicker">On this page</span>
+    <ol>
+      <li class="toc-sub"><a href="#idea">The idea</a></li>
+      <li class="toc-sub"><a href="#areas">Study areas</a></li>
+      <li class="c-access"><a href="#access">1 · Access</a></li>
+      <li class="c-refine"><a href="#refine">2 · Refine</a></li>
+      <li class="c-translate"><a href="#translate">3 · Translate</a></li>
+      <li class="c-apply"><a href="#apply">4 · Apply</a></li>
+      <li class="c-extend"><a href="#extend">5 · Extend</a></li>
+    </ol>
+  </nav>
+
+  <div class="doc-main">
+
+    <!-- ===== THE IDEA ===== -->
+    <section id="idea" class="chapter" style="padding-top:clamp(24px,4vw,40px)">
+      <div class="chapter-head" style="--c: var(--ink)">
+        <span class="kicker">The problem and the idea</span>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:340">Data that speak, physics that translates.</h2>
+      </div>
+      <div class="prose reveal">
+        <p>Physics-based models and open Earth data fail in mirror image. Models carry mechanism but lack coverage; open data carry coverage but lack mechanism. Each is the other's missing half, yet they are rarely joined, and the reason is easy to miss: calibration. A model tuned to observed discharge absorbs the errors of its inputs in its parameters, so it cannot tell good data from bad, and it needs a discharge record that the places of greatest flood exposure lack.</p>
+        <p>So give the model only an outlet. Its inputs come from open Earth data, made accessible, placed at the local scale, and read for interacting hazards. It is open and modular, so its users can run the physics provided or test their own. It is parsimonious: few parameters, each starting from open data or a published equation, with calibration kept for the few that need it. With little to tune, errors in the data surface in the hydrograph instead of hiding in the parameters, and the model becomes an instrument for judging the data that drive it.</p>
+        <p>In the Kathmandu Valley the same untuned model simulates eight floods with a median Nash–Sutcliffe efficiency of <span class="num">0.54</span> when driven by raw satellite rainfall and <span class="num">0.81</span> when driven by ground stations. The data speak, and the physics shows which to believe.</p>
+      </div>
+      <p class="reveal" style="margin-top:22px;font-size:15px;color:var(--ink-3)">Not every analysis feeds the model. Each result below carries a tag:</p>
+      <div class="chips reveal" style="margin-top:6px">
+        <span class="chip chip--plain" style="color:var(--c-translate)">Model input</span>
+        <span class="chip chip--plain" style="color:var(--c-apply)">Shapes the model</span>
+        <span class="chip chip--plain" style="color:var(--slate)">Independent finding</span>
+      </div>
+    </section>
+
+    <!-- ===== STUDY AREAS ===== -->
+    <section id="areas" class="chapter">
+      <div class="finding" style="border-top:1px solid var(--ink)">
+        <div class="finding-head"><h3>Two regions in every content chapter</h3></div>
+        <p>The <b>Mississippi River Basin and Gulf Coast</b> are data-rich: dense USGS streamflow and well networks, radar rainfall, airborne soil-moisture campaigns, and tide gauges let every refined product and every model run be checked against independent observations. The <b>Nepal Himalaya</b> is data-sparse and steep: the Bagmati River above Khokana drains the Kathmandu Valley (606 km²) and is monitored by 15 long-record daily stations of Nepal's Department of Hydrology and Meteorology (Figure 2).</p>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/study-areas.webp" aria-label="Enlarge the study area map"><img decoding="async" loading="lazy" src="assets/img/study-areas.webp" width="1600" height="896" alt="Map of the two study regions: the Mississippi River Basin and Gulf Coast with numbered sites, and the central Nepal Himalaya with the Kathmandu Valley and the Bhote Koshi to Trishuli river path"></button>
+          <figcaption><b>Figure 2</b>Study areas: (a) Mississippi River Basin and Gulf Coast; (b) central Nepal Himalaya.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== CHAPTER 1 ===== -->
+    <section id="access" class="chapter c-access">
+      <div class="chapter-head">
+        <span class="kicker">Chapter 1 · Introduction</span>
+        <div class="verb">Access</div>
+        <h2>Understanding the water balance through open Earth data</h2>
+        <p class="prose">What does each dataset say on its own, and who can hear it? Two new indices of rainfall timing, a 76-year heatwave record, and a platform that opens the data to people who do not program.</p>
+      </div>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">1.6.1</span>When the wettest days arrive</h3>
+          <div class="chips"><span class="chip chip--pub">Published · ESS 2026</span></div>
+        </div>
+        <div class="chips" style="margin-bottom:14px"><span class="chip chip--plain" style="color:var(--slate)">Independent finding</span><span class="chip chip--plain" style="color:var(--c-apply)">Shapes the model: antecedent wetness</span></div>
+        <p>Standard indices measure how much rain falls and how intense it is, but not when the wettest days arrive, and clustered wet days fall on soil the previous storm left wet. I defined two families of indices for a share of the year's rain: the fewest days that hold it (intensity, WD) and the shortest run of consecutive days that holds it (timing, WDR), computed them from ERA5 worldwide for 1980–2024, and tested them against gauges (Figure 3).</p>
+        <ul class="results">
+          <li>Timing changes independently of intensity: the Amazon reaches its annual total in <b>15–18% fewer days</b>, while eastern North America needs <b>12–25% more</b>. Monsoon regions cluster their wettest days; mid-latitudes scatter them.</li>
+          <li>Gauges confirm the timing: half of the annual rain falls within <b>54 consecutive days</b> at 15 stations in the Kathmandu Valley and within <b>114 days</b> at 16 NOAA stations in Mississippi.</li>
+          <li>Gauges do not confirm the amounts: ERA5 gets the windows right but gives <b>64% too much rain</b> in the Kathmandu Valley, the first sign of the bias corrected in Chapter 2.</li>
+        </ul>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/wettest-days.webp" aria-label="Enlarge figure 3"><img decoding="async" loading="lazy" src="assets/img/wettest-days.webp" width="1600" height="719" alt="Nine global maps of the WD25R, WD50R and WD75R rainfall timing indices for three periods"></button>
+          <figcaption><b>Figure 3</b>Chronological clustering indices WD25R, WD50R, and WD75R from ERA5: 1980–2024; 1980–1999; 2000–2024.</figcaption>
+        </figure>
+        <div class="outputs"><a href="https://doi.org/10.1029/2025EA004845"><svg class="icon"><use href="#i-doc"/></svg>Paper</a><a href="https://github.com/SauravBhattarai19/wdxx-precipitation-indices"><svg class="icon"><use href="#i-code"/></svg>Code</a></div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">1.6.2</span>A 76-year global record of heatwaves</h3>
+          <div class="chips"><span class="chip chip--prog">Manuscript in preparation</span></div>
+        </div>
+        <div class="chips" style="margin-bottom:14px"><span class="chip chip--plain" style="color:var(--slate)">Independent finding</span></div>
+        <p>Heat drives the demand side of the water balance, but heatwave records are often short, regional, or defined inconsistently. A heatwave day here is one whose daily maximum temperature exceeds its day-of-year 90th percentile, computed from 76 years of ERA5 (1950–2025) and summarized for the 44 IPCC AR6 land regions (Figure 4; Animation 1).</p>
+        <ul class="results">
+          <li>Heatwave months increased in <b>all 44 of 44</b> land regions, by <b>0.26 to 1.20 months per decade</b>. This is heat alone; Chapter 2 asks what happens when rainfall fails at the same time.</li>
+        </ul>
+        <figure class="fig reveal" style="max-width:720px">
+          <button class="plate" type="button" data-full="assets/img/heatwave-trend.webp" aria-label="Enlarge figure 4"><img decoding="async" loading="lazy" src="assets/img/heatwave-trend.webp" width="1400" height="908" alt="World map of the trend in heatwave months per decade from 1950 to 2025, rising almost everywhere"></button>
+          <figcaption><b>Figure 4</b>Trend in heatwave months, 1950–2025 (ERA5).</figcaption>
+        </figure>
+        <figure class="fig reveal" style="margin-top:22px;max-width:760px">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/heatyears.webp" aria-label="Enlarge animation 1">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/heatyears-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/heatyears.webp" width="840" height="450" alt="Animated world maps of heatwave months per year in successive 10-year windows with the rising land-mean series">
+            </picture>
+          </button>
+          <figcaption><b>Animation 1</b>Heatwave months per year in 10-year windows, 1950–2025, with the land-mean series (ERA5).</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">1.7</span>Data for everyone: the GeoClimate Intelligence Platform</h3>
+          <div class="chips"><span class="chip chip--pub">Published · EMS 2026 · ASCE 2026</span></div>
+        </div>
+        <div class="chips" style="margin-bottom:14px"><span class="chip chip--plain" style="color:var(--slate)">Independent finding</span><span class="chip chip--plain" style="color:var(--c-translate)">Model input: same data catalog</span></div>
+        <p>Cloud platforms removed the cost of storage and computation, but not the need to program. The GeoClimate Intelligence Platform puts Google Earth Engine behind a no-code web interface. The published papers describe its first five modules; it has since grown to nine tools, including snow depth and soil moisture (Figure 5).</p>
+        <ul class="results">
+          <li><b>1,042 datasets</b> and <b>23 climate indices</b> without code.</li>
+          <li>Gulf Coast (DAYMET, 1980–2023): the wettest day intensifies by <b>0.44 mm per year</b> and the longest dry spell shortens by <b>0.39 days per year</b>; design values come directly, 107 mm for the 10-year and 154 mm for the 100-year one-day rainfall.</li>
+          <li>Access is not trust: maximum temperature transfers from grid to station (R² 0.96 to 0.99 at ten airports), daily rainfall does not (R² 0.41 to 0.68), and DAYMET underestimates the days above 100 mm.</li>
+          <li>Sixteen undergraduates used the platform in Advanced Water Resources Engineering (Fall 2025).</li>
+        </ul>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/geoclimate-climate.webp" aria-label="Enlarge figure 5"><img decoding="async" loading="lazy" src="assets/img/geoclimate-climate.webp" width="1600" height="824" alt="Climate Intelligence Hub screenshots: climate index time series with trend statistics and two index maps"></button>
+          <figcaption><b>Figure 5</b>Climate Intelligence Hub: index time series with trend tests; index maps.</figcaption>
+        </figure>
+        <div class="outputs"><a href="https://doi.org/10.1016/j.envsoft.2025.106826"><svg class="icon"><use href="#i-doc"/></svg>EMS paper</a><a href="https://doi.org/10.1061/9780784486931.007"><svg class="icon"><use href="#i-doc"/></svg>ASCE paper</a><a href="https://geeclimate.streamlit.app"><svg class="icon"><use href="#i-arrow"/></svg>Launch the platform</a></div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">1.8</span>Unlocking published methods: SERVES and GLOBAL-SAM</h3>
+          <div class="chips"><span class="chip chip--prog">In progress</span></div>
+        </div>
+        <div class="chips" style="margin-bottom:14px"><span class="chip chip--plain" style="color:var(--c-translate)">Model input: SERVES soil deficit</span></div>
+        <p>SERVES root-zone soil moisture (<a href="https://doi.org/10.1080/02626667.2019.1593417">Pradhan, 2019</a>; <a href="https://doi.org/10.3390/rs12132108">Pradhan et al., 2020</a>) and GLOBAL-SAM snow depth are algorithms from the U.S. Army Engineer Research and Development Center. I implemented both as Google Earth Engine applications inside the platform and evaluated SERVES against SMAP Level 4 and <b>2,643 in situ stations</b> (ISMN, SCAN, SNOTEL, USCRN, and NEON), asking where it works (Figure 6).</p>
+        <ul class="results">
+          <li>Useful where vegetation controls soil water: tropical climates (median r <b>0.64</b>), polar sites (<b>0.55</b>), and the growing season (JJA <b>0.33</b>).</li>
+          <li>Not in cold (about −0.2) and temperate (0.03) climates outside the growing season, where SMAP L4 remains skillful.</li>
+          <li>Next: GLOBAL-SAM snow depth against SNOTEL.</li>
+        </ul>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/serves-climate.webp" aria-label="Enlarge figure 6"><img decoding="async" loading="lazy" src="assets/img/serves-climate.webp" width="1400" height="657" alt="Bar charts of median correlation with in situ root-zone soil moisture for SMAP L4 and SERVES by climate zone and by season"></button>
+          <figcaption><b>Figure 6</b>Median correlation with in situ root-zone soil moisture, SMAP L4 and SERVES: by climate zone; by season.</figcaption>
+        </figure>
+      </article>
+    </section>
+
+    <!-- ===== CHAPTER 2 ===== -->
+    <section id="refine" class="chapter c-refine">
+      <div class="chapter-head">
+        <span class="kicker">Chapter 2 · Data science</span>
+        <div class="verb">Refine</div>
+        <h2>Making coarse data useful: mass-conserving downscaling, bias correction, and compound hazards</h2>
+        <p class="prose">Coarse data become local in three ways: downscale under an exact conservation constraint, correct with ground observations for a stated use, and combine hazards into compound and cascading records. Every method is judged against data it never saw.</p>
+      </div>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">2.2.1</span>Groundwater storage from GRACE, 55 km to 5 km</h3>
+          <div class="chips"><span class="chip chip--prog">Manuscript in preparation</span></div>
+        </div>
+        <div class="chips" style="margin-bottom:14px"><span class="chip chip--plain" style="color:var(--slate)">Independent finding: groundwater for aquifer management</span><span class="chip chip--plain" style="color:var(--c-translate)">Model input: baseflow check</span></div>
+        <p>GRACE is the only observation of groundwater from space, but at about 55 km, and downscaled fields often create or lose water. An explainable ensemble of gradient-boosted trees (XGBoost, LightGBM) and a neural network learns how terrestrial water storage relates to its drivers; applied at 5 km, 121 cells per GRACE cell, a residual correction makes the fine field average exactly to GRACE (Figure 7; Animations 2 and 3).</p>
+        <ul class="results">
+          <li>Held-out test against GRACE: <b>R² = 0.95</b>.</li>
+          <li>Against data GRACE never saw: High Plains aquifer storage change matches USGS estimates (<b>r = 0.84</b>), and the drought drawdowns of 2005–2006 and 2012 in the Mississippi Embayment are visible. Validated against <b>825 groundwater wells</b>.</li>
+        </ul>
+        <p class="honest"><b>Where it stops working.</b> Only about one third of the long-term High Plains decline is captured, because pumping is not a predictor, and inside a single GRACE cell the detail adds little skill against individual wells (r ≈ 0.02). The product is right at the scale where aquifers are managed, and its limits are known.</p>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/grace-5km.webp" aria-label="Enlarge figure 7"><img decoding="async" loading="lazy" src="assets/img/grace-5km.webp" width="1600" height="1007" alt="Twelve monthly maps of downscaled groundwater storage anomaly over the Mississippi River Basin at 5 km"></button>
+          <figcaption><b>Figure 7</b>Monthly mean groundwater storage anomaly, Mississippi River Basin, downscaled to 5 km.</figcaption>
+        </figure>
+        <div class="fig-row" style="margin-top:22px">
+        <figure class="fig reveal">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/gracenative.webp" aria-label="Enlarge animation 2">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/gracenative-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/gracenative.webp" width="840" height="450" alt="Animated monthly GRACE water storage anomaly maps of the Mississippi River Basin with the basin-mean series">
+            </picture>
+          </button>
+          <figcaption><b>Animation 2</b>Monthly GRACE storage anomaly over the Mississippi River Basin at its native 55 km grid, with the basin mean; the 2012 drought stands out.</figcaption>
+        </figure>
+        <figure class="fig reveal">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/graceside.webp" aria-label="Enlarge animation 3">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/graceside-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/graceside.webp" width="840" height="450" alt="Animated side-by-side maps of GRACE at 55 km and the downscaled 5 km storage anomaly">
+            </picture>
+          </button>
+          <figcaption><b>Animation 3</b>GRACE at 55 km beside the downscaled 5 km field, month by month; averaged back to 55 km, the fine field is exactly GRACE.</figcaption>
+        </figure>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">2.2.2</span>Soil moisture from SMAP, 9 km to 1 km, and what it adds inside the pixel</h3>
+          <div class="chips"><span class="chip chip--done">Analysis complete</span></div>
+        </div>
+        <div class="chips" style="margin-bottom:14px"><span class="chip chip--plain" style="color:var(--c-apply)">Shapes the model: storms need physics</span><span class="chip chip--plain" style="color:var(--c-translate)">Model input: soil-moisture state</span></div>
+        <p>Daily 1 km soil moisture that preserves SMAP exactly: each 9 km pixel holds 81 cells of 1 km, and the model predicts each cell's departure from its parent, not the parent itself. The test that matters is whether the detail inside the pixel is real (Figure 8; Animation 4).</p>
+        <ul class="results">
+          <li>By the usual test the product works: <b>r ≈ 0.8</b> against Sentinel-1-based labels.</li>
+          <li>Against radar-free independent data, <b>r ≤ 0.35</b>: agreement is not accuracy.</li>
+          <li>The best lasting within-pixel pattern among the products tested, but a storm response of only <b>3 to 10%</b>, where a rain-forced model reaches 40 to 50%. Learned maps carry patterns; storm dynamics need physics.</li>
+        </ul>
+        <figure class="fig reveal" style="max-width:760px">
+          <button class="plate" type="button" data-full="assets/img/smap-1km.webp" aria-label="Enlarge figure 8"><img decoding="async" loading="lazy" src="assets/img/smap-1km.webp" width="1400" height="1082" alt="Panels of the 1 km soil moisture product: a daily map, SMAP at 9 km, the 1 km median, anomalies by land use, irrigated fraction, and interval width"></button>
+          <figcaption><b>Figure 8</b>The daily 1 km soil moisture product: one morning; SMAP at 9 km; 1 km median; anomaly by land use; irrigated fraction; interval width.</figcaption>
+        </figure>
+        <figure class="fig reveal" style="margin-top:22px;max-width:760px">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/smapdaily.webp" aria-label="Enlarge animation 4">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/smapdaily-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/smapdaily.webp" width="840" height="450" alt="Animated daily 1 km soil moisture maps of the Mississippi River Basin with a zoom on central Iowa">
+            </picture>
+          </button>
+          <figcaption><b>Animation 4</b>Daily 1 km soil moisture (latest pass within 3 days), with a zoom on central Iowa where every 1 km cell is visible.</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">2.3</span>Satellite rainfall that lost its gauges</h3>
+          <div class="chips"><span class="chip chip--prog">Manuscript in preparation</span></div>
+        </div>
+        <div class="chips" style="margin-bottom:14px"><span class="chip chip--plain" style="color:var(--c-translate)">Model input: rainfall for every Kathmandu run</span></div>
+        <p>IMERG V07 over the Kathmandu Valley became too wet after 2016. Three records are combined to find out why and to correct it: IMERG (30 min, 1998–2025), 15 DHM stations with reliable daily totals, and nine S4W automatic weather stations (10 to 15 min, 2018–2025) (Figure 9).</p>
+        <ul class="results">
+          <li>The DHM stations see <b>78%</b> of IMERG's rainfall before the break and <b>55%</b> after; three homogeneity tests agree.</li>
+          <li>The GPCC gauges behind IMERG's adjustment here fell from about 50 to none; on the same days the S4W stations give a ratio of 0.60 and the DHM stations 0.57. <b>The satellite did not change; its gauges disappeared.</b></li>
+          <li>Volume correction keeps bias within <b>±4%</b> in every period; peak correction lowers the 30-minute heavy-rain error at independent S4W stations from <b>54% to 40%</b>.</li>
+          <li>First flood test with the model unchanged, eight floods: median efficiency <b>0.54</b> with raw IMERG, <b>0.62</b> with IMERG scaled to DHM totals, <b>0.81</b> with the S4W stations.</li>
+        </ul>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/imerg-break.webp" aria-label="Enlarge figure 9"><img decoding="async" loading="lazy" src="assets/img/imerg-break.webp" width="1600" height="468" alt="Three panels: seasonal rainfall from DHM gauges and IMERG, the gauge to IMERG ratio with a step after 2016, and a double-mass curve"></button>
+          <figcaption><b>Figure 9</b>IMERG V07 and DHM stations, Kathmandu Valley: seasonal rainfall; step after 2016; double-mass curve.</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">2.4</span>Compound heatwave–drought</h3>
+          <div class="chips"><span class="chip chip--prog">Manuscript in preparation</span></div>
+        </div>
+        <div class="chips" style="margin-bottom:14px"><span class="chip chip--plain" style="color:var(--slate)">Independent finding</span><span class="chip chip--plain" style="color:var(--c-translate)">Model input: antecedent states (proposed)</span></div>
+        <p>A global record of months that are both heatwave months and drought months (SPEI), 1950–2025, and how water storage in the Mississippi River Basin responds to them (Figure 10; Animation 5).</p>
+        <ul class="results">
+          <li>Compound months more than doubled, from <b>0.80 per year</b> (1950–1979) to <b>1.70</b> (1996–2025), with a significant rise over <b>65% of land</b> and the fastest rise in the driest regions.</li>
+          <li>The shifts come in order: heatwaves in 1986, compound months in 1996, drought in 2000. Heat increasingly comes first and dries the land before rain fails.</li>
+          <li>Mississippi River Basin (in progress): a compound month is followed by a storage loss of <b>0.81 cm</b>, a drought-only month by 0.41 cm, about twice as much with slower recovery; 74% of warm-season drought months there are also heatwave months.</li>
+        </ul>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/compound-heat-drought.webp" aria-label="Enlarge figure 10"><img decoding="async" loading="lazy" src="assets/img/compound-heat-drought.webp" width="1600" height="593" alt="Two world maps: mean annual frequency of compound heatwave and drought months, and its change between the first and last 30 years"></button>
+          <figcaption><b>Figure 10</b>Compound heatwave–drought months: mean annual frequency, 1950–2025; change between the first and last 30 years.</figcaption>
+        </figure>
+        <figure class="fig reveal" style="margin-top:22px;max-width:760px">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/compyears.webp" aria-label="Enlarge animation 5">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/compyears-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/compyears.webp" width="840" height="450" alt="Animated world maps of compound heatwave and drought months per year in successive 10-year windows with the land-mean series">
+            </picture>
+          </button>
+          <figcaption><b>Animation 5</b>Compound heatwave–drought months per year in 10-year windows, 1950–2025, with the land-mean series.</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">2.5</span>Compound flooding from storm surge, rainfall, and rivers</h3>
+          <div class="chips"><span class="chip chip--prog">Manuscript in preparation</span></div>
+        </div>
+        <div class="chips" style="margin-bottom:14px"><span class="chip chip--plain" style="color:var(--slate)">Independent finding: attribution to sea level</span><span class="chip chip--plain" style="color:var(--c-apply)">Shapes the model: sea-level boundary</span></div>
+        <p>At 79 NOAA tide gauges (tide removed), 1950–2025, joint exceedance of the 99th percentiles of surge and rainfall is compared with what independence would give, the trend is attributed, and what follows downstream is traced (Figure 11; Animation 6).</p>
+        <ul class="results">
+          <li>Joint extreme surge and rainfall occur <b>6.9 times</b> more often than under independence, significant at <b>78 of 79</b> gauges; on the Gulf Coast more than half are near a tropical cyclone.</li>
+          <li>Compound flood days rose from <b>1.03 to 1.79 per year</b>; with sea level held at its earlier level there is <b>no increase</b>. Sea-level rise, not changing storm dependence, explains the rise.</li>
+          <li>The day after an extreme surge, river floods are twice as likely as chance for about a week: compound becomes cascade, with Hurricane Florence as the example.</li>
+        </ul>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/compound-flood.webp" aria-label="Enlarge figure 11a"><img decoding="async" loading="lazy" src="assets/img/compound-flood.webp" width="1800" height="693" alt="Map of U.S. tide gauges colored by how much more often joint surge and rainfall extremes occur than chance, with regional tropical cyclone shares"></button>
+        </figure>
+        <figure class="fig reveal" style="max-width:600px;margin-top:16px">
+          <button class="plate" type="button" data-full="assets/img/compound-flood-attrib.webp" aria-label="Enlarge figure 11b"><img decoding="async" loading="lazy" src="assets/img/compound-flood-attrib.webp" width="1100" height="662" alt="Dot plot of national change in flood days and compound flood days, observed and with sea level held at its 1950 to 1987 level"></button>
+          <figcaption><b>Figure 11</b>Compound flooding at U.S. tide gauges: joint extremes against chance; change in flood days, observed and at 1950–1987 sea level.</figcaption>
+        </figure>
+        <figure class="fig reveal" style="margin-top:22px;max-width:760px">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/florence.webp" aria-label="Enlarge animation 6">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/florence-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/florence.webp" width="840" height="450" alt="Animated map of Hurricane Florence with storm surge at tide gauges, rain, and the Cape Fear River rising days later">
+            </picture>
+          </button>
+          <figcaption><b>Animation 6</b>Hurricane Florence, September 2018: surge at the tide gauges, rain, and the Cape Fear River rising days later at Wilmington, North Carolina.</figcaption>
+        </figure>
+      </article>
+    </section>
+
+    <!-- ===== CHAPTER 3 ===== -->
+    <section id="translate" class="chapter c-translate">
+      <div class="chapter-head">
+        <span class="kicker">Chapter 3 · Core</span>
+        <div class="verb">Translate</div>
+        <h2>MRRpy, an open, modular, parsimonious hydrological model: governing equations, numerical solution, and verification</h2>
+        <p class="prose">An outlet in, a flood out. MRRpy, developed in this work, combines Green–Ampt infiltration with recovery, variable source area, and impervious runoff without double counting, and routes water with schemes derived from the Saint-Venant equations, the implicit one solved exactly in linear time on the drainage tree. Every parameter starts from open data or published physics (Figure 12).</p>
+      </div>
+      <figure class="fig reveal">
+        <button class="plate" type="button" data-full="assets/img/mrrpy-concept.webp" aria-label="Enlarge figure 12"><img decoding="async" loading="lazy" src="assets/img/mrrpy-concept.webp" width="1896" height="567" alt="MRRpy concept diagram: Earth observation layers become a model grid, three runoff mechanisms combine per cell, water is routed on the D8 tree with three schemes, and an outlet hydrograph results"></button>
+        <figcaption><b>Figure 12</b>MRRpy concept: Earth observation to model grid; runoff generation in every cell; routing on the D8 tree; outlet hydrograph.</figcaption>
+      </figure>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">3.2–3.4</span>Runoff physics and routing you can switch</h3>
+          <div class="chips"><span class="chip chip--done">Complete</span></div>
+        </div>
+        <p>One setting swaps the physics. Runoff comes from infiltration excess (Green–Ampt with soil recovery between storms), saturation excess (a variable source area that grows as the divide store fills), and impervious surfaces, alone or together. Routing uses a kinematic wave, Muskingum–Cunge, or a semi-implicit diffusive wave, and since version 0.3.0 a local-inertial scheme (Figure 13; Animation 7).</p>
+        <ul class="results">
+          <li>September 2024, Bagmati: infiltration excess made <b>48%</b> of runoff, impervious surfaces <b>28%</b>, saturation excess <b>23%</b>; the saturated area grew from 0.6% to 36% of the basin, then contracted.</li>
+          <li>Blue River 2018, nothing tuned: saturation excess alone gives the best overall skill (<b>KGE 0.68</b>), all three mechanisms together the best peak (−29%). Different basins, different dominant physics.</li>
+          <li>The same runoff routed with three schemes gives peaks that differ by a factor of almost three.</li>
+        </ul>
+        <figure class="fig reveal" style="max-width:640px">
+          <button class="plate" type="button" data-full="assets/img/mrrpy-routing-schemes.webp" aria-label="Enlarge figure 13"><img decoding="async" loading="lazy" src="assets/img/mrrpy-routing-schemes.webp" width="970" height="537" alt="Hydrographs of the same storm routed with three schemes, with peaks that differ by almost three times"></button>
+          <figcaption><b>Figure 13</b>The same storm routed with three schemes (MRRpy documentation example).</figcaption>
+        </figure>
+        <figure class="fig reveal" style="margin-top:22px;max-width:760px">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/vsa.webp" aria-label="Enlarge animation 7">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/vsa-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/vsa.webp" width="840" height="450" alt="Animated map of saturated cells spreading across the Bagmati basin with rainfall and saturated-area series">
+            </picture>
+          </button>
+          <figcaption><b>Animation 7</b>Saturated area (blue) spreading across the Bagmati basin in the September 2024 storm, with rainfall and the saturated share of the basin.</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">3.5</span>An exact linear-time tree solver</h3>
+          <div class="chips"><span class="chip chip--done">Complete · method contribution</span></div>
+        </div>
+        <p>On a D8 grid every cell drains to exactly one neighbor, so the implicit diffusive scheme's system of equations lives on a tree. Eliminating from the leaves to the outlet and substituting back solves it exactly, in time proportional to the number of cells, stable by construction and with water conserved (Figure 14).</p>
+        <ul class="results">
+          <li>Matches a dense matrix solve on 150 random trees to <b>4 × 10⁻¹⁶</b>; the water ledger closes to a median <b>3 × 10⁻⁶</b> of input over 14 basin runs.</li>
+          <li>Five years at Khokana: 31.6 million kinematic steps (5 s) against 1.4 to 2.0 million implicit steps (mean 77 to 115 s); the GPU speeds the kinematic scheme <b>34 times</b> at 1.38 million cells.</li>
+        </ul>
+        <div class="fig-row" style="max-width:820px">
+          <figure class="fig reveal">
+            <button class="plate" type="button" data-full="assets/img/mrrpy-tree.webp" aria-label="Enlarge figure 14a"><img decoding="async" loading="lazy" src="assets/img/mrrpy-tree.webp" width="396" height="300" alt="Diagram of elimination from the leaves to the outlet and substitution back on a D8 tree"></button>
+          </figure>
+          <figure class="fig reveal">
+            <button class="plate" type="button" data-full="assets/img/mrrpy-scaling.webp" aria-label="Enlarge figure 14b"><img decoding="async" loading="lazy" src="assets/img/mrrpy-scaling.webp" width="474" height="252" alt="Run time against grid size for CPU and GPU"></button>
+            <figcaption><b>Figure 14</b>The implicit solver: (a) elimination and substitution on the D8 tree; (b) run time against grid size.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">3.6</span>Verification against analytical solutions</h3>
+          <div class="chips"><span class="chip chip--prog">Nearly complete</span></div>
+        </div>
+        <div class="table-scroll">
+          <table class="compare">
+            <thead><tr><th>Test</th><th>Result</th></tr></thead>
+            <tbody>
+              <tr><td>Tree solver against a dense matrix solve, 150 random trees</td><td>error 4 × 10⁻¹⁶</td></tr>
+              <tr><td>Mass balance on a valley DEM</td><td>error 4 × 10⁻¹⁶</td></tr>
+              <tr><td>Steady flow against Manning normal depth</td><td>0.0% difference</td></tr>
+              <tr><td>Linear diffusion wave (Hayami)</td><td>peak within 7%, timing exact</td></tr>
+              <tr><td>Kinematic wave on a plane; flood front in a dry channel</td><td>analytical hydrograph and arrival</td></tr>
+              <tr><td>Green–Ampt recovery against the EPA SWMM engine</td><td>matches</td></tr>
+              <tr><td>Automated test suite, Python 3.9 to 3.12</td><td>1,893 tests pass</td></tr>
+              <tr><td>Tilted V-catchment</td><td>proposed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">3.7</span>Observed floods without event-wise fitting</h3>
+          <div class="chips"><span class="chip chip--prog">In progress</span></div>
+        </div>
+        <p>A parsimonious model fed by open data has to work in a steep, monsoon, partly urban basin with sparse data (the Bagmati at Khokana) and in a mild, rural basin with rich data (the Blue River in Oklahoma), before any tuning (Figures 15 and 16).</p>
+        <ul class="results">
+          <li>Bagmati: median Nash–Sutcliffe efficiency <b>0.81</b>, all eight peaks within <b>30%</b>, one to two minutes per six-day run on a CPU.</li>
+          <li>Blue River: <b>KGE 0.68</b> untuned. On this mild slope routing matters as much as runoff (all mechanisms: NSE −1.17 kinematic, 0.43 implicit diffusive).</li>
+        </ul>
+        <p class="honest"><b>What it does not do yet.</b> At the Blue River, peaks arrive 25 to 30 hours early in every configuration, and the observed volume includes baseflow the model does not have yet. A linear groundwater store fed by recharge from the saturated zone is being added.</p>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/mrrpy-floods8.webp" aria-label="Enlarge figure 15"><img decoding="async" loading="lazy" src="assets/img/mrrpy-floods8.webp" width="1601" height="629" alt="Eight panels of observed and simulated discharge at Khokana for floods from 2020 to 2024, with NSE between 0.65 and 0.89"></button>
+          <figcaption><b>Figure 15</b>Eight largest floods with complete records, Bagmati River at Khokana: observed and MRRpy.</figcaption>
+        </figure>
+        <figure class="fig reveal" style="max-width:640px;margin-top:22px">
+          <button class="plate" type="button" data-full="assets/img/mrrpy-blue-river.webp" aria-label="Enlarge figure 16"><img decoding="async" loading="lazy" src="assets/img/mrrpy-blue-river.webp" width="816" height="696" alt="Blue River 2018: observed and simulated discharge, skill of every mechanism combination, and the effect of routing scheme and rainfall interpolation"></button>
+          <figcaption><b>Figure 16</b>Blue River, 2018: observed and simulated discharge; skill of every mechanism combination; routing scheme; rainfall interpolation.</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">3.8</span>An open companion to GSSHA</h3>
+          <div class="chips"><span class="chip chip--prog">In progress</span></div>
+        </div>
+        <p>I built and tested a GSSHA model of the Bagmati above Khokana as an established physically based reference. Both models route the same floods with the same rainfall and terrain; hydrographs, peaks, timing, and volumes are being compared event by event. The aim is not to replace GSSHA but to offer an open, fast companion that agrees with it where both apply.</p>
+        <div class="table-scroll">
+          <table class="compare compare--3">
+            <thead><tr><th></th><th>GSSHA</th><th>MRRpy</th></tr></thead>
+            <tbody>
+              <tr><td>Source</td><td>free, closed</td><td>open, MIT license</td></tr>
+              <tr><td>Interface</td><td>WMS (paid)</td><td>Python, command line, notebook, QGIS</td></tr>
+              <tr><td>Setup</td><td>project built by hand</td><td>an outlet and one configuration file</td></tr>
+              <tr><td>Data</td><td>supplied by the user</td><td>Earth Engine when local data are missing</td></tr>
+              <tr><td>Physics</td><td>comprehensive (groundwater, 2-D overland flow)</td><td>narrower, switchable by one setting</td></tr>
+              <tr><td>Solvers</td><td>established schemes</td><td>GPU explicit or exact implicit tree solver</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">3.11</span>A model anyone can start</h3>
+          <div class="chips"><span class="chip chip--done">Complete</span></div>
+        </div>
+        <p>A model nobody can run changes nothing. <code class="mono">pip install MRRpy</code>, then a complete run is three lines of Python given an outlet. The documentation has a user manual and 11 worked examples, each shown four ways (notebook, command line, Python, QGIS), and a free six-module course follows the model's pipeline in the browser. A software paper is drafted for the <i>Journal of Open Source Software</i> (Figure 17; Animation 8).</p>
+        <figure class="fig reveal" style="max-width:760px">
+          <button class="plate" type="button" data-full="assets/img/mrrpy-docs.webp" aria-label="Enlarge figure 17"><img decoding="async" loading="lazy" src="assets/img/mrrpy-docs.webp" width="1400" height="860" alt="Screenshot of the MRRpy documentation home page"></button>
+          <figcaption><b>Figure 17</b>The MRRpy documentation at mrrpy.readthedocs.io.</figcaption>
+        </figure>
+        <figure class="fig reveal" style="margin-top:22px;max-width:760px">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/course.webp" aria-label="Enlarge animation 8">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/course-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/course.webp" width="960" height="540" alt="Screen recording of the interactive course showing how each grid cell picks its steepest neighbour">
+            </picture>
+          </button>
+          <figcaption><b>Animation 8</b>The free interactive course: a D8 flow-direction explorer that runs in the browser.</figcaption>
+        </figure>
+        <div class="outputs"><a href="https://mrrpy.readthedocs.io"><svg class="icon"><use href="#i-book"/></svg>Documentation</a><a href="https://github.com/SauravBhattarai19/MRRpy"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a><a href="software.html#mrrpy"><svg class="icon"><use href="#i-right"/></svg>Software page</a></div>
+      </article>
+    </section>
+
+    <!-- ===== CHAPTER 4 ===== -->
+    <section id="apply" class="chapter c-apply">
+      <div class="chapter-head">
+        <span class="kicker">Chapter 4 · Use cases</span>
+        <div class="verb">Apply</div>
+        <h2>Model applications with ground, satellite, and refined data in the Himalaya and the Mississippi River Basin</h2>
+        <p class="prose">Where does open-data flood modeling with few parameters work, and where does it fail? Each use case is run with ground, raw Earth Engine, and corrected data, to measure how much each source changes the answer.</p>
+      </div>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">4.2</span>An observed flood, at the outlet and along the way</h3>
+          <div class="chips"><span class="chip chip--prog">In progress</span></div>
+        </div>
+        <p>For 30–31 July 2024, with S4W rainfall, MRRpy produces hydrographs at five DHM station locations as well as at the outlet. Tributaries peak first and the flood builds downstream (Figure 18; Animation 9).</p>
+        <ul class="results">
+          <li>At Khokana the Nash–Sutcliffe efficiency is <b>0.86</b>, and the peak is 923 m³/s against 813 observed: 14% high and one hour late, with the right shape.</li>
+        </ul>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/kathmandu-july2024.webp" aria-label="Enlarge figure 18"><img decoding="async" loading="lazy" src="assets/img/kathmandu-july2024.webp" width="1596" height="633" alt="Map of the Bagmati basin above Khokana with gauge locations, rainfall bars, and modeled hydrographs at five locations against the observed outlet hydrograph"></button>
+          <figcaption><b>Figure 18</b>30–31 July 2024: rainfall; hydrographs at five DHM station locations; observed at Khokana.</figcaption>
+        </figure>
+        <figure class="fig reveal" style="margin-top:22px;max-width:760px">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/route.webp" aria-label="Enlarge animation 9">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/route-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/route.webp" width="840" height="450" alt="Animated map of river flow routed through every river cell of the Bagmati basin with observed and simulated hydrographs">
+            </picture>
+          </button>
+          <figcaption><b>Animation 9</b>MRRpy routing the 31 July 2024 flood through every river cell to Khokana (log-scale flow), with observed and simulated discharge.</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">4.3</span>Design floods from return-period rainfall</h3>
+          <div class="chips"><span class="chip chip--prog">In progress</span></div>
+        </div>
+        <p>Generalized extreme value fits at the 15 DHM stations give 24-hour design rainfall of 78 to 194 mm for the 2- to 100-year storms; one run per return period gives design hydrographs at every station location (Figure 19).</p>
+        <ul class="results">
+          <li>Peaks at Khokana range from about <b>900 to 2,400 m³/s</b>.</li>
+          <li>Corrected IMERG matches gauge design rainfall up to about the 10-year return period, and the September 2024 storm exceeded <b>11 of 14</b> station 100-year estimates.</li>
+          <li>Point rainfall is applied without areal reduction, so present peaks are upper estimates.</li>
+        </ul>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/kathmandu-design.webp" aria-label="Enlarge figure 19"><img decoding="async" loading="lazy" src="assets/img/kathmandu-design.webp" width="1569" height="540" alt="Design hydrographs at Khokana for 2, 10, 50 and 100 year storms, and peak discharge against return period at five locations"></button>
+          <figcaption><b>Figure 19</b>24-hour design storms through MRRpy: hydrographs at Khokana; peaks at five locations.</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">4.4</span>Five years, storms and dry spells</h3>
+          <div class="chips"><span class="chip chip--prog">In progress</span></div>
+        </div>
+        <p>Because the soil dries and recovers between storms, a five-year run takes a few hours on a CPU with the implicit solver (Figure 20).</p>
+        <ul class="results">
+          <li>Driven by the S4W stations, it follows the floods and the seasonal cycle with a daily correlation of <b>0.88</b>.</li>
+          <li>Between floods it drains to almost nothing: there is no baseflow yet, which is why the groundwater store comes next.</li>
+        </ul>
+        <figure class="fig reveal">
+          <button class="plate" type="button" data-full="assets/img/kathmandu-longterm.webp" aria-label="Enlarge figure 20"><img decoding="async" loading="lazy" src="assets/img/kathmandu-longterm.webp" width="1607" height="648" alt="Daily observed and simulated flow at Khokana from 2020 to 2024, with the seasonal cycle and flow-duration curve"></button>
+          <figcaption><b>Figure 20</b>Daily flow at Khokana, 2020–2024: observed and MRRpy; seasonal cycle; flow-duration curve.</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">4.5</span>Floods without local rain: the 2026 outburst</h3>
+          <div class="chips"><span class="chip chip--prog">Exploratory</span></div>
+        </div>
+        <p>For the glacier-triggered surge of 26 August 2026, the inflow was routed down the Bhote Koshi and Trishuli rivers as an upstream boundary (Figure 21; Animation 10).</p>
+        <ul class="results">
+          <li>The modeled front arrives at Syabrubesi, Betrawati, and Malekhu after <b>27, 52, and 175 minutes</b>, against 23, 43, and 193 minutes reported.</li>
+          <li>This is exploratory: the released volume is assumed and roughness calibrated. Next is the 2020 Pearl River flood at Jackson, Mississippi, with the reservoir release as inflow.</li>
+        </ul>
+        <figure class="fig reveal" style="max-width:680px">
+          <button class="plate" type="button" data-full="assets/img/trishuli-arrival.webp" aria-label="Enlarge figure 21"><img decoding="async" loading="lazy" src="assets/img/trishuli-arrival.webp" width="1412" height="774" alt="Reported and modeled surge arrival times at Syabrubesi, Betrawati and Malekhu"></button>
+          <figcaption><b>Figure 21</b>Surge arrival along the Trishuli River: reported and modeled.</figcaption>
+        </figure>
+        <figure class="fig reveal" style="margin-top:22px;max-width:760px">
+          <button class="plate anim-plate" type="button" data-full="assets/img/anim/bc.webp" aria-label="Enlarge animation 10">
+            <span class="anim-badge">Animation</span>
+            <picture>
+              <source srcset="assets/img/anim/bc-still.webp" media="(prefers-reduced-motion: reduce)">
+              <img decoding="async" loading="lazy" src="assets/img/anim/bc.webp" width="840" height="450" alt="Animated map of the outburst surge travelling down the Bhote Koshi and Trishuli rivers with modeled and reported arrival times">
+            </picture>
+          </button>
+          <figcaption><b>Animation 10</b>The 26 August 2026 outburst surge entering as an upstream boundary and travelling down the Bhote Koshi and Trishuli, with modeled and reported arrival.</figcaption>
+        </figure>
+      </article>
+
+      <article class="finding">
+        <div class="finding-head">
+          <h3><span class="sec">4.6–4.7</span>Forecast rain, and the Mississippi River Basin</h3>
+          <div class="chips"><span class="chip chip--prop">Proposed</span></div>
+        </div>
+        <ul class="results">
+          <li>Forecast rainfall through an interface, toward early warning: how early a warning is possible, and how wrong at each lead time. Weak skill of global forecasts at valley scale is a known risk and will be reported as a result.</li>
+          <li>Chapter 2 products as model inputs on gauged tributaries of the Mississippi River Basin: radar, gauge, and satellite rainfall; downscaled soil moisture and groundwater as initial states; floods after compound heatwave–drought months.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- ===== CHAPTER 5 ===== -->
+    <section id="extend" class="chapter c-extend">
+      <div class="chapter-head">
+        <span class="kicker">Chapter 5 · Conclusions and future work</span>
+        <div class="verb">Extend</div>
+        <h2>Sediment, sea-level boundaries, and machine-learning surrogates</h2>
+        <p class="prose">Prototypes within the dissertation; full development after it.</p>
+      </div>
+      <div class="thread-grid">
+        <div class="thread reveal">
+          <span class="kicker">Sediment</span>
+          <h3>Floods carry more than water</h3>
+          <p>A terrain reconstruction released after the 2026 outburst, from stereo satellite imagery, shows at least 3.1 million m³ eroded and 0.8 million m³ deposited along the Bhote Koshi: a rare test for a sediment-continuity term in each routing cell.</p>
+        </div>
+        <div class="thread reveal">
+          <span class="kicker">Sea level</span>
+          <h3>The coast pushes back</h3>
+          <p>A tide-plus-surge water level at the outlet would let the model simulate what compound and cascading floods do to river levels. The implicit diffusive scheme already carries backwater; the new piece is the boundary itself, tested first on a Gulf Coast river.</p>
+        </div>
+        <div class="thread reveal">
+          <span class="kicker">Surrogates</span>
+          <h3>Access at the start, access at the end</h3>
+          <p>The design and long-term runs are training data. A surrogate that learns rainfall and soil state in and hydrograph out can be served in the GeoClimate platform for each study area, so a user gets a flood estimate in seconds without running a model.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span data-year>2026</span> Saurav Bhattarai · Updated October 2026</span>
+    <nav aria-label="Footer">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="publications.html">Publications</a>
+      <a href="talks.html">Talks</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="CV.pdf">CV</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
