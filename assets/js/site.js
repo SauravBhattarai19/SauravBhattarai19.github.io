@@ -270,6 +270,20 @@
     }
   });
 
+  /* ---------- analytics: count clicks on outgoing links (GoatCounter) ---------- */
+  // Event name is "out: host/path" (query dropped), "email", or a link's own data-goatcounter-click.
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a[href]");
+    if (!a || a.hasAttribute("data-goatcounter-click") || !window.goatcounter || !window.goatcounter.count) return;
+    var name;
+    if (a.protocol === "mailto:") name = "email";
+    else if (/^https?:$/.test(a.protocol) && a.hostname !== location.hostname) {
+      name = "out: " + a.hostname.replace(/^www\./, "") + a.pathname.replace(/\/+$/, "");
+    }
+    if (!name) return;
+    window.goatcounter.count({ path: name, title: (a.textContent || "").trim().slice(0, 80), event: true });
+  });
+
   /* ---------- footer year ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = String(new Date().getFullYear());
