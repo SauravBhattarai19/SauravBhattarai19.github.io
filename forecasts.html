@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flood Forecasts · Saurav Bhattarai</title>
+<meta name="description" content="Live experimental flood forecasts built on MRRpy: the Roshi Khola in Kavre, Nepal, updated every 30 minutes from automatic weather stations and four rain forecasts, with 2-D flood maps, plus an empirical river-flow forecast for every river in Nepal.">
+<meta name="author" content="Saurav Bhattarai">
+<link rel="canonical" href="https://sauravbhattarai19.github.io/forecasts.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Saurav Bhattarai">
+<meta property="og:title" content="Flood Forecasts · Saurav Bhattarai">
+<meta property="og:description" content="Live experimental flood forecasts built on MRRpy: the Roshi Khola in Kavre, Nepal, updated every 30 minutes from automatic weather stations and four rain forecasts, with 2-D flood maps, plus an empirical river-flow forecast for every river in Nepal.">
+<meta property="og:url" content="https://sauravbhattarai19.github.io/forecasts.html">
+<meta property="og:image" content="https://sauravbhattarai19.github.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4f1e9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d141c" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")d.setAttribute("data-theme",t);}catch(e){}})();</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19V5.5A2.5 2.5 0 0 1 6.5 3H20v14H6.5A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-scholar" viewBox="0 0 24 24"><path d="M12 2 1 9.5l4.6 3.2A7.2 7.2 0 0 1 12 9a7.2 7.2 0 0 1 6.4 3.7L23 9.5 12 2Zm0 9a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/></symbol>
+  <symbol id="i-orcid" viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22ZM8.3 17.3H6.6V8.1h1.7v9.2ZM7.4 7a1.05 1.05 0 1 1 0-2.1 1.05 1.05 0 0 1 0 2.1Zm10.1 5.7c0 2.7-1.8 4.6-4.7 4.6H10V8.1h2.8c2.9 0 4.7 1.9 4.7 4.6Zm-1.7 0c0-1.9-1.1-3.1-3.2-3.1h-1.2v6.2h1.2c2.1 0 3.2-1.2 3.2-3.1Z"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .6a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .6Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Saurav Bhattarai, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#1b2430"/><path d="M16 24.5V16.5M16 16.5 10.2 8M16 16.5l6.2-8.6M12.9 12l-4.6.6M19.4 11.8l3.9 1.9" fill="none" stroke="#74b0f4" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="25.2" r="2.5" fill="#f39361"/></svg>
+      <span>Saurav Bhattarai</span>
+      <small>Hydrologist</small>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="forecasts.html" aria-current="page">Forecasts</a>
+      <a href="publications.html">Publications</a>
+      <a href="talks.html">Talks</a>
+      <a href="teaching.html">Teaching</a>
+      <a class="nav-cv" href="CV.pdf" data-goatcounter-click="cv-download"><svg class="icon"><use href="#i-download"/></svg>CV</a>
+    </nav>
+    <button class="icon-btn theme-toggle" type="button" aria-label="Toggle color theme"><svg class="icon icon-sun"><use href="#i-sun"/></svg><svg class="icon icon-moon"><use href="#i-moon"/></svg></button>
+    <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+<section class="page-head">
+  <div class="wrap">
+    <span class="kicker">Forecasts · built on MRRpy</span>
+    <h1>Flood forecasts, <em>live</em> every 30 minutes.</h1>
+    <p class="lede">MRRpy is no longer only a research model. It now runs on its own as an experimental live flood forecast for the Roshi Khola in Kavre, Nepal. Every half hour it reads rain from two automatic weather stations, adds the rain forecasts of four weather models, routes the water 72 hours ahead, and publishes river-flow forecasts and 2-D flood maps to a public web page.</p>
+    <span class="status"><span class="pulse" aria-hidden="true"></span>Live · three places · updated every 30 minutes</span>
+    <div class="actions">
+      <a class="btn" href="https://sauravbhattarai19.github.io/Roshi-Forecast/">Open the live forecast <svg class="icon"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn--ghost" href="https://github.com/SauravBhattarai19/Roshi-Forecast"><svg class="icon icon--fill"><use href="#i-github"/></svg>Source on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Roshi Khola ===== -->
+<section class="section" id="roshi" style="padding-top:clamp(16px,3vw,32px)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" style="color:var(--c-apply)">Live forecast · Roshi Khola, Kavre, Nepal</span>
+      <h2>Roshi Khola flood forecast</h2>
+      <p class="lede">The Roshi Khola drains the hills south-east of Kathmandu, past Panauti and Khopasi and along the BP Highway to the Sunkoshi. In late September 2024 it flooded Panauti and Roshi Rural Municipality and cut the highway. It is the first river the MRRpy forecast was built for.</p>
+    </div>
+    <p class="honest" style="--c:var(--c-apply)"><b>A research test, not a flood warning.</b> Official flood warnings in Nepal come from the Department of Hydrology and Meteorology (DHM). The modelled flows are not yet checked against measured river flow, and the warning levels on the page are placeholders for testing.</p>
+
+    <h3 class="list-head">See it working</h3>
+    <p style="color:var(--ink-2);max-width:72ch;margin:8px 0 22px">Recorded with a headless browser from the live site on 3 November 2026, a dry-season night in Nepal, so the rivers are low and the flood maps nearly empty (Figure 1). The orange ring marks each click.</p>
+    <div class="walkthrough c-apply reveal" data-walkthrough id="walkthrough">
+      <ol class="walk-steps" role="tablist" aria-label="Roshi Khola forecast walkthrough, step by step">
+        <li><button type="button" role="tab" aria-selected="true" data-src="assets/img/forecast/roshi-01.webp" data-alt="Front page of the flood forecast site with cards for Roshi Khola, Roshi Khola at Panauti and Bagmati at Khokana beside a map of their basins"><span class="k">1</span><b>One site, three places</b><small>Each place has a card with its forecast points and warning state, and a basin outline on the map.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/forecast/roshi-02.webp" data-alt="Roshi Khola forecast page with forecast points, a map of the basin, the flow now and the highest expected flow at Panauti, and hydrographs of four forecasts"><span class="k">2</span><b>Forecast points and hydrographs</b><small>Panauti, Khopasi, Mangaltar on the BP Highway, and the outlet: flow now, the highest flow expected, and one hydrograph per weather model.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/forecast/roshi-03.webp" data-alt="The Roshi Khola map with the rivers-by-flow layer switched on"><span class="k">3</span><b>Every river, by flow</b><small>Any river cell of the basin can be clicked for its own forecast, not only the named points.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/forecast/roshi-04.webp" data-alt="Satellite map zoomed to Panauti town with the 2-D flood map selected"><span class="k">4</span><b>2-D flood maps</b><small>The deepest water expected over the next 72 hours, from MRRpy's 2-D flood simulation, here for Panauti town on satellite imagery.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/forecast/roshi-05.webp" data-alt="Terrain map at Mangaltar on the BP Highway with the next 72 hours of forecast flow"><span class="k">5</span><b>The next 72 hours</b><small>Mangaltar on the BP Highway: the forecast of each model, day-by-day tiles, and how far apart the models are.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/forecast/roshi-06.webp" data-alt="Roshi Khola at Panauti page with the AWS at Roshi and AWS at Nala reporting rain and soil moisture, and the river gauge"><span class="k">6</span><b>Measured rain, every 10 minutes</b><small>At Panauti the past rain is measured: AWS at Roshi and AWS at Nala report rain and soil moisture through RTS.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/forecast/roshi-07.webp" data-alt="Panauti hydrograph with the measured water level of the Roshi Khola at Panauti drawn underneath"><span class="k">7</span><b>The river gauge beside the model</b><small>The water level measured at the Panauti gauge (RTS 471) is drawn under the modelled hydrograph, on its own scale.</small></button></li>
+        <li><button type="button" role="tab" aria-selected="false" data-src="assets/img/forecast/roshi-08.webp" data-alt="Bagmati at Khokana forecast page with a whole-basin flood map of the Kathmandu Valley"><span class="k">8</span><b>A forecast-only place</b><small>The Bagmati at Khokana has no live stations yet: the page says so and runs on forecast rain, with a 2-D map of every river in the valley.</small></button></li>
+      </ol>
+      <div class="walk-stage">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">sauravbhattarai19.github.io/Roshi-Forecast</span><a class="open" href="https://sauravbhattarai19.github.io/Roshi-Forecast/">Open live</a></div>
+          <button class="shot" type="button" data-full="assets/img/forecast/roshi-01.webp" aria-label="Enlarge this screenshot"><img decoding="async" loading="lazy" src="assets/img/forecast/roshi-01.webp" alt="Front page of the flood forecast site with cards for Roshi Khola, Roshi Khola at Panauti and Bagmati at Khokana beside a map of their basins" width="1600" height="1067"></button>
+        </div>
+        <div class="walk-progress" aria-hidden="true"><i></i></div>
+        <div class="walk-caption"><span>Step 1 of 8 · One site, three places</span><span class="walk-nav"><button type="button" data-walk-prev aria-label="Previous step"><svg class="icon" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" data-walk-next aria-label="Next step"><svg class="icon" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></span></div>
+        <p class="muted" style="font-size:14px;margin:10px 0 0"><b>Figure 1.</b> The live Roshi Khola forecast, 3 November 2026: front page; forecast points; 2-D flood maps; rain stations and river gauge.</p>
+      </div>
+    </div>
+
+    <h3 class="list-head" style="margin-top:clamp(40px,6vw,64px)">Three places</h3>
+    <div class="place-grid">
+      <a class="mini reveal" href="https://sauravbhattarai19.github.io/Roshi-Forecast/roshi/">
+        <span class="kicker">Whole basin · to the Sunkoshi</span>
+        <h4>Roshi Khola</h4>
+        <ul class="facts">
+          <li>Points at Panauti, Khopasi, Mangaltar (BP Highway), and the outlet</li>
+          <li>2-D flood maps: Panauti town, Mangaltar, and the whole basin</li>
+        </ul>
+        <span class="go">Open the forecast <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="mini reveal" href="https://sauravbhattarai19.github.io/Roshi-Forecast/panauti/">
+        <span class="kicker">158 km² above the gauge · AWS</span>
+        <h4>Roshi Khola at Panauti</h4>
+        <ul class="facts">
+          <li>Past rain measured at AWS at Roshi (Utrecht University and S4W) and AWS at Nala</li>
+          <li>Water level from the Panauti river gauge (RTS 471) beside the model</li>
+        </ul>
+        <span class="go">Open the forecast <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="mini reveal" href="https://sauravbhattarai19.github.io/Roshi-Forecast/khokana/">
+        <span class="kicker">Forecast only · Kathmandu Valley</span>
+        <h4>Bagmati at Khokana</h4>
+        <ul class="facts">
+          <li>The basin of the eight floods MRRpy was verified on</li>
+          <li>Forecast rain only, with a 2-D flood map of every river in the valley</li>
+        </ul>
+        <span class="go">Open the forecast <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+
+    <div class="two-col c-apply" style="margin-top:clamp(36px,5vw,56px)">
+      <div class="reveal">
+        <h3 class="list-head">Every 30 minutes</h3>
+        <ul class="ticks" style="margin-top:14px">
+          <li><b>Measured rain.</b> Two automatic weather stations report every 10 minutes through RTS, used with the alertnepal team's permission. A station silent for an hour counts as missing, and the forecast says so.</li>
+          <li><b>Forecast rain.</b> ECMWF, GFS, and ICON through Open-Meteo, the alertnepal hourly forecast, and a "no more rain" version. Each is its own run, so the spread between them is part of the forecast.</li>
+          <li><b>The model.</b> MRRpy on a 90 m grid: Green–Ampt infiltration with impervious land and implicit diffusive-wave routing. Each update carries on from the last saved state instead of starting dry.</li>
+          <li><b>Flood maps.</b> The main forecast (ECMWF) drives a 2-D flood simulation for each town and for the whole basin, on 30 m terrain.</li>
+          <li><b>Publishing.</b> The page is rebuilt and pushed to GitHub Pages. A server keeps it running, with GitHub Actions as the backup; updates need no Earth Engine.</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <figure class="fig" style="max-width:300px;margin:0 auto">
+          <button class="plate" type="button" data-full="assets/img/forecast/roshi-phone.webp" aria-label="Enlarge figure 2"><img decoding="async" loading="lazy" src="assets/img/forecast/roshi-phone.webp" width="520" height="1125" alt="The Roshi Khola forecast on a phone screen, with the flow now and the highest flow expected at Panauti"></button>
+          <figcaption><b>Figure 2</b>The same page on a phone.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:clamp(32px,5vw,48px)">
+      <div class="reveal">
+        <h3 class="list-head">What is MRRpy's, and what is the forecast's</h3>
+        <p style="color:var(--ink-2)">All the hydrology and hydraulics are the MRRpy library's: rain onto the grid, infiltration, runoff, river routing, saved model states, and the 2-D flood maps. The forecast repository holds no model code. It reads the stations and forecasts, writes each version's rain files, runs the versions side by side, and builds the page.</p>
+        <p style="color:var(--ink-2)">The forecast code is general: another river needs only its own <code class="mono">model.yaml</code> and <code class="mono">forecast.yaml</code>, and <code class="mono">roshi-forecast new</code> writes both from an outlet.</p>
+      </div>
+      <div class="reveal">
+        <h3 class="list-head">Run it yourself</h3>
+        <pre class="codeblock"><span class="k">git</span> clone https://github.com/SauravBhattarai19/Roshi-Forecast
+<span class="k">cd</span> Roshi-Forecast
+scripts/install.sh       <span class="c"># this package and its MRRpy</span>
+.venv/bin/roshi-forecast service install
+.venv/bin/roshi-forecast doctor  <span class="c"># what to fix</span></pre>
+        <div class="link-row">
+          <a href="https://sauravbhattarai19.github.io/Roshi-Forecast/"><svg class="icon"><use href="#i-arrow"/></svg>Live forecast</a>
+          <a href="https://github.com/SauravBhattarai19/Roshi-Forecast"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a>
+          <a href="https://github.com/SauravBhattarai19/Roshi-Forecast/blob/main/docs/how-it-works.md"><svg class="icon"><use href="#i-book"/></svg>How it works</a>
+          <a href="https://github.com/SauravBhattarai19/Roshi-Forecast/blob/main/docs/operator-guide.md"><svg class="icon"><use href="#i-doc"/></svg>Operator guide</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Rehearsal ===== -->
+<section class="section" id="rehearsal" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" style="color:var(--c-apply)">Replay · 25–29 September 2024</span>
+      <h2>How early would it have <em>seen</em> the 2024 flood?</h2>
+      <p class="lede">The forecast was replayed for the September 2024 flood on a fake clock, with an update every 3 hours. Satellite rain (IMERG) stood in for the stations, and ECMWF forecasts were used as they were issued. The model's own flood, from about 383 mm of rain over the basin on 26–28 September, peaked on the morning of 28 September.</p>
+    </div>
+
+    <div class="leadchart reveal" role="group" aria-labelledby="lc-title">
+      <h3 class="list-head" id="lc-title">Hours before the modelled peak that ECMWF first showed it</h3>
+      <div class="lc-legend" aria-hidden="true">
+        <span><i class="lc-key lc-key--80"></i>at least 80% of the peak</span>
+        <span><i class="lc-key lc-key--100"></i>the whole peak</span>
+      </div>
+      <div class="lc-row">
+        <span class="lc-name">Panauti<small>686 m³/s</small></span>
+        <div class="lc-track">
+          <span class="lc-span" style="left:17.5%;width:30%"></span>
+          <span class="lc-mark lc-mark--80" style="left:17.5%" tabindex="0" aria-label="Panauti: 80% of the peak first shown 66 hours ahead"><span class="lc-tip">Panauti · ≥ 80% of peak · 66 h ahead</span></span>
+          <span class="lc-mark lc-mark--100" style="left:47.5%" tabindex="0" aria-label="Panauti: the whole peak first shown 42 hours ahead"><span class="lc-tip">Panauti · whole peak · 42 h ahead</span></span>
+        </div>
+      </div>
+      <div class="lc-row">
+        <span class="lc-name">Khopasi<small>840 m³/s</small></span>
+        <div class="lc-track">
+          <span class="lc-span" style="left:17.5%;width:15%"></span>
+          <span class="lc-mark lc-mark--80" style="left:17.5%" tabindex="0" aria-label="Khopasi: 80% of the peak first shown 66 hours ahead"><span class="lc-tip">Khopasi · ≥ 80% of peak · 66 h ahead</span></span>
+          <span class="lc-mark lc-mark--100" style="left:32.5%" tabindex="0" aria-label="Khopasi: the whole peak first shown 54 hours ahead"><span class="lc-tip">Khopasi · whole peak · 54 h ahead</span></span>
+        </div>
+      </div>
+      <div class="lc-row">
+        <span class="lc-name">Mangaltar (BP Highway)<small>2,213 m³/s</small></span>
+        <div class="lc-track">
+          <span class="lc-span" style="left:16.25%;width:45%"></span>
+          <span class="lc-mark lc-mark--80" style="left:16.25%" tabindex="0" aria-label="Mangaltar: 80% of the peak first shown 67 hours ahead"><span class="lc-tip">Mangaltar · ≥ 80% of peak · 67 h ahead</span></span>
+          <span class="lc-mark lc-mark--100" style="left:61.25%" tabindex="0" aria-label="Mangaltar: the whole peak first shown 31 hours ahead"><span class="lc-tip">Mangaltar · whole peak · 31 h ahead</span></span>
+        </div>
+      </div>
+      <div class="lc-row">
+        <span class="lc-name">Outlet<small>2,556 m³/s</small></span>
+        <div class="lc-track">
+          <span class="lc-span" style="left:8.75%;width:52.5%"></span>
+          <span class="lc-mark lc-mark--80" style="left:8.75%" tabindex="0" aria-label="Outlet: 80% of the peak first shown 73 hours ahead"><span class="lc-tip">Outlet · ≥ 80% of peak · 73 h ahead</span></span>
+          <span class="lc-mark lc-mark--100" style="left:61.25%" tabindex="0" aria-label="Outlet: the whole peak first shown 31 hours ahead"><span class="lc-tip">Outlet · whole peak · 31 h ahead</span></span>
+        </div>
+      </div>
+      <div class="lc-axis" aria-hidden="true">
+        <span></span>
+        <div class="lc-ticks"><span style="left:10%">72 h</span><span style="left:40%">48 h</span><span style="left:70%">24 h</span><span class="lc-end" style="left:100%">peak</span><em>hours ahead</em></div>
+      </div>
+      <p class="muted" style="font-size:14px;margin:6px 0 0"><b>Figure 3.</b> First lead time at which ECMWF showed at least 80% of the modelled peak, and all of it, at four places. Hover a mark for its value.</p>
+    </div>
+
+    <div class="two-col" style="margin-top:clamp(24px,4vw,36px)">
+      <div class="reveal table-scroll">
+        <table class="compare">
+          <caption class="visually-hidden">Table 1. Highest modelled flow and ECMWF lead times, September 2024 replay</caption>
+          <thead><tr><th>Place</th><th>Highest flow</th><th>≥ 80% shown</th><th>All shown</th></tr></thead>
+          <tbody>
+            <tr><td>Panauti</td><td>686 m³/s</td><td>66 h ahead</td><td>42 h ahead</td></tr>
+            <tr><td>Khopasi</td><td>840 m³/s</td><td>66 h ahead</td><td>54 h ahead</td></tr>
+            <tr><td>Mangaltar (BP Highway)</td><td>2,213 m³/s</td><td>67 h ahead</td><td>31 h ahead</td></tr>
+            <tr><td>Outlet</td><td>2,556 m³/s</td><td>73 h ahead</td><td>31 h ahead</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="font-size:14px;margin:0">Table 1. The same lead times as Figure 3, with the highest modelled flow.</p>
+      </div>
+      <div class="reveal">
+        <p class="honest" style="--c:var(--c-apply);margin:0"><b>Read with care.</b> The forecasts are compared with the model's own result, not with measured flow. ECMWF swung between runs: at Panauti, successive runs gave 199 to 742 m³/s. In the Bagmati at Khokana the same soil maps gave about twice too much runoff, and IMERG 1.5 to 1.7 times too much rain, so these flows are likely too high. Setting real warning levels, and checking the forecast against measured floods, is the next step of Chapter 4.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Flood maps ===== -->
+<section class="section" id="flood-maps" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" style="color:var(--c-translate)">MRRpy · new inundation stage</span>
+      <h2>From river flow to <em>flood maps</em>.</h2>
+      <p class="lede">The flood maps in the forecast come from a new MRRpy stage, in development on the <a href="https://github.com/SauravBhattarai19/MRRpy/tree/flood-zoom"><code class="mono">flood-zoom</code></a> branch. It turns the routed river flow into maps of flood depth and extent, drawn on finer terrain than the model ran on: the routing runs at 90 m over the whole basin, and the flood is drawn at 30 m (or on your own LiDAR) for the area that matters.</p>
+    </div>
+
+    <figure class="fig reveal">
+      <button class="plate anim-plate" type="button" data-full="assets/img/forecast/mrrpy-flood-2d.webp" aria-label="Enlarge figure 4">
+        <span class="anim-badge">Animation</span>
+        <picture>
+          <source srcset="assets/img/forecast/mrrpy-flood-2d-still.webp" media="(prefers-reduced-motion: reduce)">
+          <img decoding="async" loading="lazy" src="assets/img/forecast/mrrpy-flood-2d.webp" width="805" height="378" alt="Animated 2-D flood depth along the Bagmati between Chobhar and Khokana beside the hydrograph of the storm">
+        </picture>
+      </button>
+      <figcaption><b>Figure 4</b>2-D flood simulation of the Chobhar–Khokana valley: flood depth over time; hydrograph.</figcaption>
+    </figure>
+
+    <div class="two-col c-translate" style="margin-top:clamp(28px,4vw,44px)">
+      <div class="reveal">
+        <h3 class="list-head">Two ways to spread the water</h3>
+        <ul class="ticks" style="margin-top:14px">
+          <li><b>HAND, for a whole basin in seconds.</b> Every cell gets its height above the river it drains to; each reach of about 1 km gets a rating curve, and its flow gives the water level that floods all lower land. Main rivers are mapped again on their own so they back up into side streams.</li>
+          <li><b>2-D, for one town.</b> A local-inertial flood simulation (Bates et al., 2010), compiled and parallel. Every river entering the area brings its routed flow, water spreads, ponds, and backs up as on the ground, and the run warns when the flood reaches the edge of the area (Figure 5).</li>
+          <li><b>Rivers in their real channels.</b> Flow paths for the maps are traced on the original terrain by least-cost search, so rivers do not cut straight lines across flat valley floors.</li>
+          <li><b>Outputs.</b> Deepest water and flood extent as GeoTIFF and GeoJSON, time of the peak, first-wet time, duration, and an animation; redrawn without routing again.</li>
+        </ul>
+      </div>
+      <figure class="fig reveal">
+        <button class="plate" type="button" data-full="assets/img/forecast/mrrpy-hand-vs-2d.webp" aria-label="Enlarge figure 5"><img decoding="async" loading="lazy" src="assets/img/forecast/mrrpy-hand-vs-2d.webp" width="960" height="740" alt="Deepest flood depth from the HAND method, 1.16 square kilometres flooded, beside the 2-D method, 3.12 square kilometres flooded"></button>
+        <figcaption><b>Figure 5</b>Deepest water from one storm, FABDEM at 30 m: HAND, 1.16 km² flooded; 2-D, 3.12 km² flooded.</figcaption>
+      </figure>
+    </div>
+
+    <figure class="fig reveal" style="margin-top:clamp(28px,4vw,44px)">
+      <button class="plate" type="button" data-full="assets/img/forecast/mrrpy-flood-places.webp" aria-label="Enlarge figure 6"><img decoding="async" loading="lazy" src="assets/img/forecast/mrrpy-flood-places.webp" width="1553" height="438" alt="Deepest flood water from 2-D simulations at Montpelier Vermont, Kathmandu, the East Rapti in Chitwan, and the Ahr valley in Germany"></button>
+      <figcaption><b>Figure 6</b>The same settings at four places, with no calibration: Montpelier, July 2023; Kathmandu, September 2024; East Rapti, September 2024; Ahr valley, July 2021.</figcaption>
+    </figure>
+
+    <div class="meta-grid reveal" style="margin-top:20px">
+      <div><span class="kicker">Montpelier, Vermont, 2023</span><p>Water level within 0.2–0.4 m of high-water marks, on LiDAR</p></div>
+      <div><span class="kicker">Pearl River at Jackson, 2020</span><p>0.4 m RMSE against the gauge</p></div>
+      <div><span class="kicker">Kathmandu, 2024</span><p>Checked against satellite flood traces; 2-D closer than HAND everywhere</p></div>
+      <div><span class="kicker">Run time</span><p>49 km² of 2-D at Kathmandu in 20 s, after 117 s of routing on a 32-core workstation</p></div>
+    </div>
+    <p style="margin-top:20px"><a class="arrow-link" href="https://github.com/SauravBhattarai19/MRRpy/tree/flood-zoom">The flood-zoom branch of MRRpy <svg class="icon"><use href="#i-arrow"/></svg></a></p>
+  </div>
+</section>
+
+<!-- ===== Nepal empirical ===== -->
+<section class="section" id="nepal" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" style="color:var(--c-refine)">Live forecast · every river of Nepal · in development</span>
+      <h2>Nepal empirical flood forecast</h2>
+      <p class="lede">A separate project that works at the other end of the scale: a river-flow forecast for every river in Nepal draining 20 km² or more, from the empirical methods used in Nepali practice. Every 2 hours it averages the rain forecasts of ECMWF, GFS, and ICON over the catchment of each river, turns them into discharge, and colours each river by the flood level its forecast reaches.</p>
+    </div>
+
+    <div class="numbers reveal">
+      <div><b>4,205</b><span>river reaches of 20 km² or more, traced from the Copernicus GLO-90 DEM</span></div>
+      <div><b>105 / 112</b><span>DHM hydrometric stations whose drainage area the tracing matches within 10%</span></div>
+      <div><b>2–100 yr</b><span>flood levels at every point from WECS/DHM 1990, DHM 2004, MHSP 1997, WECS 2019, and Modified Dickens</span></div>
+      <div><b>2 h</b><span>update cycle, run entirely on GitHub Actions with a NOAA GFS backup feed</span></div>
+    </div>
+
+    <div class="fig-row" style="margin-top:clamp(28px,4vw,44px)">
+      <figure class="fig reveal">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">Made-up storm, for illustration</span></div>
+          <button class="shot" type="button" data-full="assets/img/forecast/nepal-storm-demo.webp" aria-label="Enlarge figure 7"><img decoding="async" loading="lazy" src="assets/img/forecast/nepal-storm-demo.webp" width="1500" height="950" alt="Nepal flood forecast page during a synthetic storm over central Nepal, with rivers coloured from below the 2-year flood to above the 20-year flood and the Rapti selected"></button>
+        </div>
+        <figcaption><b>Figure 7</b>The page during a made-up 200 mm storm over central Nepal, to show the flood colours.</figcaption>
+      </figure>
+      <figure class="fig reveal">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">Live forecast, 1 November 2026</span></div>
+          <button class="shot" type="button" data-full="assets/img/forecast/nepal-live.webp" aria-label="Enlarge figure 8"><img decoding="async" loading="lazy" src="assets/img/forecast/nepal-live.webp" width="1500" height="950" alt="Real Nepal flood forecast with Bagmati at Khokana selected, a 27.5 cubic metre per second forecast peak against a 540 cubic metre per second 2-year flood, and design floods by method"></button>
+        </div>
+        <figcaption><b>Figure 8</b>A real dry-season forecast with Bagmati at Khokana selected: forecast peak; design floods by method.</figcaption>
+      </figure>
+    </div>
+
+    <div class="two-col c-refine" style="margin-top:clamp(28px,4vw,44px)">
+      <div class="reveal">
+        <h3 class="list-head">How it works</h3>
+        <ul class="ticks" style="margin-top:14px">
+          <li><b>Discharge from rain.</b> SCS curve number with the SCS unit hydrograph as the main method, with the Rational, Mononobe, and B.D. Richards methods as cross-checks, added to the normal monthly flow.</li>
+          <li><b>Catchment descriptors.</b> Area, area above 3,000 and 5,000 m, mean elevation, Kirpich time of concentration, ERA5 wetness indices, and curve numbers from ESA WorldCover.</li>
+          <li><b>Five views.</b> Each weather model alone, where at least two agree, or the highest of any; hotspots ranked by flood level, agreement, and rise.</li>
+          <li><b>Every formula tested</b> against the numbers printed in the source report.</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3 class="list-head">Where it fits</h3>
+        <p style="color:var(--ink-2)">The two forecasts are complements. The empirical forecast screens every river in Nepal in about a minute of computing, with methods engineers already use; MRRpy gives a physics-based forecast and flood maps where a basin is set up, as on the Roshi Khola. Both are uncalibrated research tests, and the empirical one is rain-driven only: snow and glacier melt, lake outbursts, and dam operations are not modelled.</p>
+        <div class="link-row">
+          <a href="https://sauravbhattarai19.github.io/Nepal_Empirical_Flood_Forecast/"><svg class="icon"><use href="#i-arrow"/></svg>Live forecast</a>
+          <a href="https://github.com/SauravBhattarai19/Nepal_Empirical_Flood_Forecast"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a>
+          <a href="https://github.com/SauravBhattarai19/Nepal_Empirical_Flood_Forecast/blob/main/docs/user-guide.md"><svg class="icon"><use href="#i-book"/></svg>User guide</a>
+          <a href="https://github.com/SauravBhattarai19/Nepal_Empirical_Flood_Forecast/blob/main/docs/verification.md"><svg class="icon"><use href="#i-doc"/></svg>Verification</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="muted" style="font-size:14px;margin-top:clamp(28px,4vw,40px);max-width:80ch">Credits. Station rain through RTS (Real Time Solutions) and the hourly forecast from <a href="https://alertnepal.online">alertnepal</a>, with permission; AWS at Roshi belongs to Utrecht University and S4W. Weather-model rain from <a href="https://open-meteo.com">Open-Meteo</a> (CC BY 4.0), from ECMWF, NOAA GFS, and DWD ICON. Terrain from FABDEM and Copernicus GLO-90; maps © OpenStreetMap contributors.</p>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span data-year>2026</span> Saurav Bhattarai · Updated November 2026</span>
+    <nav aria-label="Footer">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="forecasts.html">Forecasts</a>
+      <a href="publications.html">Publications</a>
+      <a href="talks.html">Talks</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="CV.pdf" data-goatcounter-click="cv-download">CV</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+<script data-goatcounter="https://sauravbhattarai.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -60,6 +60,7 @@
     <nav class="nav" id="site-nav" aria-label="Main">
       <a href="research.html">Research</a>
       <a href="software.html" aria-current="page">Software</a>
+      <a href="forecasts.html">Forecasts</a>
       <a href="publications.html">Publications</a>
       <a href="talks.html">Talks</a>
       <a href="teaching.html">Teaching</a>
@@ -75,7 +76,7 @@
   <div class="wrap">
     <span class="kicker">Software</span>
     <h1>Open tools, <em>free</em> to run.</h1>
-    <p class="lede">Two projects carry the dissertation: the GeoClimate Intelligence Platform opens Earth data to people who do not program, and MRRpy turns those data into floods. Both are free, documented, and already used in teaching. The code behind my published papers is public too.</p>
+    <p class="lede">Two projects carry the dissertation: the GeoClimate Intelligence Platform opens Earth data to people who do not program, and MRRpy turns those data into floods. Both are free, documented, and already used in teaching, and MRRpy now also runs as a <a href="forecasts.html">live flood forecast</a>. The code behind my published papers is public too.</p>
   </div>
 </section>
 
@@ -122,7 +123,8 @@ run_pipeline(cfg)                             <span class="c"># results/hydrogra
           <li><b>Runoff generation.</b> Coefficient, raster, SCS curve number, or physical runoff: variable source area saturation excess, Green–Ampt infiltration with recovery, and impervious surfaces as composable mechanisms.</li>
           <li><b>Flood routing.</b> Kinematic wave, Muskingum–Cunge, a semi-implicit diffusion wave solved exactly on the drainage tree, and a local-inertial dynamic wave, with sub-grid river channels sized from the 2-year flood and an always-on water-balance check.</li>
           <li><b>Satellite forcing.</b> Optional DEM download, IMERG rainfall, curve numbers, SERVES soil deficit, SoilGrids, HiHydroSoil, and land cover from Google Earth Engine; every option also works offline with your own files.</li>
-          <li><b>Flood maps.</b> Depth and discharge maps over time, animations, and peak-depth GeoTIFFs.</li>
+          <li><b>Flood maps.</b> Depth and discharge maps over time, animations, and peak-depth GeoTIFFs. In development on the <a href="https://github.com/SauravBhattarai19/MRRpy/tree/flood-zoom"><code class="mono">flood-zoom</code></a> branch: flood depth and extent by HAND for a whole basin, or a 2-D local-inertial simulation for one town on finer terrain (<a href="forecasts.html#flood-maps">examples</a>).</li>
+          <li><b>Live forecasting.</b> Saved model states and Open-Meteo rain let MRRpy run as the <a href="forecasts.html">Roshi Khola live flood forecast</a>, every 30 minutes.</li>
           <li><b>CPU or GPU.</b> One code path in NumPy or CuPy, with automatic CPU fallback; 34 times faster on GPU at 1.38 million cells.</li>
           <li><b>Interfaces for every taste.</b> Python API, a command line with a question-and-answer wizard, a Jupyter form, and a QGIS plugin.</li>
         </ul>
@@ -274,6 +276,18 @@ run_pipeline(cfg)                             <span class="c"># results/hydrogra
       <h2>Smaller tools and <em>the code</em> behind the papers.</h2>
     </div>
     <div class="mini-grid" style="margin-top:0">
+      <a class="mini reveal" href="forecasts.html">
+        <span class="kicker">Live forecast · built on MRRpy</span>
+        <h4>Roshi Khola flood forecast</h4>
+        <p>MRRpy every 30 minutes from weather stations and four rain forecasts: 72 hours of river flow and 2-D flood maps for Panauti and the BP Highway.</p>
+        <span class="go">See the forecast <svg class="icon"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="mini reveal" href="forecasts.html#nepal">
+        <span class="kicker">Live forecast · empirical methods</span>
+        <h4>Nepal empirical flood forecast</h4>
+        <p>River-flow forecasts every 2 hours for 4,205 rivers of Nepal, measured against their 2- to 100-year floods.</p>
+        <span class="go">See the forecast <svg class="icon"><use href="#i-right"/></svg></span>
+      </a>
       <a class="mini reveal" href="https://sauravbhattarai1999.users.earthengine.app/view/cooling-efficiency-analyzer">
         <span class="kicker">Earth Engine app</span>
         <h4>Cooling Efficiency Analyzer</h4>
@@ -311,10 +325,11 @@ run_pipeline(cfg)                             <span class="c"># results/hydrogra
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>© <span data-year>2026</span> Saurav Bhattarai · Updated October 2026</span>
+    <span>© <span data-year>2026</span> Saurav Bhattarai · Updated November 2026</span>
     <nav aria-label="Footer">
       <a href="research.html">Research</a>
       <a href="software.html">Software</a>
+      <a href="forecasts.html">Forecasts</a>
       <a href="publications.html">Publications</a>
       <a href="talks.html">Talks</a>
       <a href="teaching.html">Teaching</a>

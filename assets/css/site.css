@@ -345,6 +345,11 @@ sup, sub { line-height: 0; }
   :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: none; }
 }
 .menu-toggle { display: none; }
+@media (min-width: 961px) and (max-width: 1100px) {
+  .brand small { display: none; }
+  .nav a { padding: 8px 8px; }
+  .nav a[aria-current="page"]::after { left: 8px; right: 8px; }
+}
 
 @media (max-width: 960px) {
   .brand small { display: none; }
@@ -1691,6 +1696,46 @@ dialog.lightbox .icon-btn {
 @media (prefers-reduced-motion: reduce) {
   .js .reveal, .js .hero .rise { opacity: 1; transform: none; transition: none; animation: none; }
   .status .pulse::after, .basin-fig .live i { animation: none; }
+}
+
+/* ---------- forecasts page ---------- */
+.place-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+@media (max-width: 860px) { .place-grid { grid-template-columns: 1fr; } }
+.place-grid .mini h4 { font-size: 1.2rem; }
+.place-grid .mini .facts { margin: 4px 0 0; padding: 0; list-style: none; font-size: 14.5px; color: var(--ink-2); }
+.place-grid .mini .facts li { padding: 5px 0; border-top: 1px solid var(--rule-2); }
+
+/* lead-time dumbbell: hours before the modelled peak, 0 (the peak) at the right */
+.leadchart { max-width: 760px; margin: 18px 0 8px; }
+.leadchart .lc-legend { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 14px; color: var(--ink-2); margin-bottom: 12px; }
+.leadchart .lc-legend span { display: inline-flex; align-items: center; gap: 8px; }
+.lc-key { display: inline-block; width: 12px; height: 12px; border-radius: 50%; }
+.lc-key--80 { border: 2px solid var(--c-apply); background: var(--card); }
+.lc-key--100 { background: var(--c-translate); box-shadow: 0 0 0 2px var(--card); }
+.lc-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); align-items: center; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--rule-2); }
+.lc-row .lc-name { font-size: 14.5px; color: var(--ink); line-height: 1.3; }
+.lc-row .lc-name small { display: block; color: var(--ink-3); font-size: 12.5px; font-family: var(--f-mono); }
+.lc-track { position: relative; height: 26px; }
+.lc-track::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed var(--rule); }
+.lc-span { position: absolute; top: calc(50% - 1px); height: 2px; background: color-mix(in srgb, var(--ink-3) 55%, transparent); }
+.lc-mark { position: absolute; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; cursor: default; outline-offset: 3px; }
+.lc-mark::before { content: ""; position: absolute; inset: -8px; } /* bigger hit target */
+.lc-mark--80 { border: 2px solid var(--c-apply); background: var(--card); }
+.lc-mark--100 { background: var(--c-translate); box-shadow: 0 0 0 2px var(--card); }
+.lc-mark .lc-tip {
+  position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+  white-space: nowrap; background: var(--ink); color: var(--paper); font-size: 12.5px; line-height: 1.35;
+  padding: 6px 9px; border-radius: 6px; pointer-events: none; opacity: 0; transition: opacity 0.12s; z-index: 3;
+}
+.lc-mark:hover .lc-tip, .lc-mark:focus .lc-tip { opacity: 1; }
+.lc-axis { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 14px; margin-top: 6px; }
+.lc-axis .lc-ticks { position: relative; height: 34px; font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-3); }
+.lc-axis .lc-ticks span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.lc-axis .lc-ticks .lc-end { transform: translateX(-100%); }
+.lc-axis .lc-ticks em { position: absolute; left: 0; top: 18px; font-style: normal; }
+@media (max-width: 600px) {
+  .lc-row, .lc-axis { grid-template-columns: 96px minmax(0, 1fr); gap: 10px; }
+  .lc-row .lc-name { font-size: 13.5px; }
 }
 
 /* ---------- 404 ---------- */

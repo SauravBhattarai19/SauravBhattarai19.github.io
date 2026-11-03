@@ -8,10 +8,11 @@ Plain static HTML, CSS, and JavaScript: no framework and no build step. GitHub A
 
 | File | Content |
 | --- | --- |
-| `index.html` | Home: hero with the live drainage-basin figure, key numbers, the dissertation in five steps, MRRpy and GeoClimate, first-author articles, recent news, about, recognition, contact |
+| `index.html` | Home: hero with the live drainage-basin figure, key numbers, the live Roshi forecast highlight, the dissertation in five steps, MRRpy and GeoClimate, first-author articles, recent news, about, recognition, contact |
 | `research.html` | Research by theme (hydroclimatic extremes, compound hazards, Earth observation, flood modeling, heat and urban cooling, open tools), with animations; tabs link the two degree pages |
 | `phd.html` | Ph.D. dissertation, chapter by chapter, with figures, animations, and results (source: the committee write-up, Oct 2026) |
 | `ms.html` | M.S. thesis (May 2025), study by study, with figures from the thesis |
+| `forecasts.html` | Live flood forecasts: the Roshi Khola forecast built on MRRpy (walkthrough recorded from the live site, September 2024 replay lead times), MRRpy flood maps from the `flood-zoom` branch, and the Nepal empirical flood forecast |
 | `software.html` | MRRpy, the GeoClimate Intelligence Platform (nine tools), Earth Engine apps, course platforms, research code |
 | `publications.html` | All journal articles, proceedings, manuscripts, and the dataset, with topic filters, search, and copy-citation |
 | `talks.html` | Map of presentation cities and the full list of talks and posters, filterable by type |
@@ -29,6 +30,7 @@ Plain static HTML, CSS, and JavaScript: no framework and no build step. GitHub A
 - `assets/js/basin.js`: the home-page figure. A random terrain is filled from one outlet into a D8 drainage tree;
   rain parcels are routed to the outlet and counted as the hydrograph. Pauses when off screen and respects
   reduced-motion settings.
+- `assets/img/forecast/`: screenshots of the live forecast sites, taken with a headless browser (Playwright: open the page, click, `page.screenshot`), the animated walkthrough made from them, and MRRpy flood-map figures from its `flood-zoom` docs. Retake them the same way when the forecast pages change.
 - `assets/img/`: web-sized WebP figures (from the proposal, defense, and M.S. thesis), headshot, social card (`og-image.png`).
 - `assets/img/anim/`: animated WebP files (like GIFs, about a third of the size) made from the defense-deck animation frames,
   each with a `-still.webp` frame shown to visitors who turn off motion. To add one, save frames as an animated WebP

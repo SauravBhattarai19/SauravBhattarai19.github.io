@@ -79,6 +79,7 @@
     <nav class="nav" id="site-nav" aria-label="Main">
       <a href="research.html">Research</a>
       <a href="software.html">Software</a>
+      <a href="forecasts.html">Forecasts</a>
       <a href="publications.html">Publications</a>
       <a href="talks.html">Talks</a>
       <a href="teaching.html">Teaching</a>
@@ -101,7 +102,7 @@
       </div>
       <h1 class="rise">Saurav Bhattarai</h1>
       <p class="statement rise">Data that <em class="w1">speak</em>, physics that <em class="w2">translates</em>.</p>
-      <p class="intro rise">I am a hydrologist who builds open tools that carry free Earth observation data all the way to local flood predictions. I make the data reachable without code, refine coarse satellite products to the scale of a valley, and feed them to <a href="software.html#mrrpy">MRRpy</a>, the open, modular, parsimonious flood model I develop.</p>
+      <p class="intro rise">I am a hydrologist who builds open tools that carry free Earth observation data all the way to local flood predictions. I make the data reachable without code, refine coarse satellite products to the scale of a valley, and feed them to <a href="software.html#mrrpy">MRRpy</a>, the open, modular, parsimonious flood model I develop, which now runs as a <a href="forecasts.html">live flood forecast</a> for the Roshi Khola in Nepal.</p>
       <div class="rise">
         <span class="status"><span class="pulse" aria-hidden="true"></span>Defending February 10, 2027 · Seeking postdoctoral positions</span>
       </div>
@@ -146,6 +147,40 @@
       <div><b>0.81</b><span>median Nash–Sutcliffe efficiency of MRRpy for eight Bagmati floods, without event-wise fitting</span></div>
       <div><b>2,643</b><span>in situ stations used to evaluate SERVES root-zone soil moisture worldwide</span></div>
     </div>
+  </div>
+</section>
+
+<!-- ================= LIVE FORECAST ================= -->
+<section class="section" id="live" style="padding-top:clamp(8px,2vw,24px)">
+  <div class="wrap">
+    <article class="tool tool--wide-media c-apply" style="padding-top:0">
+      <div class="tool-copy reveal">
+        <span class="kicker">Live now · Roshi Khola, Kavre, Nepal</span>
+        <h3>MRRpy, running as a flood forecast</h3>
+        <p class="tagline">Every 30 minutes: measured rain, four rain forecasts, 72 hours of river flow, and 2-D flood maps.</p>
+        <ul class="ticks">
+          <li>Rain from two automatic weather stations every 10 minutes, with ECMWF, GFS, ICON, and the alertnepal hourly forecast run side by side.</li>
+          <li>Forecasts for Panauti, Khopasi, the BP Highway at Mangaltar, and every river cell of the basin; at Panauti, the measured river level is shown beside the model.</li>
+          <li>Replayed on the September 2024 flood, ECMWF showed 80% of the modelled peak 66 to 73 hours ahead.</li>
+          <li>An experimental research test, not an official warning.</li>
+        </ul>
+        <div class="link-row">
+          <a href="https://sauravbhattarai19.github.io/Roshi-Forecast/"><svg class="icon"><use href="#i-arrow"/></svg>Open the live forecast</a>
+          <a href="forecasts.html"><svg class="icon"><use href="#i-right"/></svg>How it works</a>
+          <a href="https://github.com/SauravBhattarai19/Roshi-Forecast"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a>
+        </div>
+      </div>
+      <figure class="fig tool-media reveal">
+        <div class="browser">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">sauravbhattarai19.github.io/Roshi-Forecast</span><a class="open" href="https://sauravbhattarai19.github.io/Roshi-Forecast/">Open live</a></div>
+          <picture>
+            <source srcset="assets/img/forecast/roshi-walkthrough-still.webp" media="(prefers-reduced-motion: reduce)">
+            <img src="assets/img/forecast/roshi-walkthrough.webp" alt="Recorded walkthrough of the live Roshi Khola flood forecast: the front page with three places, forecast points and hydrographs, rivers by flow, a 2-D flood map of Panauti town, the next 72 hours at Mangaltar, rain stations and the river gauge at Panauti, and the Bagmati at Khokana" width="1200" height="800" loading="lazy">
+          </picture>
+        </div>
+        <figcaption><b>Live forecast</b>Recorded from the live site on 3 November 2026, a dry-season night, so flows are low. <a href="forecasts.html#walkthrough">Step through it</a>.</figcaption>
+      </figure>
+    </article>
   </div>
 </section>
 
@@ -386,6 +421,8 @@
       <h2>What's <em>new</em>.</h2>
     </div>
     <ul class="news reveal">
+      <li><time datetime="2026-10">Oct 2026</time><span>The <b>Nepal empirical flood forecast</b> went online: river-flow forecasts every 2 hours for 4,205 rivers of Nepal from Nepal's empirical methods. <a href="forecasts.html#nepal">See it</a>.</span></li>
+      <li><time datetime="2026-10">Oct 2026</time><span>The <b>Roshi Khola flood forecast</b> went live: MRRpy runs every 30 minutes from weather stations and four rain forecasts, with 2-D flood maps for Panauti and the BP Highway. <a href="forecasts.html">See it</a>.</span></li>
       <li><time datetime="2026-10">Oct 2026</time><span><b>MRRpy 0.3.0</b> released on PyPI, adding a local-inertial dynamic-wave routing scheme.</span></li>
       <li><time datetime="2026-10">Oct 2026</time><span>Defended my <b>dissertation proposal</b> before the advisory committee. <a href="phd.html">Read the overview</a>.</span></li>
       <li><time datetime="2026-09">Sep 2026</time><span>First public release of <b>MRRpy</b> on PyPI: <code class="mono">pip install MRRpy</code>.</span></li>
@@ -471,10 +508,11 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>© <span data-year>2026</span> Saurav Bhattarai · Updated October 2026</span>
+    <span>© <span data-year>2026</span> Saurav Bhattarai · Updated November 2026</span>
     <nav aria-label="Footer">
       <a href="research.html">Research</a>
       <a href="software.html">Software</a>
+      <a href="forecasts.html">Forecasts</a>
       <a href="publications.html">Publications</a>
       <a href="talks.html">Talks</a>
       <a href="teaching.html">Teaching</a>
