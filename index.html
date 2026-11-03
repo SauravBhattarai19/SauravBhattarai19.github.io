@@ -196,13 +196,14 @@
         <p>Physics-based hydrological models carry mechanism but lack coverage. Open Earth data carry coverage but lack mechanism. Each is the other's missing half, yet they are rarely joined, and the reason is easy to miss: calibration. A model tuned to observed discharge absorbs the errors of its inputs in its parameters, so it cannot tell good data from bad, and it needs a discharge record that the most flood-exposed places do not have.</p>
         <p>My dissertation builds the chain that joins them. Open data are made accessible, refined to the local scale, and combined into records of interacting hazards. They feed an open, modular model with few parameters, each starting from open data or a published equation. With little to tune, errors in the data surface in the hydrograph instead of hiding in the parameters, and the model becomes an instrument for judging the data that drive it.</p>
       </div>
-      <aside class="callout reveal" aria-label="Key result">
-        <span class="kicker">Same model · same eight floods · Kathmandu Valley</span>
-        <div class="vs">
-          <div style="--c: var(--slate)"><b>0.54</b><span>raw satellite rainfall (IMERG)</span></div>
-          <div style="--c: var(--c-translate)"><b>0.81</b><span>S4W automatic weather stations</span></div>
-        </div>
-        <p>Median Nash–Sutcliffe efficiency of MRRpy with nothing refitted between the two runs. The data speak; the physics shows which to believe.</p>
+      <aside class="callout reveal" aria-label="One storm through the chain">
+        <span class="kicker">One storm through the chain · September 2024, Nepal</span>
+        <ol class="chain">
+          <li style="--c: var(--c-access)"><span class="kicker">The data</span><b>11 of 14</b><span>Bagmati rain stations passed their 100-year rainfall, and satellite rain put about 383 mm on the Roshi Khola in three days.</span></li>
+          <li style="--c: var(--c-translate)"><span class="kicker">The physics</span><b>0.6% → 36%</b><span>of the Bagmati basin saturated as the storm went on, in MRRpy's variable-source-area runoff.</span></li>
+          <li style="--c: var(--c-apply)"><span class="kicker">The forecast</span><b>~3 days</b><span>ahead of the peak, a replayed ECMWF forecast already showed 80% of the Roshi Khola's modelled peak.</span></li>
+        </ol>
+        <p>The same chain now runs as a <a href="forecasts.html">live flood forecast</a>, every 30 minutes.</p>
       </aside>
     </div>
 

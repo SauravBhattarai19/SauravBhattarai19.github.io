@@ -748,6 +748,13 @@ sup, sub { line-height: 0; }
 }
 .callout .vs span { display: block; margin-top: 6px; font-size: 14px; color: var(--ink-2); line-height: 1.4; }
 .callout p { font-size: 15.5px; color: var(--ink-2); margin: 0; }
+.callout .chain { list-style: none; margin: 0 0 16px; padding: 0; }
+.callout .chain li { position: relative; padding: 2px 0 14px 18px; border-left: 3px solid var(--c); }
+.callout .chain li + li { padding-top: 12px; }
+.callout .chain li:last-child { padding-bottom: 4px; }
+.callout .chain .kicker { margin: 0 0 2px; font-size: 10.5px; color: var(--ink-3); }
+.callout .chain b { display: block; font-family: var(--f-display); font-weight: 300; font-size: 2.15rem; line-height: 1.05; letter-spacing: -0.02em; color: var(--c); }
+.callout .chain span:not(.kicker) { display: block; margin-top: 4px; font-size: 14.5px; color: var(--ink-2); line-height: 1.45; }
 .callout p + p { margin-top: 10px; }
 @media (max-width: 860px) {
   .idea-grid { grid-template-columns: 1fr; }
