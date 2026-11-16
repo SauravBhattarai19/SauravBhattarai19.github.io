@@ -97,9 +97,9 @@
     <div class="two-col c-translate" style="margin-top:clamp(32px,5vw,56px)">
       <div class="reveal">
         <h3 class="list-head">Install</h3>
-        <pre class="codeblock"><span class="k">pip</span> install MRRpy            <span class="c"># core (CPU)</span>
-<span class="k">pip</span> install <span class="s">"MRRpy[gpu]"</span>     <span class="c"># + CuPy/CUDA acceleration</span>
-<span class="k">pip</span> install <span class="s">"MRRpy[gee]"</span>     <span class="c"># + Google Earth Engine forcing</span></pre>
+        <pre class="codeblock"><span class="k">pip</span> install <span class="s">"MRRpy[all]"</span>       <span class="c"># recommended: Earth Engine, Jupyter form, USGS data</span>
+<span class="k">pip</span> install <span class="s">"MRRpy[all,gpu]"</span>   <span class="c"># + NVIDIA GPU acceleration (CUDA 12.x)</span>
+<span class="k">pip</span> install MRRpy              <span class="c"># minimal: Python API and command line</span></pre>
         <h3 class="list-head">Run, given only an outlet</h3>
         <pre class="codeblock"><span class="k">from</span> MRRpy <span class="k">import</span> Config, run_pipeline
 
@@ -109,6 +109,12 @@ cfg = Config(DEM_PATH=<span class="s">"dem.tif"</span>, OUTPUT_DIR=<span class="
 run_pipeline(cfg)                             <span class="c"># results/hydrograph.csv</span></pre>
         <pre class="codeblock"><span class="k">MRRpy</span> wizard            <span class="c"># answer a few questions, get run.yaml</span>
 <span class="k">MRRpy</span> run -c run.yaml   <span class="c"># process the DEM and route the storm</span></pre>
+        <h3 class="list-head">Add a flood map of a town</h3>
+        <pre class="codeblock">cfg = Config(DEM_PATH=<span class="s">"dem.tif"</span>, OUTPUT_DIR=<span class="s">"results/"</span>,
+             OUTPUT_POINT=(<span class="s">27.632</span>, <span class="s">85.293</span>), TARGET_CRS_EPSG=<span class="s">"EPSG:32645"</span>,
+             INUNDATION_MAP=<span class="k">True</span>, INUNDATION_METHOD=<span class="s">"2d"</span>,
+             INUNDATION_AREA=(<span class="s">85.276</span>, <span class="s">27.595</span>, <span class="s">85.325</span>, <span class="s">27.683</span>))  <span class="c"># lon/lat box</span>
+run_pipeline(cfg)   <span class="c"># results/inundation/flood_depth_max.tif</span></pre>
         <div class="link-row">
           <a href="https://mrrpy.readthedocs.io"><svg class="icon"><use href="#i-book"/></svg>Documentation</a>
           <a href="https://github.com/SauravBhattarai19/MRRpy"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a>
@@ -121,17 +127,17 @@ run_pipeline(cfg)                             <span class="c"># results/hydrogra
         <ul class="ticks" style="margin-top:14px">
           <li><b>DEM to watershed.</b> Reproject, pit-fill, D8 flow direction and accumulation, and delineation, or route the whole DEM with no outlet.</li>
           <li><b>Runoff generation.</b> Coefficient, raster, SCS curve number, or physical runoff: variable source area saturation excess, Green–Ampt infiltration with recovery, and impervious surfaces as composable mechanisms.</li>
-          <li><b>Flood routing.</b> Kinematic wave, Muskingum–Cunge, a semi-implicit diffusion wave solved exactly on the drainage tree, and a local-inertial dynamic wave, with sub-grid river channels sized from the 2-year flood and an always-on water-balance check.</li>
+          <li><b>Flood routing.</b> Kinematic wave, Muskingum–Cunge, and a semi-implicit diffusion wave solved exactly on the drainage tree (a local-inertial scheme is experimental), with sub-grid river channels sized from the 2-year flood and an always-on water-balance check.</li>
           <li><b>Satellite forcing.</b> Optional DEM download, IMERG rainfall, curve numbers, SERVES soil deficit, SoilGrids, HiHydroSoil, and land cover from Google Earth Engine; every option also works offline with your own files.</li>
-          <li><b>Flood maps.</b> Depth and discharge maps over time, animations, and peak-depth GeoTIFFs. In development on the <a href="https://github.com/SauravBhattarai19/MRRpy/tree/flood-zoom"><code class="mono">flood-zoom</code></a> branch: flood depth and extent from a 2-D local-inertial simulation on finer terrain, for one town or, in overlapping blocks, a whole basin, with HAND as a quick alternative (<a href="forecasts.html#flood-maps">examples</a>).</li>
-          <li><b>Live forecasting.</b> Saved model states and Open-Meteo rain let MRRpy run as the <a href="forecasts.html">Roshi Khola live flood forecast</a>, every 30 minutes.</li>
+          <li><b>Flood maps.</b> New in 1.0: flood depth and extent from the routed flow, by HAND for a whole basin in seconds or by a 2-D local-inertial simulation of a town or valley, on finer terrain than the model grid (your LiDAR, or the 30 m DEM under a 90 m run). Also depth and discharge maps over time, animations, and peak-depth GeoTIFFs (<a href="forecasts.html#flood-maps">examples</a>).</li>
+          <li><b>Forecasts.</b> New in 1.0: rain from the world's weather models (ECMWF, GFS, ICON, and others, through Open-Meteo) for a past storm or up to 16 days ahead, and restart files that continue a run from a saved state. Together they run the <a href="forecasts.html">Roshi Khola live flood forecast</a> every 30 minutes.</li>
           <li><b>CPU or GPU.</b> One code path in NumPy or CuPy, with automatic CPU fallback; 34 times faster on GPU at 1.38 million cells.</li>
           <li><b>Interfaces for every taste.</b> Python API, a command line with a question-and-answer wizard, a Jupyter form, and a QGIS plugin.</li>
         </ul>
         <div class="meta-grid" style="margin-top:20px">
           <div><span class="kicker">License</span><p>MIT</p></div>
-          <div><span class="kicker">Release</span><p>v0.3.0, October 2026</p></div>
-          <div><span class="kicker">Tests</span><p>1,893 automated tests, Python 3.9 to 3.12</p></div>
+          <div><span class="kicker">Release</span><p>v1.0.0, November 2026</p></div>
+          <div><span class="kicker">Tests</span><p>Automated tests on every push, Python 3.9 to 3.12</p></div>
           <div><span class="kicker">Paper</span><p>Drafted for the <i>Journal of Open Source Software</i></p></div>
         </div>
       </div>
@@ -140,12 +146,76 @@ run_pipeline(cfg)                             <span class="c"># results/hydrogra
     <div class="fig-row" style="margin-top:clamp(32px,5vw,56px)">
       <figure class="fig reveal">
         <button class="plate" type="button" data-full="assets/img/mrrpy-docs.webp" aria-label="Enlarge figure 2"><img decoding="async" src="assets/img/mrrpy-docs.webp" width="1400" height="860" alt="Screenshot of the MRRpy documentation home page" loading="lazy"></button>
-        <figcaption><b>Figure 2</b>Documentation with a user manual and 11 worked examples, each shown as notebook, command line, Python, and QGIS.</figcaption>
+        <figcaption><b>Figure 2</b>Documentation with a user manual and 14 worked examples, each shown as notebook, command line, Python, and QGIS.</figcaption>
       </figure>
       <figure class="fig reveal">
         <button class="plate" type="button" data-full="assets/img/mrrpy-floods8.webp" aria-label="Enlarge figure 3"><img decoding="async" src="assets/img/mrrpy-floods8.webp" width="1601" height="629" alt="Eight panels of observed and simulated discharge at Khokana" loading="lazy"></button>
         <figcaption><b>Figure 3</b>Eight Bagmati floods at Khokana without event-wise fitting: median Nash–Sutcliffe efficiency 0.81. <a href="phd.html#translate">How it was verified</a>.</figcaption>
       </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Collaborate on MRRpy ===== -->
+<section class="section c-translate" id="collaborate" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" style="color:var(--c-translate)">MRRpy · open for collaboration</span>
+      <h2>Build on MRRpy <em>with me</em>.</h2>
+      <p class="lede">MRRpy went public on PyPI in September 2026 and reached version 1.0 in November. In those two months people have starred and forked it on GitHub. Every new basin is a fresh test of the model, and every new process makes it useful to more people. If one of the directions below fits your work, I would like to hear from you.</p>
+    </div>
+
+    <div class="community reveal" data-gh-repo="SauravBhattarai19/MRRpy" style="margin-top:0">
+      <span><b data-gh="stars">20</b>stars</span>
+      <span><b data-gh="forks">8</b>forks</span>
+      <span><b>3</b>releases on PyPI</span>
+      <span><b>14</b>worked examples</span>
+      <a href="https://github.com/SauravBhattarai19/MRRpy"><svg class="icon icon--fill"><use href="#i-github"/></svg>Star or fork it on GitHub</a>
+    </div>
+
+    <div class="mini-grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
+      <a class="mini reveal" href="https://mrrpy.readthedocs.io">
+        <span class="kicker">Use it</span>
+        <h4>Run it on your basin</h4>
+        <p>A DEM, a storm, and an outlet are enough to start, from global data or your own. Tell me where it works and where it fails: both make the model better.</p>
+        <span class="go">Getting started <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="mini reveal" href="phd.html#translate">
+        <span class="kicker">Test it</span>
+        <h4>Check it against your floods</h4>
+        <p>Gauges, high-water marks, and satellite flood extents from new places are the most useful test there is. So far: eight Bagmati floods, the Blue River in Oklahoma, Montpelier in Vermont, and the Pearl River at Jackson.</p>
+        <span class="go">How it was checked <svg class="icon"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="mini reveal" href="https://github.com/SauravBhattarai19/MRRpy/blob/main/CONTRIBUTING.md">
+        <span class="kicker">Extend it</span>
+        <h4>Add a process</h4>
+        <p>Runoff mechanisms and routing schemes are modules behind one configuration, and every routing scheme is tested with every runoff mechanism. Open directions: baseflow and groundwater, snowmelt, sediment transport, land-cover change, and machine-learning surrogates trained on many runs.</p>
+        <span class="go">How to contribute <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="mini reveal" href="https://sauravbhattarai19.github.io/MRRpy/">
+        <span class="kicker">Teach with it</span>
+        <h4>Use it in a class</h4>
+        <p>A free six-module course in the browser, 14 worked examples, a QGIS plugin, and a wizard that asks plain questions: ready for a course or a workshop.</p>
+        <span class="go">Open the course <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="mini reveal" href="forecasts.html">
+        <span class="kicker">Forecast with it</span>
+        <h4>Forecast your river</h4>
+        <p>MRRpy runs the Roshi Khola forecast every 30 minutes from weather-model rain and restart files. The same set-up can forecast another river.</p>
+        <span class="go">See the forecast <svg class="icon"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="mini reveal" href="mailto:saurav.bhattarai.1999@gmail.com?subject=MRRpy%20collaboration">
+        <span class="kicker">Write with me</span>
+        <h4>Co-author a study</h4>
+        <p>A basin, a hazard, or a dataset you want to put to work? I am glad to set MRRpy up for it with you and write up what we find together.</p>
+        <span class="go">Email me <svg class="icon"><use href="#i-right"/></svg></span>
+      </a>
+    </div>
+
+    <div class="link-row reveal" style="margin-top:24px">
+      <a href="mailto:saurav.bhattarai.1999@gmail.com?subject=MRRpy%20collaboration"><svg class="icon"><use href="#i-mail"/></svg>Email me about a collaboration</a>
+      <a href="https://github.com/SauravBhattarai19/MRRpy/issues"><svg class="icon icon--fill"><use href="#i-github"/></svg>Open an issue</a>
+      <a href="https://github.com/SauravBhattarai19/MRRpy/blob/main/CITATION.cff"><svg class="icon"><use href="#i-doc"/></svg>Cite MRRpy</a>
     </div>
   </div>
 </section>

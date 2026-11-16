@@ -408,7 +408,7 @@
           <h3><span class="sec">3.2–3.4</span>Runoff physics and routing you can switch</h3>
           <div class="chips"><span class="chip chip--done">Complete</span></div>
         </div>
-        <p>One setting swaps the physics. Runoff comes from infiltration excess (Green–Ampt with soil recovery between storms), saturation excess (a variable source area that grows as the divide store fills), and impervious surfaces, alone or together. Routing uses a kinematic wave, Muskingum–Cunge, or a semi-implicit diffusive wave, and since version 0.3.0 a local-inertial scheme (Figure 13; Animation 7).</p>
+        <p>One setting swaps the physics. Runoff comes from infiltration excess (Green–Ampt with soil recovery between storms), saturation excess (a variable source area that grows as the divide store fills), and impervious surfaces, alone or together. Routing uses a kinematic wave, Muskingum–Cunge, or a semi-implicit diffusive wave, with a local-inertial scheme under development; since version 1.0 the routed flow also becomes flood depth and extent maps (Figure 13; Animation 7).</p>
         <ul class="results">
           <li>September 2024, Bagmati: infiltration excess made <b>48%</b> of runoff, impervious surfaces <b>28%</b>, saturation excess <b>23%</b>; the saturated area grew from 0.6% to 36% of the basin, then contracted.</li>
           <li>Blue River 2018, nothing tuned: saturation excess alone gives the best overall skill (<b>KGE 0.68</b>), all three mechanisms together the best peak (−29%). Different basins, different dominant physics.</li>
@@ -520,7 +520,7 @@
           <h3><span class="sec">3.11</span>A model anyone can start</h3>
           <div class="chips"><span class="chip chip--done">Complete</span></div>
         </div>
-        <p>A model nobody can run changes nothing. <code class="mono">pip install MRRpy</code>, then a complete run is three lines of Python given an outlet. The documentation has a user manual and 11 worked examples, each shown four ways (notebook, command line, Python, QGIS), and a free six-module course follows the model's pipeline in the browser. A software paper is drafted for the <i>Journal of Open Source Software</i> (Figure 17; Animation 8).</p>
+        <p>A model nobody can run changes nothing. <code class="mono">pip install MRRpy</code>, then a complete run is three lines of Python given an outlet. The documentation has a user manual and 14 worked examples, each shown four ways (notebook, command line, Python, QGIS), and a free six-module course follows the model's pipeline in the browser. Version 1.0 came out in November 2026, and the repository has 20 stars and 8 forks on GitHub. A software paper is drafted for the <i>Journal of Open Source Software</i> (Figure 17; Animation 8).</p>
         <figure class="fig reveal" style="max-width:760px">
           <button class="plate" type="button" data-full="assets/img/mrrpy-docs.webp" aria-label="Enlarge figure 17"><img decoding="async" loading="lazy" src="assets/img/mrrpy-docs.webp" width="1400" height="860" alt="Screenshot of the MRRpy documentation home page"></button>
           <figcaption><b>Figure 17</b>The MRRpy documentation at mrrpy.readthedocs.io.</figcaption>

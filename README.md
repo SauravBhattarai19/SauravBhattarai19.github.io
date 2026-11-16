@@ -12,8 +12,8 @@ Plain static HTML, CSS, and JavaScript: no framework and no build step. GitHub A
 | `research.html` | Research by theme (hydroclimatic extremes, compound hazards, Earth observation, flood modeling, heat and urban cooling, open tools), with animations; tabs link the two degree pages |
 | `phd.html` | Ph.D. dissertation, chapter by chapter, with figures, animations, and results (source: the committee write-up, Oct 2026) |
 | `ms.html` | M.S. thesis (May 2025), study by study, with figures from the thesis |
-| `forecasts.html` | Live flood forecasts: the Roshi Khola forecast built on MRRpy (walkthrough recorded from the live site, September 2024 replay lead times), MRRpy flood maps from the `flood-zoom` branch, and the Nepal empirical flood forecast |
-| `software.html` | MRRpy, the GeoClimate Intelligence Platform (nine tools), Earth Engine apps, course platforms, research code |
+| `forecasts.html` | Live flood forecasts: the Roshi Khola forecast built on MRRpy (walkthrough recorded from the live site, September 2024 replay lead times), MRRpy 1.0 flood maps, and the Nepal empirical flood forecast |
+| `software.html` | MRRpy, its collaboration section (`#collaborate`), the GeoClimate Intelligence Platform (nine tools), Earth Engine apps, course platforms, research code |
 | `publications.html` | All journal articles, proceedings, manuscripts, and the dataset, with topic filters, search, and copy-citation |
 | `talks.html` | Map of presentation cities and the full list of talks and posters, filterable by type |
 | `teaching.html` | Teaching, mentoring, workshops, training programs, service |
@@ -30,7 +30,7 @@ Plain static HTML, CSS, and JavaScript: no framework and no build step. GitHub A
 - `assets/js/basin.js`: the home-page figure. A random terrain is filled from one outlet into a D8 drainage tree;
   rain parcels are routed to the outlet and counted as the hydrograph. Pauses when off screen and respects
   reduced-motion settings.
-- `assets/img/forecast/`: screenshots of the live forecast sites, taken with a headless browser (Playwright: open the page, click, `page.screenshot`), the animated walkthrough made from them, and MRRpy flood-map figures from its `flood-zoom` docs. Retake them the same way when the forecast pages change.
+- `assets/img/forecast/`: screenshots of the live forecast sites, taken with a headless browser (Playwright: open the page, click, `page.screenshot`), the animated walkthrough made from them, and MRRpy flood-map figures from its docs (the `flood-zoom` branch, released in MRRpy 1.0). Retake them the same way when the forecast pages change.
 - `assets/img/`: web-sized WebP figures (from the proposal, defense, and M.S. thesis), headshot, social card (`og-image.png`).
 - `assets/img/anim/`: animated WebP files (like GIFs, about a third of the size) made from the defense-deck animation frames,
   each with a `-still.webp` frame shown to visitors who turn off motion. To add one, save frames as an animated WebP
@@ -46,6 +46,10 @@ Plain static HTML, CSS, and JavaScript: no framework and no build step. GitHub A
   `invited`). If the city is new, add it to `CITIES` in `tools/make_talks_map.py` and run
   `python tools/make_talks_map.py` (needs geopandas) to redraw the map.
 - **News.** Edit the `<ul class="news">` list in `index.html`.
+- **GitHub stars and forks.** Any element with `data-gh-repo="owner/name"` gets live counts in its `[data-gh="stars"]` and
+  `[data-gh="forks"]` children (`assets/js/site.js`, cached for an hour per visitor). Update the numbers written in the HTML
+  now and then: they are what visitors see if the GitHub API cannot be reached, and the prose on `phd.html`,
+  `research.html`, and the news list quotes them as fixed text.
 - **CV.** Rebuild `CV_general.pdf` with `Dissertation/CV/build_general.sh` and copy it here as `CV.pdf`.
 
 ## Preview locally

@@ -458,6 +458,31 @@ sup, sub { line-height: 0; }
 .link-row a:hover { color: var(--accent); }
 .link-row .icon { font-size: 16px; }
 
+/* ---------- community strip (GitHub stars and forks, updated live by site.js) ---------- */
+.community {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 20px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.community b {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--c, var(--ink));
+  margin-right: 5px;
+}
+.community a { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--link); text-decoration: none; }
+.community a:hover { text-decoration: underline; }
+@media (max-width: 560px) { .community a { margin-left: 0; flex-basis: 100%; } }
+
 /* ---------- sections ---------- */
 .section { padding-block: clamp(64px, 9vw, 120px); }
 .section--tight { padding-block: clamp(40px, 6vw, 72px); }

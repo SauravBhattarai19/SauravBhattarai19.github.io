@@ -272,9 +272,9 @@ scripts/install.sh       <span class="c"># this package and its MRRpy</span>
 <section class="section" id="flood-maps" style="padding-top:0">
   <div class="wrap">
     <div class="section-head">
-      <span class="kicker" style="color:var(--c-translate)">MRRpy · new inundation stage</span>
+      <span class="kicker" style="color:var(--c-translate)">MRRpy 1.0 · flood maps</span>
       <h2>From river flow to <em>flood maps</em>.</h2>
-      <p class="lede">The flood maps in the forecast come from a new MRRpy stage, in development on the <a href="https://github.com/SauravBhattarai19/MRRpy/tree/flood-zoom"><code class="mono">flood-zoom</code></a> branch. It turns the routed river flow into maps of flood depth and extent, drawn on finer terrain than the model ran on: the routing runs at 90 m over the whole basin, and the flood is drawn at 30 m (or on your own LiDAR), for one town or for the whole basin.</p>
+      <p class="lede">The flood maps in the forecast come from the flood-map stage released in <a href="software.html#mrrpy">MRRpy 1.0</a> (November 2026). It turns the routed river flow into maps of flood depth and extent, drawn on finer terrain than the model ran on: the routing runs at 90 m over the whole basin, and the flood is drawn at 30 m (or on your own LiDAR), for one town or for the whole basin.</p>
     </div>
 
     <figure class="fig reveal">
@@ -293,7 +293,7 @@ scripts/install.sh       <span class="c"># this package and its MRRpy</span>
         <h3 class="list-head">Two ways to spread the water</h3>
         <ul class="ticks" style="margin-top:14px">
           <li><b>2-D, the main method.</b> A local-inertial flood simulation (Bates et al., 2010), compiled and parallel. Every river entering the area brings its routed flow, and water spreads, ponds, and backs up as on the ground. It came closer than HAND in every check below, so the forecast uses it everywhere (Figure 5).</li>
-          <li><b>Whole basins in blocks.</b> A whole basin is covered with blocks that overlap by 1.5 km; each block is its own 2-D simulation, the blocks run side by side, and their cores are joined into one map. The whole Roshi Khola in 3 × 3 blocks took 45 s instead of 81 s as one block, with depths near the joins matching the one-block map to 1 cm (median).</li>
+          <li><b>Whole basins in blocks.</b> In the forecast, a whole basin is covered with blocks that overlap by 1.5 km; each block is its own 2-D simulation, the blocks run side by side, and their cores are joined into one map. The whole Roshi Khola in 3 × 3 blocks took 45 s instead of 81 s as one block, with depths near the joins matching the one-block map to 1 cm (median).</li>
           <li><b>HAND, the quick alternative.</b> Every cell gets its height above the river it drains to; each reach of about 1 km gets a rating curve, and its flow gives the water level that floods all lower land. Seconds for a whole basin, with no 2-D run.</li>
           <li><b>Rivers in their real channels.</b> Flow paths for the maps are traced on the original terrain by least-cost search, so rivers do not cut straight lines across flat valley floors.</li>
           <li><b>Outputs.</b> Deepest water and flood extent as GeoTIFF and GeoJSON, time of the peak, first-wet time, duration, and an animation; redrawn without routing again.</li>
@@ -317,7 +317,7 @@ scripts/install.sh       <span class="c"># this package and its MRRpy</span>
       <div><span class="kicker">Run time, one town</span><p>49 km² of 2-D at Kathmandu in 20 s, after 117 s of routing on a 32-core workstation</p></div>
       <div><span class="kicker">Run time, whole basin</span><p>The Roshi Khola in 3 × 3 overlapping blocks: 45 s for the 2-D map of every river</p></div>
     </div>
-    <p style="margin-top:20px"><a class="arrow-link" href="https://github.com/SauravBhattarai19/MRRpy/tree/flood-zoom">The flood-zoom branch of MRRpy <svg class="icon"><use href="#i-arrow"/></svg></a></p>
+    <p style="margin-top:20px"><a class="arrow-link" href="https://mrrpy.readthedocs.io/en/latest/examples/flood-2d-town/">Make a 2-D flood map of your own town (MRRpy Example 13) <svg class="icon"><use href="#i-arrow"/></svg></a></p>
   </div>
 </section>
 

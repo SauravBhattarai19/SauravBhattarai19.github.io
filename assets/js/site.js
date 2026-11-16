@@ -284,6 +284,38 @@
     window.goatcounter.count({ path: name, title: (a.textContent || "").trim().slice(0, 80), event: true });
   });
 
+  /* ---------- live GitHub stars and forks ---------- */
+  // <div data-gh-repo="owner/name"> with <b data-gh="stars"> / <b data-gh="forks"> inside. The numbers written
+  // in the HTML stay if the API cannot be reached; a reply is kept for an hour so page views do not use up
+  // the 60-requests-per-hour limit GitHub gives each visitor.
+  var ghBoxes = document.querySelectorAll("[data-gh-repo]");
+  if (ghBoxes.length && window.fetch) {
+    var ghRepos = {};
+    ghBoxes.forEach(function (el) { ghRepos[el.getAttribute("data-gh-repo")] = true; });
+    Object.keys(ghRepos).forEach(function (repo) {
+      var key = "gh:" + repo, cached = null;
+      function show(d) {
+        document.querySelectorAll('[data-gh-repo="' + repo + '"]').forEach(function (el) {
+          [["stars", d.stars], ["forks", d.forks]].forEach(function (p) {
+            var t = el.querySelector('[data-gh="' + p[0] + '"]');
+            if (t && typeof p[1] === "number") t.textContent = p[1].toLocaleString("en-US");
+          });
+        });
+      }
+      try { cached = JSON.parse(sessionStorage.getItem(key) || "null"); } catch (e) {}
+      if (cached && Date.now() - cached.t < 3600000) { show(cached); return; }
+      fetch("https://api.github.com/repos/" + repo)
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) {
+          if (!j) return;
+          var d = { stars: j.stargazers_count, forks: j.forks_count, t: Date.now() };
+          show(d);
+          try { sessionStorage.setItem(key, JSON.stringify(d)); } catch (e) {}
+        })
+        .catch(function () {});
+    });
+  }
+
   /* ---------- footer year ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = String(new Date().getFullYear());

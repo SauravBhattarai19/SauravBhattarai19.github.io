@@ -259,13 +259,13 @@
 
     <article class="tool tool--wide-media c-translate" id="mrrpy">
       <div class="tool-copy reveal">
-        <span class="kicker">Python package · MIT license · v0.3.0 on PyPI</span>
+        <span class="kicker">Python package · MIT license · v1.0 on PyPI</span>
         <h3>MRRpy</h3>
-        <p class="tagline">Rainfall–runoff and flood routing for any basin on Earth, from a DEM and a storm.</p>
+        <p class="tagline">Rainfall–runoff, flood routing, and flood maps for any basin on Earth, from a DEM and a storm.</p>
         <ul class="ticks">
           <li>Runoff physics you can switch: Green–Ampt infiltration with soil recovery, variable source area, impervious surfaces, or SCS curve number, combined without counting rain twice.</li>
-          <li>Routing derived from the Saint-Venant equations: kinematic, Muskingum–Cunge, semi-implicit diffusive, and local-inertial schemes.</li>
-          <li>An exact, linear-time implicit solver on the drainage tree; water conserved to a median of 3 parts per million.</li>
+          <li>Routing derived from the Saint-Venant equations: kinematic, Muskingum–Cunge, and a semi-implicit diffusive wave solved exactly on the drainage tree; water conserved to a median of 3 parts per million.</li>
+          <li>New in 1.0: flood depth and extent maps (HAND for a whole basin in seconds, or a 2-D simulation of a town), rain from weather-model forecasts up to 16 days ahead, and restart files.</li>
           <li>Python, a command-line wizard, a Jupyter form, and a QGIS plugin; runs on CPU, or on GPU 34 times faster at 1.38 million cells.</li>
         </ul>
         <div class="code"><code>pip install MRRpy</code><button class="copy-btn" type="button" data-copy="pip install MRRpy"><svg class="icon"><use href="#i-copy"/></svg><span data-label>Copy</span></button></div>
@@ -274,6 +274,11 @@
           <a href="https://github.com/SauravBhattarai19/MRRpy"><svg class="icon icon--fill"><use href="#i-github"/></svg>GitHub</a>
           <a href="https://pypi.org/project/MRRpy/"><svg class="icon"><use href="#i-code"/></svg>PyPI</a>
           <a href="https://sauravbhattarai19.github.io/MRRpy/"><svg class="icon"><use href="#i-arrow"/></svg>Interactive course</a>
+        </div>
+        <div class="community" data-gh-repo="SauravBhattarai19/MRRpy">
+          <span><b data-gh="stars">20</b>stars on GitHub</span>
+          <span><b data-gh="forks">8</b>forks</span>
+          <a href="software.html#collaborate">Build on it with me <svg class="icon"><use href="#i-right"/></svg></a>
         </div>
       </div>
       <figure class="fig tool-media reveal">
@@ -422,9 +427,10 @@
       <h2>What's <em>new</em>.</h2>
     </div>
     <ul class="news reveal">
+      <li><time datetime="2026-11">Nov 2026</time><span><b>MRRpy 1.0</b> released: flood depth and extent maps, rain from weather-model forecasts up to 16 days ahead, and restart files. 20 stars and 8 forks on GitHub so far. <a href="software.html#collaborate">Build on it with me</a>.</span></li>
       <li><time datetime="2026-10">Oct 2026</time><span>The <b>Nepal empirical flood forecast</b> went online: river-flow forecasts every 2 hours for 4,205 rivers of Nepal from Nepal's empirical methods. <a href="forecasts.html#nepal">See it</a>.</span></li>
       <li><time datetime="2026-10">Oct 2026</time><span>The <b>Roshi Khola flood forecast</b> went live: MRRpy runs every 30 minutes from weather stations and four rain forecasts, with 2-D flood maps for Panauti and the BP Highway. <a href="forecasts.html">See it</a>.</span></li>
-      <li><time datetime="2026-10">Oct 2026</time><span><b>MRRpy 0.3.0</b> released on PyPI, adding a local-inertial dynamic-wave routing scheme.</span></li>
+      <li><time datetime="2026-10">Oct 2026</time><span><b>MRRpy 0.3.0</b> released on PyPI: Green–Ampt soils now dry out between storms, by the EPA SWMM 5 method.</span></li>
       <li><time datetime="2026-10">Oct 2026</time><span>Defended my <b>dissertation proposal</b> before the advisory committee. <a href="phd.html">Read the overview</a>.</span></li>
       <li><time datetime="2026-09">Sep 2026</time><span>First public release of <b>MRRpy</b> on PyPI: <code class="mono">pip install MRRpy</code>.</span></li>
       <li><time datetime="2026-04">Apr 2026</time><span><i>Earth and Space Science</i> published our global analysis of <b>whether the wettest days occur together</b>.</span></li>
