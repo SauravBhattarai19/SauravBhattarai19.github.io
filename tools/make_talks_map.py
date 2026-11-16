@@ -20,6 +20,7 @@ CITIES = [
     ("San Francisco, CA", -122.42, 37.77, "AGU Fall Meeting 2023", 1),
     ("Honolulu, HI", -157.86, 21.31, "AGU Chapman Conference 2024", 2),
     ("Houston, TX", -95.37, 29.76, "AMS Annual Meeting 2026", 1),
+    ("Columbia, MO", -92.33, 38.95, "CUAHSI Water Science Exchange 2026", 1),
     ("New Orleans, LA", -90.07, 29.95, "AGU Fall Meeting 2025", 6),
     ("Mobile, AL", -88.04, 30.69, "ASCE-EWRI Congress 2026", 1),
     ("Vicksburg, MS", -90.88, 32.35, "ERDC RD26 Workshop 2026", 1),
